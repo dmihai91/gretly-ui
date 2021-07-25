@@ -84,7 +84,7 @@ export default {
 	},
 	env: {
 		baseUrl: process.env.BASE_URL || 'http://localhost:3000',
-		apiUrl: process.env.API_URL || 'http://localhost:5000',
+		apiUrl: process.env.API_URL || 'http://localhost:44381',
 		fbClientId: process.env.FB_CLIENT_ID,
 		googleClientId: process.env.GOOGLE_CLIENT_ID
 	},
