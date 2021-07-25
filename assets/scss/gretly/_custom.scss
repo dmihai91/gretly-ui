@@ -1,0 +1,15 @@
+.main {
+	height: 100%;
+	display: flex;
+	flex-direction: row;
+	overflow: hidden;
+}
+
+.link {
+	color: $link-color !important;
+	cursor: pointer;
+}
+
+.nuxt-loading div {
+	border-left: 0.5rem solid $primary;
+}

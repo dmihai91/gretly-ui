@@ -1,0 +1,19 @@
+{
+	"login_slogan": "<b>GREAT</b> editor for building interactive <b>WEBSITES</b> and <b>WEB APPS</b>.",
+	"sign_in_label": "Sign in to Gretly",
+	"sign_in_with": "Sign in with",
+	"fill_up_details": "Fill up the following details",
+	"or": "or",
+	"username_or_email": "Username or Email Address",
+	"password": "Password",
+	"remember_me": "Remember me",
+	"forgot_password": "Forgot Password?",
+	"sign_in": "Sign in",
+	"not_registered_yet": "Not registered yet?",
+	"join_us": "Join us",
+	"messages": {
+		"please_enter_username_or_email": "Please enter your username or email address",
+		"invalid_username_or_email": "Invalid username or password",
+		"please_enter_password": "Please enter your password"
+	}
+}
