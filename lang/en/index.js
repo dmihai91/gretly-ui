@@ -8,13 +8,4 @@ import footer from './footer.json';
 
 const messages = { messages: { ...login.messages, ...register.messages } };
 
-export default {
-  ...global,
-  ...login,
-  ...register,
-  ...messages,
-  ...index,
-  ...pricing,
-  ...projects,
-  ...footer,
-};
+export default { ...global, ...login, ...register, ...messages, ...index, ...pricing, ...projects, ...footer };

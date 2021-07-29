@@ -1,10 +1,10 @@
-import { Vue } from 'vue/types/vue';
+import { Vue } from 'vue/types/vue'
 
-import './umd';
+import './umd'
 
-export default Vue;
+export default Vue
 
-export { CreateElement, VueConstructor } from 'vue/types/vue';
+export { CreateElement, VueConstructor } from 'vue/types/vue'
 
 export {
   Component,
@@ -19,16 +19,9 @@ export {
   WatchOptions,
   WatchOptionsWithHandler,
   DirectiveFunction,
-  DirectiveOptions,
-} from 'vue/types/options';
+  DirectiveOptions
+} from 'vue/types/options'
 
-export { PluginFunction, PluginObject } from 'vue/types/plugin';
+export { PluginFunction, PluginObject } from 'vue/types/plugin'
 
-export {
-  VNodeChildren,
-  VNodeChildrenArrayContents,
-  VNode,
-  VNodeComponentOptions,
-  VNodeData,
-  VNodeDirective,
-} from 'vue/types/vnode';
+export { VNodeChildren, VNodeChildrenArrayContents, VNode, VNodeComponentOptions, VNodeData, VNodeDirective } from 'vue/types/vnode'

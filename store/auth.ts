@@ -55,7 +55,8 @@ export const actions = actionTree(
 				});
 				dispatch(ActionsTypes.FETCH_USER_DATA);
 			} catch (_err) {
-        return _err;
+				const error: ApiError = _err;
+				// TO BE IMPLEMENTED
 			}
 		},
 		async [ActionsTypes.AUTH_WITH_FB]({ dispatch }, token: string) {

@@ -1,105 +1,97 @@
 <template>
-  <div class="input-slider-container">
-    <div
-      class="input-slider"
-      ref="slider"
-      :class="[`slider-${type}`]"
-      :disabled="disabled"
-    ></div>
-  </div>
+	<div class="input-slider-container">
+		<div class="input-slider" ref="slider" :class="[`slider-${type}`]" :disabled="disabled"></div>
+	</div>
 </template>
 
 <script lang="ts">
 /// <reference types="@types/nouislider"/>
 
-import Vue from 'vue'
-import noUiSlider from 'nouislider'
+import Vue from 'vue';
+import noUiSlider from 'nouislider';
 
-type Slider = noUiSlider.noUiSlider
-type SliderValue = number[] & string
+type Slider = noUiSlider.noUiSlider;
+type SliderValue = number[] & string;
 
 export default Vue.extend({
-  name: 'base-slider',
-  props: {
-    value: {
-      type: [String, Array, Number],
-      description: 'Slider value'
-    },
-    disabled: {
-      type: Boolean,
-      description: 'Whether slider is disabled'
-    },
-    range: {
-      type: Object,
-      default: () => {
-        return {
-          min: 0,
-          max: 100
-        }
-      },
-      description: 'Slider range (defaults to 0-100)'
-    },
-    type: {
-      type: String,
-      default: '',
-      description: 'Slider type (e.g primary, danger etc)'
-    },
-    options: {
-      type: Object,
-      default: () => {
-        return {}
-      },
-      description: 'noUiSlider options'
-    }
-  },
-  computed: {
-    connect(): boolean | boolean[] {
-      return Array.isArray(this.value) || [true, false]
-    }
-  },
-  data() {
-    return {
-      slider: null
-    }
-  },
-  methods: {
-    createSlider() {
-      const sliderRef: HTMLElement = <HTMLElement>this.$refs.slider
-      noUiSlider.create(sliderRef, {
-        start: this.value,
-        connect: this.connect,
-        range: this.range,
-        ...this.options
-      })
-      const slider: Slider = sliderRef['noUiSlider']
-      slider.on('slide', () => {
-        let value = slider.get()
-        if (value !== this.value) {
-          this.$emit('input', value)
-        }
-      })
-    }
-  },
-  mounted() {
-    this.createSlider()
-  },
-  watch: {
-    value(newValue: SliderValue, oldValue: SliderValue) {
-      const slider: Slider = this.$refs.slider['noUiSlider']
-      const sliderValue = slider.get()
-      if (newValue !== oldValue && sliderValue !== newValue) {
-        if (Array.isArray(sliderValue) && Array.isArray(newValue)) {
-          if (
-            oldValue.length === newValue.length &&
-            oldValue.every((v, i) => v === newValue[i])
-          ) {
-            slider.set(newValue)
-          }
-        } else {
-          slider.set(newValue)
-        }
-      }
-    }
-  }
-})
+	name: 'base-slider',
+	props: {
+		value: {
+			type: [String, Array, Number],
+			description: 'Slider value'
+		},
+		disabled: {
+			type: Boolean,
+			description: 'Whether slider is disabled'
+		},
+		range: {
+			type: Object,
+			default: () => {
+				return {
+					min: 0,
+					max: 100
+				};
+			},
+			description: 'Slider range (defaults to 0-100)'
+		},
+		type: {
+			type: String,
+			default: '',
+			description: 'Slider type (e.g primary, danger etc)'
+		},
+		options: {
+			type: Object,
+			default: () => {
+				return {};
+			},
+			description: 'noUiSlider options'
+		}
+	},
+	computed: {
+		connect(): boolean | boolean[] {
+			return Array.isArray(this.value) || [true, false];
+		}
+	},
+	data() {
+		return {
+			slider: null
+		};
+	},
+	methods: {
+		createSlider() {
+			const sliderRef: HTMLElement = <HTMLElement>this.$refs.slider;
+			noUiSlider.create(sliderRef, {
+				start: this.value,
+				connect: this.connect,
+				range: this.range,
+				...this.options
+			});
+			const slider: Slider = sliderRef['noUiSlider'];
+			slider.on('slide', () => {
+				let value = slider.get();
+				if (value !== this.value) {
+					this.$emit('input', value);
+				}
+			});
+		}
+	},
+	mounted() {
+		this.createSlider();
+	},
+	watch: {
+		value(newValue: SliderValue, oldValue: SliderValue) {
+			const slider: Slider = this.$refs.slider['noUiSlider'];
+			const sliderValue = slider.get();
+			if (newValue !== oldValue && sliderValue !== newValue) {
+				if (Array.isArray(sliderValue) && Array.isArray(newValue)) {
+					if (oldValue.length === newValue.length && oldValue.every((v, i) => v === newValue[i])) {
+						slider.set(newValue);
+					}
+				} else {
+					slider.set(newValue);
+				}
+			}
+		}
+	}
+});
 </script>

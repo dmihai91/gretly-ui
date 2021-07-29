@@ -1,55 +1,52 @@
-import en from './lang/en';
-import fs from 'fs';
+import en from "./lang/en";
+import fs from "fs";
 
 export default {
   ssr: true,
-  target: 'static',
+  target: "static",
   /** Headers of the page
    ** See https://nuxtjs.org/api/configuration-head
    */
   head: {
-    title: 'Gretly',
+    title: "Gretly",
     meta: [
-      { charset: 'utf-8' },
+      { charset: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
       {
-        name: 'viewport',
-        content: 'width=device-width, initial-scale=1',
-      },
-      {
-        hid: 'description',
-        name: 'description',
-        content: process.env.npm_package_description || '',
-      },
+        hid: "description",
+        name: "description",
+        content: process.env.npm_package_description || ""
+      }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
       {
-        rel: 'stylesheet',
+        rel: "stylesheet",
         href:
-          'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css',
+          "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       },
       {
-        rel: 'stylesheet',
+        rel: "stylesheet",
         href:
-          'https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700',
-      },
-    ],
+          "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
+      }
+    ]
   },
   /*
    ** Global CSS
    */
-  css: ['~/assets/scss/style.scss'],
+  css: ["~/assets/scss/style.scss"],
   /*
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
   plugins: [
     {
-      src: '~/plugins/global.js',
-      ssr: false,
+      src: "~/plugins/global.js",
+      ssr: false
     },
-    '~/plugins/lastRouterPath.ts',
-    '~/plugins/initApiService',
+    "~/plugins/lastRouterPath.ts",
+    "~/plugins/initApiService"
   ],
   /*
    ** Auto import components
@@ -59,18 +56,18 @@ export default {
   /*
    ** Nuxt.js dev-modules
    */
-  buildModules: ['@nuxt/typescript-build', '@nuxtjs/dotenv', 'nuxt-typed-vuex'],
+  buildModules: ["@nuxt/typescript-build", "@nuxtjs/dotenv", "nuxt-typed-vuex"],
   /*
    ** Nuxt.js modules
    */
   modules: [
     // Doc: https://bootstrap-vue.js.org
-    'bootstrap-vue/nuxt',
-    '@nuxtjs/pwa',
-    '@nuxtjs/axios',
-    '@nuxtjs/style-resources',
-    'nuxt-i18n',
-    '@nuxtjs/proxy',
+    "bootstrap-vue/nuxt",
+    "@nuxtjs/pwa",
+    "@nuxtjs/axios",
+    "@nuxtjs/style-resources",
+    "nuxt-i18n",
+    "@nuxtjs/proxy"
   ],
   /*
    ** Build configuration
@@ -80,84 +77,71 @@ export default {
     extend(config, { isClient }) {
       if (isClient) {
         config.optimization.splitChunks.maxSize = 499712; // 488 Kb
-        config.optimization.runtimeChunk = 'single';
+        config.optimization.runtimeChunk = "single";
       }
     },
     babel: {
-      compact: true,
-    },
+      compact: true
+    }
   },
   env: {
-    baseUrl: process.env.BASE_URL || 'http://localhost:3000',
-    apiUrl: process.env.API_URL || 'http://localhost:5000',
+    baseUrl: process.env.BASE_URL || "http://localhost:3000",
+    apiUrl: process.env.API_URL || "http://localhost:44381",
     fbClientId: process.env.FB_CLIENT_ID,
-    googleClientId: process.env.GOOGLE_CLIENT_ID,
+    googleClientId: process.env.GOOGLE_CLIENT_ID
   },
-  extends: [
-    'plugin:vue/recommended',
-    'eslint:recommended',
-    'prettier/vue',
-    'plugin:prettier/recommended',
-  ],
   i18n: {
-    locales: ['en'],
-    defaultLocale: 'en',
+    locales: ["en"],
+    defaultLocale: "en",
     vueI18n: {
       messages: {
         en: {
-          ...en,
-        },
-      },
-    },
+          ...en
+        }
+      }
+    }
   },
   // extend routes
   router: {
     extendRoutes(routes, resolve) {
       routes.push({
-        path: '*',
-        component: resolve(__dirname, '~/pages/not-found.vue'),
+        path: "*",
+        component: resolve(__dirname, "~/pages/not-found.vue")
       });
     },
-    prefetchLinks: true,
+    prefetchLinks: true
   },
   styleResources: {
-    scss: ['~/assets/scss/style.scss'],
+    scss: ["~/assets/scss/style.scss"]
   },
   server: {
     https: {
-      key: fs.readFileSync('cert/server.key'),
-      cert: fs.readFileSync('cert/server.crt'),
-    },
+      key: fs.readFileSync("cert/server.key"),
+      cert: fs.readFileSync("cert/server.crt")
+    }
   },
   axios: {
-    proxy: true,
+    proxy: true
   },
   proxy: {
     // Simple proxy
-    '/api/': {
+    "/api/": {
       target: process.env.API_URL,
       pathRewrite: {
-        '^/api': '/',
+        "^/api": "/"
       },
-      secure: false,
-    },
+      secure: false
+    }
   },
   pwa: {
-    icon: false,
+    icon: false
   },
   loader: {
-    color: '#028656',
+    color: "#028656"
   },
   loadingIndicator: {
-    name: 'chasing-dots',
-    color: '#028675',
-    background: 'white',
-  },
-  typescript: {
-    typeCheck: {
-      eslint: {
-        files: './**/*.{ts,js,vue}',
-      },
-    },
-  },
+    name: "chasing-dots",
+    color: "#028675",
+    background: "white"
+  }
 };

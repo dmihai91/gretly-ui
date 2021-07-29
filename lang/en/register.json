@@ -1,25 +1,25 @@
 {
-  "register_slogan": "<b>CREATE</b> beautiful <b>WEBSITES</b> and <b>WEB APPS</b> by your <i>taste</i>.",
-  "register_label": "Register to Gretly",
-  "register_with": "Register with",
-  "fill_up_details": "Fill up the following details",
-  "or": "or",
-  "username": "Username",
-  "email": "Email",
-  "password": "Password",
-  "name": "Name",
-  "register": "Register",
-  "already_registered": "Already a member?",
-  "messages": {
-    "please_enter_username": "Please enter your username",
-    "invalid_username": "Username may only contain letters and numbers underscore and dash characters",
-    "username_minlength_error": "Username must have a minimum of {minLength} characters",
-    "please_enter_email": "Please enter your email",
-    "invalid_email": "Invalid email address",
-    "please_enter_password": "Please enter your password",
-    "not_good_password": "Password must be at least {minLength} characters and contain a lowercase character, uppercase character and a number",
-    "please_enter_name": "Please enter your name",
-    "invalid_name": "Invalid name (only letters and space are allowed)",
-    "name_minlength_error": "Name must have a minimum of {minLength} characters"
-  }
+	"register_slogan": "<b>CREATE</b> beautiful <b>WEBSITES</b> and <b>WEB APPS</b> by your <i>taste</i>.",
+	"register_label": "Register to Gretly",
+	"register_with": "Register with",
+	"fill_up_details": "Fill up the following details",
+	"or": "or",
+	"username": "Username",
+	"email": "Email",
+	"password": "Password",
+	"name": "Name",
+	"register": "Register",
+	"already_registered": "Already a member?",
+	"messages": {
+		"please_enter_username": "Please enter your username",
+		"invalid_username": "Username may only contain letters and numbers underscore and dash characters",
+		"username_minlength_error": "Username must have a minimum of {minLength} characters",
+		"please_enter_email": "Please enter your email",
+		"invalid_email": "Invalid email address",
+		"please_enter_password": "Please enter your password",
+		"not_good_password": "Password must be at least {minLength} characters and contain a lowercase character, uppercase character and a number",
+		"please_enter_name": "Please enter your name",
+		"invalid_name": "Invalid name (only letters and space are allowed)",
+		"name_minlength_error": "Name must have a minimum of {minLength} characters"
+	}
 }

@@ -1,8 +1,8 @@
 import '@nuxtjs/axios';
 
-import { Context } from '@nuxt/types';
 import { ApiService } from '../services/ApiService';
+import { Context } from '@nuxt/types';
 
 export default async ({ app }: Context) => {
-  await ApiService.init(app.$axios);
+	ApiService.init(app.$axios);
 };

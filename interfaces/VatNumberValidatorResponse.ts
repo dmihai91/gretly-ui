@@ -1,5 +1,5 @@
 export interface VatNumberValidatorResponse {
-  isValid: boolean;
-  name: string;
-  address: string;
+	isValid: boolean;
+	name: string;
+	address: string;
 }
