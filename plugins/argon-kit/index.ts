@@ -7,8 +7,8 @@ import VueLazyload from 'vue-lazyload';
 import globalComponents from './globalComponents';
 
 export default {
-	install: (Vue: VueConstructor<Vue>, options?: Vue['$options']) => {
-		Vue.use(globalComponents);
-		Vue.use(VueLazyload);
-	}
+  install: (Vue: VueConstructor<Vue>, _options?: Vue['$options']) => {
+    Vue.use(globalComponents);
+    Vue.use(VueLazyload);
+  },
 };

@@ -1,7 +1,7 @@
 export interface LambdaFunction {
-	id: string;
-	name: string;
-	description: string;
-	url: string;
-	jsContent: string;
+  id: string;
+  name: string;
+  description: string;
+  url: string;
+  jsContent: string;
 }

@@ -2,8 +2,8 @@ import { getterTree, mutationTree, actionTree } from 'nuxt-typed-vuex';
 import { Project } from '~/interfaces/Project';
 
 export const state = () => ({
-	data: [] as Project[],
-	currentProject: null as Project
+  data: [] as Project[],
+  currentProject: null as Project,
 });
 
 export const getters = getterTree(state, {});
