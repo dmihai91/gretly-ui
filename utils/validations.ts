@@ -6,5 +6,5 @@ export const Validations = (validations: ValidationRuleset<any>) =>
 		// component options should be passed to the callback
 		// and update for the options object affect the component
 		options.mixins = [...options.mixins, validationMixin];
-		options.validations = validations;
+		options['validations'] = validations;
 	});
