@@ -1,7 +1,8 @@
+// manage all auth operations in the app
+
 import { getterTree, mutationTree, actionTree } from 'nuxt-typed-vuex';
 import { ActionsTypes, MutationsTypes } from './types/auth';
 
-import { ApiError } from '~/interfaces/ApiError';
 import { AuthResponse } from '~/interfaces/Auth';
 import { LoginInfo } from '~/interfaces/LoginInfo';
 import { User } from '~/interfaces/User';

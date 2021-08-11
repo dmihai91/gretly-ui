@@ -5,9 +5,12 @@ import { Message } from '~/interfaces/Message';
 
 // import modules
 import * as auth from './auth';
-import * as projects from './projects';
+import * as project from './project';
 import * as user from './user';
-import * as templates from './templates';
+import * as template from './template';
+import * as course from './course';
+import * as quiz from './quiz';
+import * as role from './role';
 
 // global state
 export const state = () => ({
@@ -66,8 +69,11 @@ export const accessorType = getAccessorType({
 	state,
 	modules: {
 		auth,
-		projects,
+		project,
 		user,
-		templates
+		template,
+		course,
+		quiz,
+		role
 	}
 });

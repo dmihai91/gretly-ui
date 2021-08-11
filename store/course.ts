@@ -1,9 +1,8 @@
-import { getterTree, mutationTree, actionTree } from 'nuxt-typed-vuex';
-import { Project } from '~/interfaces/Project';
+// manage data and API operations for 'Course' db collection
+
+import { actionTree, getterTree, mutationTree } from "nuxt-typed-vuex";
 
 export const state = () => ({
-	data: [] as Project[],
-	currentProject: null as Project
 });
 
 export const getters = getterTree(state, {});
