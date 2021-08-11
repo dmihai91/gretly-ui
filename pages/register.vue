@@ -145,9 +145,9 @@ import { AuthService } from '~/services/AuthService';
 import AuthForm from '~/components/AuthForm.vue';
 import SocialLogin from '~/components/SocialLogin.vue';
 
-const usernameMinLength = 5;
-const passwordMinLength = 8;
-const nameMinLength = 5;
+const usernameMinLength = 5,
+      passwordMinLength = 8,
+      nameMinLength = 5;
 
 const formData: RegisterInfo = {
   username: '',

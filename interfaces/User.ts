@@ -1,3 +1,5 @@
+import { AccountType } from './AccountType';
+
 interface Education {
 	type: string;
 	domain: string;
@@ -53,4 +55,6 @@ export interface User {
 	education: Education;
 	businessAccount: boolean;
 	externalLink: string;
+	isEnrolled: boolean;
+	accountType: AccountType;
 }

@@ -1,7 +1,7 @@
 export function initFacebookSdk() {
 	return new Promise((resolve) => {
 		// wait for facebook sdk to initialize before starting the vue app
-		if (process.client) {
+		if (process['client']) {
 			window['fbAsyncInit'] = function() {
 				FB.init({
 					appId: process.env.fbClientId,
