@@ -1,16 +1,15 @@
 <template>
   <!-- Sign In Form -->
-  <auth-form :slogan="sloganMessage" ilustration-path="images/login-illustration.jpg">
+  <AuthForm :slogan="sloganMessage">
     <div class="text-center mb-3">
-      <h2>{{ $t('sign_in_label') }}</h2>
+      <h2>{{ $t('sign_in_label', { appName: $t('app_name') }) }}</h2>
     </div>
     <div class="card bg-secondary shadow border-0">
-      ``
       <div class="card-header bg-white pb-4">
         <div class="text-muted text-center mb-3">
           <h6>{{ $t('sign_in_with') }}</h6>
         </div>
-        <social-login />
+        <SocialLogin />
       </div>
 
       <div class="card-body px-lg-5 py-lg-4">
@@ -34,13 +33,13 @@
                 'is-invalid': usernameValidationField.$dirty && !isValidUsername,
               }"
               @input="delayTouch(usernameValidationField)"
-            >
+            />
             <div v-if="usernameValidationField.$invalid" class="error">
               <span v-if="usernameValidationField.$dirty && !usernameValidationField.required">
-                <form-input-error>{{ $t('messages.please_enter_username_or_email') }}</form-input-error>
+                <BaseFormInputError>{{ $t('messages.please_enter_username_or_email') }}</BaseFormInputError>
               </span>
               <span v-else-if="usernameValidationField.$dirty && !usernameValidationField.valid">
-                <form-input-error>{{ $t('messages.invalid_username_or_email') }}</form-input-error>
+                <BaseFormInputError>{{ $t('messages.invalid_username_or_email') }}</BaseFormInputError>
               </span>
             </div>
           </div>
@@ -58,20 +57,20 @@
                 'is-invalid': passwordValidationField.$dirty && !isValidPassword,
               }"
               @input="delayTouch(passwordValidationField)"
-            >
+            />
             <div v-if="passwordValidationField.$invalid" class="error">
               <span v-if="passwordValidationField.$dirty && !passwordValidationField.required">
-                <form-input-error>{{ $t('messages.please_enter_password') }}</form-input-error>
+                <BaseFormInputError>{{ $t('messages.please_enter_password') }}</BaseFormInputError>
               </span>
             </div>
           </div>
 
           <!-- aici vine mesajul de eroare !-->
-          <form-input-error v-if="error" />
+          <BaseFormInputError v-if="error" />
 
           <div class="form-group d-flex justify-content-between">
             <div class="custom-control custom-control-alternative custom-checkbox">
-              <input id="remember-me" type="checkbox" class="custom-control-input">
+              <input id="remember-me" type="checkbox" class="custom-control-input" />
               <label for="remember-me" class="custom-control-label">
                 <span>{{ $t('remember_me') }}</span>
               </label>
@@ -85,7 +84,7 @@
               {{ $t('sign_in') }}
             </button>
           </div>
-          <hr class="mt-6">
+          <hr class="mt-6" />
           <div class="flex justify-center">
             <span>
               {{ $t('not_registered_yet') }}
@@ -95,7 +94,7 @@
         </form>
       </div>
     </div>
-  </auth-form>
+  </AuthForm>
 </template>
 
 <script lang="ts">
@@ -111,7 +110,6 @@ import { usernameValidator } from '~/utils/validators';
 import AuthForm from '~/components/AuthForm.vue';
 import SocialLogin from '~/components/SocialLogin.vue';
 import { ApiError } from '~/interfaces/ApiError';
-import FormInputError from '~/components/base/FormInputError.vue';
 
 const formData: LoginInfo = {
   username: '',
@@ -123,9 +121,8 @@ const formData: LoginInfo = {
   components: {
     SocialLogin,
     AuthForm,
-    FormInputError,
   },
-  layout: 'simple'
+  layout: 'simple',
 })
 export default class Login extends Vue {
   // data
@@ -154,44 +151,47 @@ export default class Login extends Vue {
   })
 
   // computed props
-  get usernameValidationField () {
+  get usernameValidationField() {
     return this.$v.form.username;
   }
 
-  get passwordValidationField () {
+  get passwordValidationField() {
     return this.$v.form.password;
   }
 
-  get isValidUsername () {
+  get isValidUsername() {
     return this.$v.form.username.$dirty && !this.$v.form.username.$invalid;
   }
 
-  get isValidPassword () {
+  get isValidPassword() {
     return this.$v.form.password.$dirty && !this.$v.form.password.$invalid;
   }
 
-  get sloganMessage (): string {
+  get sloganMessage(): string {
     return this.$t('login_slogan') as string;
   }
 
   // methods
-  delayTouch ($v: IValidator) {
+  delayTouch($v: IValidator) {
     return delayTouch($v);
   }
 
-  async submitForm (_evt: Event) {
+  async submitForm(_evt: Event) {
     try {
-      await this.$auth.login(this.form);
       this.$v.$touch();
-      this.$router.push('/');
+      if(!this.$v.$invalid) {
+        await this.$auth.login(this.form);
+        this.$router.push('/');
+      }
     } catch (_err) {
       // handle error
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const apiError: ApiError = _err;
+      console.log(apiError);
     }
   }
 
-  resetForm () {
+  resetForm() {
     this.form = {
       ...formData,
     };
@@ -199,7 +199,7 @@ export default class Login extends Vue {
     this.$nextTick(() => this.$v.$reset());
   }
 
-  showRegister () {
+  showRegister() {
     this.$router.push('/register');
   }
 }

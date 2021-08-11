@@ -20,7 +20,7 @@
 import Vue from 'vue';
 
 export default Vue.extend({
-	name: 'icon',
+	name: 'Icon',
 	props: {
 		name: {
 			type: String,

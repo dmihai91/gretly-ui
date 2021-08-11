@@ -2,9 +2,10 @@
 	<nav
 		class="navbar"
 		:class="[
+			{ 'navbar-transparent': transparent },
 			{ 'navbar-expand-lg': expand },
 			{ [`navbar-${effect}`]: effect },
-			{ 'navbar-transparent': transparent },
+			{ 'navbar-semi-transparent': semiTransparent },
 			{ [`bg-${type}`]: type },
 			{ rounded: round }
 		]"
@@ -37,7 +38,7 @@ import { FadeTransition } from 'vue2-transitions';
 import NavbarToggleButton from './NavbarToggleButton.vue';
 
 export default Vue.extend({
-	name: 'base-nav',
+	name: 'BaseNav',
 	components: {
 		FadeTransition,
 		NavbarToggleButton
@@ -71,7 +72,7 @@ export default Vue.extend({
 		transparent: {
 			type: Boolean,
 			default: false,
-			description: 'Whether navbar is transparent'
+			description: 'Whether navbar is semi transparent'
 		},
 		expand: {
 			type: Boolean,
@@ -81,8 +82,18 @@ export default Vue.extend({
 	},
 	data() {
 		return {
-			toggled: false
+			toggled: false,
+			semiTransparent: false,
 		};
+	},
+	mounted() {
+		window.addEventListener('scroll', () => {
+			if(window.scrollY > 400) {
+				setTimeout(() => this.semiTransparent = true, 100);
+			} else {
+				setTimeout(() => this.semiTransparent = false, 100);
+			}
+		});
 	},
 	methods: {
 		onTitleClick(evt: Event) {

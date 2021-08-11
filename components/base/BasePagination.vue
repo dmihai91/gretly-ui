@@ -20,7 +20,7 @@
 import Vue from 'vue';
 
 export default Vue.extend({
-	name: 'base-pagination',
+	name: 'BasePagination',
 	props: {
 		pageCount: {
 			type: Number,

@@ -35,10 +35,13 @@
 <script lang="ts">
 import Vue from 'vue';
 export default Vue.extend({
-	name: 'auth-form',
+	name: 'AuthForm',
 	props: {
 		slogan: String,
-		ilustrationPath: String
+		ilustrationPath: {
+			type: String,
+			default: '',
+		}
 	}
 });
 </script>

@@ -6,6 +6,6 @@
 
 <script lang="ts">
 export default {
-	name: 'form-input-error'
+	name: 'FormInputError'
 };
 </script>

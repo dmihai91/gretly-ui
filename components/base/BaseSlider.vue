@@ -14,7 +14,7 @@ type Slider = noUiSlider.noUiSlider;
 type SliderValue = number[] & string;
 
 export default Vue.extend({
-	name: 'base-slider',
+	name: 'BaseSlider',
 	props: {
 		value: {
 			type: [String, Array, Number],

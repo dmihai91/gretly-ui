@@ -26,6 +26,7 @@ export default Vue.extend({
 			};
 
 			return FB.getLoginStatus(async (response) => {
+				if(!response.authResponse) this.$accessor.toggleIsLoading();
 				if (response.status === 'connected') {
 					await loginCb(response.authResponse.accessToken);
 				} else {

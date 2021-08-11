@@ -24,7 +24,7 @@
 import Vue from 'vue';
 
 export default Vue.extend({
-	name: 'base-dropdown',
+	name: 'BaseDropdown',
 	props: {
 		direction: {
 			type: String,

@@ -10,7 +10,7 @@
 import Vue from 'vue';
 
 export default Vue.extend({
-	name: 'badge',
+	name: 'Badge',
 	props: {
 		tag: {
 			type: String,

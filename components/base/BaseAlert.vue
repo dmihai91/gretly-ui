@@ -33,7 +33,7 @@ import Vue from 'vue';
 import { FadeTransition } from 'vue2-transitions';
 
 export default Vue.extend({
-	name: 'alert',
+	name: 'BaseAlert',
 	components: {
 		FadeTransition
 	},

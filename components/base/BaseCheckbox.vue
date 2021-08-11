@@ -21,7 +21,7 @@ interface Model extends Vue {
 }
 
 export default Vue.extend({
-	name: 'base-checkbox',
+	name: 'BaseCheckbox',
 	model: {
 		prop: 'checked'
 	},

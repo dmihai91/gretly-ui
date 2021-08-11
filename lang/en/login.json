@@ -1,6 +1,6 @@
 {
 	"login_slogan": "<b>GREAT</b> editor for building interactive <b>WEBSITES</b> and <b>WEB APPS</b>.",
-	"sign_in_label": "Sign in to Gretly",
+	"sign_in_label": "Sign in to {appName}",
 	"sign_in_with": "Sign in with",
 	"fill_up_details": "Fill up the following details",
 	"or": "or",

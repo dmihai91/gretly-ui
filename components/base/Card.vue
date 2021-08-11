@@ -28,7 +28,7 @@
 import Vue from 'vue';
 
 export default Vue.extend({
-	name: 'card',
+	name: 'Card',
 	props: {
 		type: {
 			type: String,

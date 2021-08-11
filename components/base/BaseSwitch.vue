@@ -9,7 +9,7 @@
 import Vue from 'vue';
 
 export default Vue.extend({
-	name: 'base-switch',
+	name: 'BaseSwitch',
 	inheritAttrs: false,
 	props: {
 		value: {

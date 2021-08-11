@@ -30,7 +30,7 @@
 import Vue from 'vue';
 
 export default Vue.extend({
-	name: 'base-progress',
+	name: 'BaseProgress',
 	props: {
 		striped: {
 			type: Boolean,

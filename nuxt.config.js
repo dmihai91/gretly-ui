@@ -2,13 +2,12 @@ import en from './lang/en';
 import fs from 'fs';
 
 export default {
-  ssr: true,
-  target: 'server',
+  target: 'static',
   /** Headers of the page
    ** See https://nuxtjs.org/api/configuration-head
    */
   head: {
-    title: 'Gretly',
+    title: 'GretlyStudio',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -43,7 +42,7 @@ export default {
       src: '~/plugins/global.js',
       ssr: false,
     },
-    '~/plugins/lastRouterPath.ts',
+    '~/plugins/lastRouterPath',
     '~/plugins/initApiService',
   ],
   /*
@@ -107,6 +106,7 @@ export default {
         component: resolve(__dirname, '~/pages/not-found.vue'),
       });
     },
+
     prefetchLinks: true,
   },
   styleResources: {

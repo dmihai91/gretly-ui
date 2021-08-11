@@ -1,6 +1,6 @@
 <template>
 	<div id="app" class="main">
-		<loading :active.sync="isLoading" :is-full-page="true" color="#0e5b45" />
+		<Loader :active.sync="isLoading" :is-full-page="true" color="#0e5b45" />
 		<Nuxt v-show="!isLoading" />
 	</div>
 </template>

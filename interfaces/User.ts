@@ -1,28 +1,3 @@
-export interface User {
-	id: string;
-	roleRef: RoleRef;
-	fBaseUserId: string;
-	fbUserId: string;
-	googleUserId: string;
-	username: string;
-	email: string;
-	name: string;
-	profilePicture: string;
-	type: number;
-	phoneNumber: string;
-	country: string;
-	createdAt: string;
-	modifiedAt: string;
-	lastLoggedIn: string;
-	role: Role;
-	verified: boolean;
-	locked: boolean;
-	companyInfo: CompanyInfo;
-	education: Education;
-	businessAccount: boolean;
-	externalLink: string;
-}
-
 interface Education {
 	type: string;
 	domain: string;
@@ -32,6 +7,7 @@ interface Education {
 interface CompanyInfo {
 	country: string;
 	vatNumber: string;
+	address: string;
 }
 
 interface Role {
@@ -53,4 +29,28 @@ interface RoleRef {
 
 interface Value {
 	id: string;
+}
+
+export interface User {
+	id: string;
+	roleRef: RoleRef;
+	fBaseUserId: string;
+	fbUserId: string;
+	googleUserId: string;
+	username: string;
+	email: string;
+	name: string;
+	profilePicture: string;
+	phoneNumber: string;
+	country: string;
+	createdAt: string;
+	modifiedAt: string;
+	lastLoggedIn: string;
+	role: Role;
+	verified: boolean;
+	locked: boolean;
+	companyInfo: CompanyInfo;
+	education: Education;
+	businessAccount: boolean;
+	externalLink: string;
 }

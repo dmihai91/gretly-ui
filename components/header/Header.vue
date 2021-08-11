@@ -1,9 +1,9 @@
 <template>
 	<header class="header-global">
-		<base-nav class="navbar-main" transparent type="" effect="light" expand>
-			<router-link slot="brand" class="navbar-brand mr-lg-5" to="/">
+		<BaseNav class="navbar-main" transparent type="" effect="light" expand>
+			<NuxtLink slot="brand" class="navbar-brand mr-lg-5" to="/">
 				<img src="img/brand/white.png" alt="logo" />
-			</router-link>
+			</NuxtLink>
 			<div class="row" slot="content-header" slot-scope="{ closeMenu }">
 				<div class="col-6 collapse-brand">
 					<a href="https://demos.creative-tim.com/vue-argon-design-system/documentation/">
@@ -11,22 +11,22 @@
 					</a>
 				</div>
 				<div class="col-6 collapse-close">
-					<close-button @click="closeMenu"></close-button>
+					<BaseCloseButton @click="closeMenu"></BaseCloseButton>
 				</div>
 			</div>
 
 			<ul class="navbar-nav navbar-nav-hover align-items-lg-center">
 				<li class="nav-item">
-					<router-link to="/web-apps-builder" class="nav-link d-lg-none">Webapps builder</router-link>
-					<router-link to="/web-apps-builder" class="d-none nav-link d-lg-block">Webapps builder</router-link>
+					<NuxtLink to="/web-apps-builder" class="nav-link d-lg-none">Webapps builder</NuxtLink>
+					<NuxtLink to="/web-apps-builder" class="d-none nav-link d-lg-block">Webapps builder</NuxtLink>
 				</li>
-				<base-dropdown class="nav-item" menu-classes="dropdown-menu-xl">
+				<BaseDropdown class="nav-item" menu-classes="dropdown-menu-xl">
 					<a slot="title" href="#" class="nav-link" data-toggle="dropdown" role="button">
 						<i class="ni ni-ui-04 d-lg-none"></i>
 						<span class="nav-link-inner--text">{{ $t('explore') }}</span>
 					</a>
 					<div class="dropdown-menu-inner">
-						<router-link to="/templates" class="media d-flex align-items-center">
+						<NuxtLink to="/templates" class="media d-flex align-items-center">
 							<div class="icon icon-shape bg-gradient-primary rounded-circle text-white">
 								<i class="ni ni-spaceship"></i>
 							</div>
@@ -36,7 +36,7 @@
 									Get started with Bootstrap, the world's most popular framework for building responsive sites.
 								</p>
 							</div>
-						</router-link>
+						</NuxtLink>
 						<a
 							href="https://demos.creative-tim.com/vue-argon-design-system/documentation/"
 							class="media d-flex align-items-center"
@@ -52,8 +52,8 @@
 							</div>
 						</a>
 					</div>
-				</base-dropdown>
-				<base-dropdown tag="li" class="nav-item" menu-classes="dropdown-menu-xl">
+				</BaseDropdown>
+				<BaseDropdown tag="li" class="nav-item" menu-classes="dropdown-menu-xl">
 					<a slot="title" href="#" class="nav-link" data-toggle="dropdown" role="button">
 						<i class="ni ni-collection d-lg-none"></i>
 						<span class="nav-link-inner--text">Resources</span>
@@ -88,23 +88,23 @@
 							</div>
 						</a>
 					</div>
-				</base-dropdown>
+				</BaseDropdown>
 			</ul>
 			<ul class="navbar-nav align-items-lg-center ml-lg-auto">
 				<li class="nav-item">
-					<router-link to="/login" class="nav-link d-lg-none font-weight-bold">{{ $t('sign_in') }}</router-link>
-					<router-link to="/login" class="d-none btn btn-secondary text-dark nav-link d-lg-block font-weight-bold">{{
+					<NuxtLink to="/login" class="nav-link d-lg-none font-weight-bold">{{ $t('sign_in') }}</NuxtLink>
+					<NuxtLink to="/login" class="d-none btn btn-secondary text-dark nav-link d-lg-block font-weight-bold">{{
 						$t('sign_in')
-					}}</router-link>
+					}}</NuxtLink>
 				</li>
 				<li class="nav-item">
-					<router-link to="/register" class="nav-link d-lg-none font-weight-bold">{{ $t('get_started') }}</router-link>
-					<router-link to="/register" class="d-none btn btn-warning nav-link d-lg-block font-weight-bold">{{
+					<NuxtLink to="/register" class="nav-link d-lg-none font-weight-bold">{{ $t('get_started') }}</NuxtLink>
+					<NuxtLink to="/register" class="d-none btn btn-warning nav-link d-lg-block font-weight-bold">{{
 						$t('get_started')
-					}}</router-link>
+					}}</NuxtLink>
 				</li>
 			</ul>
-		</base-nav>
+		</BaseNav>
 	</header>
 </template>
 

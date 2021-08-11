@@ -1,6 +1,6 @@
 {
 	"register_slogan": "<b>CREATE</b> beautiful <b>WEBSITES</b> and <b>WEB APPS</b> by your <i>taste</i>.",
-	"register_label": "Register to Gretly",
+	"register_label": "Register to {appName}",
 	"register_with": "Register with",
 	"fill_up_details": "Fill up the following details",
 	"or": "or",

@@ -56,7 +56,7 @@ import Vue from 'vue';
 
 export default Vue.extend({
 	inheritAttrs: false,
-	name: 'base-input',
+	name: 'BaseInput',
 	props: {
 		required: {
 			type: Boolean,

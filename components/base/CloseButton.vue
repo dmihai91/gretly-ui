@@ -17,7 +17,7 @@
 <script lang="ts">
 import Vue from 'vue';
 export default Vue.extend({
-	name: 'close-button',
+	name: 'CloseButton',
 	props: {
 		target: {
 			type: [String, Number],

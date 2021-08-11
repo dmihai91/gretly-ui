@@ -1,15 +1,15 @@
 <template>
   <!-- Register Layout -->
-  <auth-form :slogan="sloganMessage" ilustration-path="images/register-illustration.jpg">
+  <AuthForm :slogan="sloganMessage">
     <div class="text-center mb-3">
-      <h2>{{ $t('register_label') }}</h2>
+      <h2>{{ $t('register_label', { appName: $t('app_name') }) }}</h2>
     </div>
     <div class="card bg-secondary shadow border-0">
       <div class="card-header bg-white pb-4">
         <div class="text-muted text-center mb-3">
-          <h6>{{ $t('register_with') }}</h6>
+          <h6>{{ $t('register_with', { appName: $t('app_name') }) }}</h6>
         </div>
-        <social-login />
+        <SocialLogin />
       </div>
 
       <div class="card-body px-lg-5 py-lg-4">
@@ -32,15 +32,15 @@
             >
             <div v-if="usernameValidationField.$invalid" class="error">
               <span v-if="usernameValidationField.$dirty && !usernameValidationField.required">
-                <form-input-error>{{ $t('messages.please_enter_username') }}</form-input-error>
+                <BaseFormInputError>{{ $t('messages.please_enter_username') }}</BaseFormInputError>
               </span>
               <span v-else-if="usernameValidationField.$dirty && !usernameValidationField.minLength">
-                <form-input-error>{{
+                <BaseFormInputError>{{
                   $t('messages.username_minlength_error', { minLength: usernameMinLength })
-                }}</form-input-error>
+                }}</BaseFormInputError>
               </span>
               <span v-else-if="usernameValidationField.$dirty && !usernameValidationField.valid">
-                <form-input-error>{{ $t('messages.invalid_username') }}</form-input-error>
+                <BaseFormInputError>{{ $t('messages.invalid_username') }}</BaseFormInputError>
               </span>
             </div>
           </div>
@@ -57,10 +57,10 @@
             >
             <div v-if="emailValidationField.$invalid" class="error">
               <span v-if="emailValidationField.$dirty && !emailValidationField.required">
-                <form-input-error>{{ $t('messages.please_enter_email') }}</form-input-error>
+                <BaseFormInputError>{{ $t('messages.please_enter_email') }}</BaseFormInputError>
               </span>
               <span v-else-if="emailValidationField.$dirty && !emailValidationField.valid">
-                <form-input-error>{{ $t('messages.invalid_email') }}</form-input-error>
+                <BaseFormInputError>{{ $t('messages.invalid_email') }}</BaseFormInputError>
               </span>
             </div>
           </div>
@@ -78,12 +78,12 @@
             >
             <div v-if="passwordValidationField.$invalid" class="error">
               <span v-if="passwordValidationField.$dirty && !passwordValidationField.required">
-                <form-input-error>{{ $t('messages.please_enter_password') }}</form-input-error>
+                <BaseFormInputError>{{ $t('messages.please_enter_password') }}</BaseFormInputError>
               </span>
               <span v-else-if="passwordValidationField.$dirty && !passwordValidationField.goodPassword">
-                <form-input-error>{{
+                <BaseFormInputError>{{
                   $t('messages.not_good_password', { minLength: passwordMinLength })
-                }}</form-input-error>
+                }}</BaseFormInputError>
               </span>
             </div>
           </div>
@@ -100,15 +100,15 @@
             >
             <div v-if="nameValidationField.$invalid" class="error">
               <span v-if="nameValidationField.$dirty && !nameValidationField.required">
-                <form-input-error>{{ $t('messages.please_enter_name') }}</form-input-error>
+                <BaseFormInputError>{{ $t('messages.please_enter_name') }}</BaseFormInputError>
               </span>
               <span v-else-if="nameValidationField.$dirty && !nameValidationField.minLength">
-                <form-input-error>{{
+                <BaseFormInputError>{{
                   $t('messages.name_minlength_error', { minLength: nameMinLength })
-                }}</form-input-error>
+                }}</BaseFormInputError>
               </span>
               <span v-else-if="nameValidationField.$dirty && !nameValidationField.valid">
-                <form-input-error>{{ $t('messages.invalid_name') }}</form-input-error>
+                <BaseFormInputError>{{ $t('messages.invalid_name') }}</BaseFormInputError>
               </span>
             </div>
           </div>
@@ -128,7 +128,7 @@
         </form>
       </div>
     </div>
-  </auth-form>
+  </AuthForm>
 </template>
 
 <script lang="ts">
@@ -257,6 +257,7 @@ export default class Register extends Vue {
     try {
       if (!this.$v.$invalid) {
         await AuthService.register(this.form);
+        this.$router.push('/');
       }
     } catch (err) {
       console.log(err);

@@ -18,7 +18,7 @@ interface Model extends Vue {
 }
 
 export default Vue.extend({
-	name: 'base-radio',
+	name: 'BaseRadio',
 	props: {
 		name: {
 			type: [String, Number],
