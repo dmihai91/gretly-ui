@@ -7,18 +7,19 @@
 	font-size: 1rem;
 	border-radius: 50%;
 	height: 48px;
-	width: 48px; 
-} 
+	width: 48px;
+}
 
 .avatar img {
 	width: 100%;
 	border-radius: 50%;
 }
 
-.avatar + .avatar-content {
+.avatar+.avatar-content {
 	display: inline-block;
 	margin-left: .75rem;
 }
+
 .avatar-lg {
 	width: 58px;
 	height: 58px;
@@ -38,14 +39,14 @@
 		position: relative;
 		z-index: 2;
 		border: 2px solid $card-bg;
-		
+
 		&:hover {
 			z-index: 3;
 		}
 	}
 
-	.avatar + .avatar {
+	.avatar+.avatar {
 		margin-left: -1rem;
-		
+
 	}
 }

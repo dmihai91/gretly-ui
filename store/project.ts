@@ -3,8 +3,7 @@
 import { getterTree, mutationTree, actionTree } from 'nuxt-typed-vuex';
 import { Project } from '~/interfaces/Project';
 
-export const state = () => ({
-});
+export const state = () => ({});
 
 export const getters = getterTree(state, {});
 export const mutations = mutationTree(state, {});

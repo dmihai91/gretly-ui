@@ -7,7 +7,7 @@ export default {
    ** See https://nuxtjs.org/api/configuration-head
    */
   head: {
-    title: 'GretlyStudio',
+    title: 'Gretlystudio - Learn how to build Great Web and Mobile Apps',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -65,6 +65,7 @@ export default {
     '@nuxtjs/style-resources',
     'nuxt-i18n',
     '@nuxtjs/proxy',
+    '@nuxtjs/toast',
   ],
   /*
    ** Build configuration
@@ -135,11 +136,14 @@ export default {
     icon: false,
   },
   loader: {
-    color: '#028656',
+    color: '#5c00fa',
   },
   loadingIndicator: {
     name: 'chasing-dots',
-    color: '#028675',
+    color: '#5c00fa',
     background: 'white',
+  },
+  toast: {
+    iconPack: 'fontawesome',
   },
 };

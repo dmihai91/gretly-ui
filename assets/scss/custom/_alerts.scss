@@ -7,7 +7,7 @@
     .alert-inner--icon {
         font-size: 1.25rem;
         margin-right: 1.25rem;
-        display: inline-block; 
+        display: inline-block;
         vertical-align: middle;
 
         i.ni {
@@ -15,6 +15,7 @@
             top: 1px;
         }
     }
+
     .alert-inner--text {
         display: inline-block;
         vertical-align: middle;
@@ -27,7 +28,7 @@
 
 [class*="alert-"] {
     .alert-link {
-        color: $white; 
+        color: $white;
         border-bottom: 1px dotted rgba($white, .5);
     }
 }
@@ -35,11 +36,11 @@
 .alert-heading {
     font-weight: $font-weight-bold;
     font-size: $h4-font-size;
-    margin-top: .15rem; 
-} 
+    margin-top: .15rem;
+}
 
 .alert-dismissible {
-    .close { 
+    .close {
         top: 50%;
         right: $alert-padding-x;
         padding: 0;

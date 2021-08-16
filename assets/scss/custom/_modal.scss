@@ -1,10 +1,13 @@
 .modal-content {
     border: 0;
+
     @if $enable-rounded {
         border-radius: $modal-content-border-radius;
-    } @else {
+    }
+
+    @else {
         border-radius: 0;
-    }  
+    }
 }
 
 
@@ -13,14 +16,15 @@
         margin-top: 0;
         margin-bottom: 0;
     }
+
     .modal-content {
         border-radius: 0;
     }
 }
 
-@each $color, $value in $theme-colors {
+@each $color,
+$value in $theme-colors {
     .modal-#{$color} {
         @include modal-variant($value);
     }
 }
-

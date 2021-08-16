@@ -1,5 +1,5 @@
 {
-	"register_slogan": "<b>CREATE</b> beautiful <b>WEBSITES</b> and <b>WEB APPS</b> by your <i>taste</i>.",
+	"register_slogan": "<b>CREATE</b> beautiful <b>WEBSITES</b>, <b>WEB APPS</b> and <b>MOBILE apps</b> by your <i>taste</i> with the skills learned from here",
 	"register_label": "Register to {appName}",
 	"register_with": "Register with",
 	"fill_up_details": "Fill up the following details",
@@ -7,6 +7,7 @@
 	"username": "Username",
 	"email": "Email",
 	"password": "Password",
+	"confirm_password": "Confirm Password",
 	"name": "Name",
 	"register": "Register",
 	"already_registered": "Already a member?",
@@ -17,7 +18,9 @@
 		"please_enter_email": "Please enter your email",
 		"invalid_email": "Invalid email address",
 		"please_enter_password": "Please enter your password",
+		"please_enter_confirm_password": "Please enter the password confirmation",
 		"not_good_password": "Password must be at least {minLength} characters and contain a lowercase character, uppercase character and a number",
+		"confirm_password_not_match": "The password confirmation should match the password",
 		"please_enter_name": "Please enter your name",
 		"invalid_name": "Invalid name (only letters and space are allowed)",
 		"name_minlength_error": "Name must have a minimum of {minLength} characters"

@@ -1,11 +1,11 @@
 // plugins/after-each.js:
 import { Context } from '@nuxt/types';
-import { LS_ROUTE_KEY } from '../const';
+import { LS_ROUTE_KEY } from '../utils/const';
 
 export default async ({ app }: Context) => {
-	app.router.afterEach((to) => {
-		if (process.client) {
-			localStorage.setItem(LS_ROUTE_KEY, to.path);
-		}
-	});
+  app.router.afterEach((to) => {
+    if (process.client) {
+      localStorage.setItem(LS_ROUTE_KEY, to.path);
+    }
+  });
 };

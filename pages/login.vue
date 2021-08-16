@@ -45,12 +45,12 @@
           </div>
 
           <!-- password field -->
-          <div class="form-group">
+          <div class="form-group position-relative">
             <label for="inputPassword">{{ $t('password') }}</label>
             <input
               v-model="form.password"
               name="inputPassword"
-              type="password"
+              :type="passwordViewIsToggled ? 'text' : 'password'"
               class="form-control"
               :class="{
                 'is-valid': isValidPassword,
@@ -58,6 +58,12 @@
               }"
               @input="delayTouch(passwordValidationField)"
             />
+            <i
+              class="fa password-eye"
+              :class="!passwordViewIsToggled ? 'fa-eye' : 'fa-eye-slash'"
+              v-show="form.password.length > 0"
+              @click="togglePassword"
+            ></i>
             <div v-if="passwordValidationField.$invalid" class="error">
               <span v-if="passwordValidationField.$dirty && !passwordValidationField.required">
                 <BaseFormInputError>{{ $t('messages.please_enter_password') }}</BaseFormInputError>
@@ -65,7 +71,7 @@
             </div>
           </div>
 
-          <!-- aici vine mesajul de eroare !-->
+          <!-- the error from server will be displayed here !-->
           <BaseFormInputError v-if="error" />
 
           <div class="form-group d-flex justify-content-between">
@@ -98,9 +104,9 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'nuxt-property-decorator';
+import { Vue, Component, Watch } from 'nuxt-property-decorator';
 import { IValidator } from 'vuelidate';
-import { required, or, email, sameAs } from 'vuelidate/lib/validators';
+import { required, or, email } from 'vuelidate/lib/validators';
 
 import { LoginInfo } from '~/interfaces/LoginInfo';
 import { delayTouch } from '~/utils/helpers';
@@ -109,7 +115,10 @@ import { usernameValidator } from '~/utils/validators';
 
 import AuthForm from '~/components/AuthForm.vue';
 import SocialLogin from '~/components/SocialLogin.vue';
-import { ApiError } from '~/interfaces/ApiError';
+import { ApiError } from '~/utils/apiError';
+import { PASSWORD_VISIBLE_TIMEOUT } from '~/utils/const';
+import { LayoutType } from '~/enum/LayoutType';
+import { AxiosResponse } from 'axios';
 
 const formData: LoginInfo = {
   username: '',
@@ -122,7 +131,7 @@ const formData: LoginInfo = {
     SocialLogin,
     AuthForm,
   },
-  layout: 'simple',
+  layout: LayoutType.SIMPLE,
 })
 export default class Login extends Vue {
   // data
@@ -131,6 +140,7 @@ export default class Login extends Vue {
   };
 
   isBusy = false;
+  passwordViewIsToggled = false;
   error: string = null;
 
   // validations
@@ -142,10 +152,6 @@ export default class Login extends Vue {
       },
       password: {
         required,
-      },
-      confirmPassword: {
-        required,
-        sameAs: sameAs('form.password'),
       },
     },
   })
@@ -179,28 +185,52 @@ export default class Login extends Vue {
   async submitForm(_evt: Event) {
     try {
       this.$v.$touch();
-      if(!this.$v.$invalid) {
-        await this.$auth.login(this.form);
-        this.$router.push('/');
+      this.isBusy = true;
+      if (!this.$v.$invalid) {
+        this.$auth
+          .login(this.form)
+          .then(() => {
+            this.isBusy = false;
+            this.$router.push('/');
+          })
+          .catch((err) => {
+            throw new Error(err);
+          });
       }
-    } catch (_err) {
+    } catch (err) {
+      this.isBusy = false;
       // handle error
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const apiError: ApiError = _err;
-      console.log(apiError);
+      const { response }: { response: AxiosResponse } = err;
+      // set error message on bad request
+      if (response.status === 400) {
+      }
     }
   }
 
   resetForm() {
+    this.error = '';
     this.form = {
       ...formData,
     };
-    this.error = '';
     this.$nextTick(() => this.$v.$reset());
   }
 
   showRegister() {
     this.$router.push('/register');
+  }
+
+  togglePassword() {
+    this.passwordViewIsToggled = !this.passwordViewIsToggled;
+  }
+
+  @Watch('passwordViewIsToggled')
+  onPasswordViewIsToggled(val: boolean) {
+    // make the password visible for 3s only
+    if (val) {
+      setTimeout(() => {
+        this.passwordViewIsToggled = false;
+      }, PASSWORD_VISIBLE_TIMEOUT);
+    }
   }
 }
 </script>

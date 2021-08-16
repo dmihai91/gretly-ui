@@ -6,7 +6,7 @@
     }
 }
 
-.badge + .badge {
+.badge+.badge {
     margin-left: 3px;
 }
 
@@ -32,12 +32,12 @@
     margin-right: .625rem;
 }
 
-.badge-inline + span {
+.badge-inline+span {
     top: 2px;
     position: relative;
 }
 
-.badge-inline + span > a {
+.badge-inline+span>a {
     text-decoration: underline;
 }
 
@@ -64,6 +64,7 @@
         &:not(:first-child) {
             margin-left: .5rem;
         }
+
         &:not(:last-child) {
             margin-right: .5rem;
         }

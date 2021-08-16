@@ -21,9 +21,7 @@ $black: #000 !default;
 
 $grays: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default
-$grays: map-merge(
-	(
-		'100': $gray-100,
+$grays: map-merge(('100': $gray-100,
 		'200': $gray-200,
 		'300': $gray-300,
 		'400': $gray-400,
@@ -31,10 +29,8 @@ $grays: map-merge(
 		'600': $gray-600,
 		'700': $gray-700,
 		'800': $gray-800,
-		'900': $gray-900
-	),
-	$grays
-);
+		'900': $gray-900),
+	$grays);
 
 $blue: #007bff !default;
 $indigo: #6610f2 !default;
@@ -49,9 +45,7 @@ $cyan: #17a2b8 !default;
 
 $colors: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default
-$colors: map-merge(
-	(
-		'blue': $blue,
+$colors: map-merge(('blue': $blue,
 		'indigo': $indigo,
 		'purple': $purple,
 		'pink': $pink,
@@ -63,10 +57,8 @@ $colors: map-merge(
 		'cyan': $cyan,
 		'white': $white,
 		'gray': $gray-600,
-		'gray-dark': $gray-800
-	),
-	$colors
-);
+		'gray-dark': $gray-800),
+	$colors);
 
 $primary: $blue !default;
 $secondary: $gray-600 !default;
@@ -79,19 +71,15 @@ $dark: $gray-800 !default;
 
 $theme-colors: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default
-$theme-colors: map-merge(
-	(
-		'primary': $primary,
+$theme-colors: map-merge(('primary': $primary,
 		'secondary': $secondary,
 		'success': $success,
 		'info': $info,
 		'warning': $warning,
 		'danger': $danger,
 		'light': $light,
-		'dark': $dark
-	),
-	$theme-colors
-);
+		'dark': $dark),
+	$theme-colors);
 
 // Set a specific jump point for requesting color jumps
 $theme-color-interval: 8% !default;
@@ -125,39 +113,23 @@ $enable-print-styles: true !default;
 $spacer: 1rem !default;
 $spacers: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default
-$spacers: map-merge(
-	(
-		0: 0,
-		1: (
-			$spacer * 0.25
-		),
-		2: (
-			$spacer * 0.5
-		),
+$spacers: map-merge((0: 0,
+		1: ($spacer * 0.25),
+		2: ($spacer * 0.5),
 		3: $spacer,
-		4: (
-			$spacer * 1.5
-		),
-		5: (
-			$spacer * 3
-		)
-	),
-	$spacers
-);
+		4: ($spacer * 1.5),
+		5: ($spacer * 3)),
+	$spacers);
 
 // This variable affects the `.h-*` and `.w-*` classes.
 $sizes: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default
-$sizes: map-merge(
-	(
-		25: 25%,
+$sizes: map-merge((25: 25%,
 		50: 50%,
 		75: 75%,
 		100: 100%,
-		auto: auto
-	),
-	$sizes
-);
+		auto: auto),
+	$sizes);
 
 // Body
 //
@@ -186,13 +158,11 @@ $paragraph-margin-bottom: 1rem !default;
 // Define the minimum dimensions at which your layout will change,
 // adapting to different screen sizes, for use in media queries.
 
-$grid-breakpoints: (
-	xs: 0,
+$grid-breakpoints: (xs: 0,
 	sm: 576px,
 	md: 768px,
 	lg: 992px,
-	xl: 1200px
-) !default;
+	xl: 1200px) !default;
 
 @include _assert-ascending($grid-breakpoints, '$grid-breakpoints');
 @include _assert-starts-at-zero($grid-breakpoints);
@@ -201,12 +171,10 @@ $grid-breakpoints: (
 //
 // Define the maximum width of `.container` for different screen sizes.
 
-$container-max-widths: (
-	sm: 540px,
+$container-max-widths: (sm: 540px,
 	md: 720px,
 	lg: 960px,
-	xl: 1140px
-) !default;
+	xl: 1140px) !default;
 
 @include _assert-ascending($container-max-widths, '$container-max-widths');
 
@@ -249,9 +217,24 @@ $transition-collapse: height 0.35s ease !default;
 // Font, line-height, and color for body text, headings, and more.
 
 // stylelint-disable value-keyword-case
-$font-family-sans-serif: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif,
-	'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji' !default;
-$font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace !default;
+$font-family-sans-serif: -apple-system,
+BlinkMacSystemFont,
+'Segoe UI',
+Roboto,
+'Helvetica Neue',
+Arial,
+sans-serif,
+'Apple Color Emoji',
+'Segoe UI Emoji',
+'Segoe UI Symbol',
+'Noto Color Emoji' !default;
+$font-family-monospace: SFMono-Regular,
+Menlo,
+Monaco,
+Consolas,
+'Liberation Mono',
+'Courier New',
+monospace !default;
 $font-family-base: $font-family-sans-serif !default;
 // stylelint-enable value-keyword-case
 
@@ -385,7 +368,8 @@ $btn-line-height-lg: $input-btn-line-height-lg !default;
 $btn-border-width: $input-btn-border-width !default;
 
 $btn-font-weight: $font-weight-normal !default;
-$btn-box-shadow: inset 0 1px 0 rgba($white, 0.15), 0 1px 1px rgba($black, 0.075) !default;
+$btn-box-shadow: inset 0 1px 0 rgba($white, 0.15),
+0 1px 1px rgba($black, 0.075) !default;
 $btn-focus-width: $input-btn-focus-width !default;
 $btn-focus-box-shadow: $input-btn-focus-box-shadow !default;
 $btn-disabled-opacity: 0.65 !default;
@@ -400,8 +384,10 @@ $btn-border-radius: $border-radius !default;
 $btn-border-radius-lg: $border-radius-lg !default;
 $btn-border-radius-sm: $border-radius-sm !default;
 
-$btn-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
-	box-shadow 0.15s ease-in-out !default;
+$btn-transition: color 0.15s ease-in-out,
+background-color 0.15s ease-in-out,
+border-color 0.15s ease-in-out,
+box-shadow 0.15s ease-in-out !default;
 
 // Forms
 
@@ -442,16 +428,17 @@ $input-plaintext-color: $body-color !default;
 
 $input-height-border: $input-border-width * 2 !default;
 
-$input-height-inner: ($font-size-base * $input-btn-line-height) + ($input-btn-padding-y * 2) !default;
+$input-height-inner: ($font-size-base * $input-btn-line-height)+($input-btn-padding-y * 2) !default;
 $input-height: calc(#{$input-height-inner} + #{$input-height-border}) !default;
 
-$input-height-inner-sm: ($font-size-sm * $input-btn-line-height-sm) + ($input-btn-padding-y-sm * 2) !default;
+$input-height-inner-sm: ($font-size-sm * $input-btn-line-height-sm)+($input-btn-padding-y-sm * 2) !default;
 $input-height-sm: calc(#{$input-height-inner-sm} + #{$input-height-border}) !default;
 
-$input-height-inner-lg: ($font-size-lg * $input-btn-line-height-lg) + ($input-btn-padding-y-lg * 2) !default;
+$input-height-inner-lg: ($font-size-lg * $input-btn-line-height-lg)+($input-btn-padding-y-lg * 2) !default;
 $input-height-lg: calc(#{$input-height-inner-lg} + #{$input-height-border}) !default;
 
-$input-transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out !default;
+$input-transition: border-color 0.15s ease-in-out,
+box-shadow 0.15s ease-in-out !default;
 
 $form-text-margin-top: 0.25rem !default;
 
@@ -468,8 +455,9 @@ $input-group-addon-color: $input-color !default;
 $input-group-addon-bg: $gray-200 !default;
 $input-group-addon-border-color: $input-border-color !default;
 
-$custom-forms-transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
-	box-shadow 0.15s ease-in-out !default;
+$custom-forms-transition: background-color 0.15s ease-in-out,
+border-color 0.15s ease-in-out,
+box-shadow 0.15s ease-in-out !default;
 
 $custom-control-gutter: 1.5rem !default;
 $custom-control-spacer-x: 1rem !default;
@@ -487,31 +475,29 @@ $custom-control-indicator-checked-bg: $component-active-bg !default;
 $custom-control-indicator-checked-disabled-bg: rgba(theme-color('primary'), 0.5) !default;
 $custom-control-indicator-checked-box-shadow: none !default;
 
-$custom-control-indicator-focus-box-shadow: 0 0 0 1px $body-bg, $input-btn-focus-box-shadow !default;
+$custom-control-indicator-focus-box-shadow: 0 0 0 1px $body-bg,
+$input-btn-focus-box-shadow !default;
 
 $custom-control-indicator-active-color: $component-active-color !default;
 $custom-control-indicator-active-bg: lighten($component-active-bg, 35%) !default;
 $custom-control-indicator-active-box-shadow: none !default;
 
 $custom-checkbox-indicator-border-radius: $border-radius !default;
-$custom-checkbox-indicator-icon-checked: str-replace(
-	url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='#{$custom-control-indicator-checked-color}' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3E%3C/svg%3E"),
+$custom-checkbox-indicator-icon-checked: str-replace(url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='#{$custom-control-indicator-checked-color}' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3E%3C/svg%3E"),
 	'#',
 	'%23'
 ) !default;
 
 $custom-checkbox-indicator-indeterminate-bg: $component-active-bg !default;
 $custom-checkbox-indicator-indeterminate-color: $custom-control-indicator-checked-color !default;
-$custom-checkbox-indicator-icon-indeterminate: str-replace(
-	url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 4'%3E%3Cpath stroke='#{$custom-checkbox-indicator-indeterminate-color}' d='M0 2h4'/%3E%3C/svg%3E"),
+$custom-checkbox-indicator-icon-indeterminate: str-replace(url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 4'%3E%3Cpath stroke='#{$custom-checkbox-indicator-indeterminate-color}' d='M0 2h4'/%3E%3C/svg%3E"),
 	'#',
 	'%23'
 ) !default;
 $custom-checkbox-indicator-indeterminate-box-shadow: none !default;
 
 $custom-radio-indicator-border-radius: 50% !default;
-$custom-radio-indicator-icon-checked: str-replace(
-	url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3E%3Ccircle r='3' fill='#{$custom-control-indicator-checked-color}'/%3E%3C/svg%3E"),
+$custom-radio-indicator-icon-checked: str-replace(url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3E%3Ccircle r='3' fill='#{$custom-control-indicator-checked-color}'/%3E%3C/svg%3E"),
 	'#',
 	'%23'
 ) !default;
@@ -527,8 +513,7 @@ $custom-select-bg: $input-bg !default;
 $custom-select-disabled-bg: $gray-200 !default;
 $custom-select-bg-size: 8px 10px !default; // In pixels because image dimensions
 $custom-select-indicator-color: $gray-800 !default;
-$custom-select-indicator: str-replace(
-	url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='#{$custom-select-indicator-color}' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E"),
+$custom-select-indicator: str-replace(url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='#{$custom-select-indicator-color}' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E"),
 	'#',
 	'%23'
 ) !default;
@@ -560,7 +545,8 @@ $custom-range-thumb-bg: $component-active-bg !default;
 $custom-range-thumb-border: 0 !default;
 $custom-range-thumb-border-radius: 1rem !default;
 $custom-range-thumb-box-shadow: 0 0.1rem 0.25rem rgba($black, 0.1) !default;
-$custom-range-thumb-focus-box-shadow: 0 0 0 1px $body-bg, $input-btn-focus-box-shadow !default;
+$custom-range-thumb-focus-box-shadow: 0 0 0 1px $body-bg,
+$input-btn-focus-box-shadow !default;
 $custom-range-thumb-focus-box-shadow-width: $input-btn-focus-width !default; // For focus box shadow issue in IE/Edge
 $custom-range-thumb-active-bg: lighten($component-active-bg, 35%) !default;
 
@@ -581,8 +567,7 @@ $custom-file-border-radius: $input-border-radius !default;
 $custom-file-box-shadow: $input-box-shadow !default;
 $custom-file-button-color: $custom-file-color !default;
 $custom-file-button-bg: $input-group-addon-bg !default;
-$custom-file-text: (
-	en: 'Browse'
+$custom-file-text: (en: 'Browse'
 ) !default;
 
 // Form validation
@@ -675,8 +660,7 @@ $navbar-dark-color: rgba($white, 0.5) !default;
 $navbar-dark-hover-color: rgba($white, 0.75) !default;
 $navbar-dark-active-color: $white !default;
 $navbar-dark-disabled-color: rgba($white, 0.25) !default;
-$navbar-dark-toggler-icon-bg: str-replace(
-	url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='#{$navbar-dark-color}' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E"),
+$navbar-dark-toggler-icon-bg: str-replace(url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='#{$navbar-dark-color}' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E"),
 	'#',
 	'%23'
 ) !default;
@@ -686,8 +670,7 @@ $navbar-light-color: rgba($black, 0.5) !default;
 $navbar-light-hover-color: rgba($black, 0.7) !default;
 $navbar-light-active-color: rgba($black, 0.9) !default;
 $navbar-light-disabled-color: rgba($black, 0.3) !default;
-$navbar-light-toggler-icon-bg: str-replace(
-	url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='#{$navbar-light-color}' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E"),
+$navbar-light-toggler-icon-bg: str-replace(url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='#{$navbar-light-color}' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E"),
 	'#',
 	'%23'
 ) !default;
@@ -929,13 +912,11 @@ $carousel-caption-color: $white !default;
 
 $carousel-control-icon-width: 20px !default;
 
-$carousel-control-prev-icon-bg: str-replace(
-	url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='#{$carousel-control-color}' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E"),
+$carousel-control-prev-icon-bg: str-replace(url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='#{$carousel-control-color}' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E"),
 	'#',
 	'%23'
 ) !default;
-$carousel-control-next-icon-bg: str-replace(
-	url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='#{$carousel-control-color}' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E"),
+$carousel-control-next-icon-bg: str-replace(url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='#{$carousel-control-color}' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E"),
 	'#',
 	'%23'
 ) !default;

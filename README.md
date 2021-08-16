@@ -1,4 +1,4 @@
-# GretlyStudio
+# Gretlystudio
 
 ## Build Setup
 

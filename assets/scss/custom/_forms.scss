@@ -18,19 +18,19 @@ label {
 /* Textareas */
 
 textarea[resize="none"] {
-    resize: none!important;
+    resize: none !important;
 }
 
 textarea[resize="both"] {
-    resize: both!important;
+    resize: both !important;
 }
 
 textarea[resize="vertical"] {
-    resize: vertical!important;
+    resize: vertical !important;
 }
 
 textarea[resize="horizontal"] {
-    resize: horizontal!important;
+    resize: horizontal !important;
 }
 
 
@@ -92,6 +92,7 @@ textarea[resize="horizontal"] {
         color: darken($form-feedback-valid-color, 18%);
         background-color: $form-feedback-valid-bg;
     }
+
     .form-control {
         background-color: $input-focus-bg;
 
@@ -118,6 +119,7 @@ textarea[resize="horizontal"] {
         color: darken($form-feedback-invalid-color, 18%);
         background-color: $form-feedback-invalid-bg;
     }
+
     .form-control {
         background-color: $input-focus-bg;
 

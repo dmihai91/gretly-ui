@@ -77,7 +77,7 @@
   }
 
   .nav-link.active,
-  .show > .nav-link {
+  .show>.nav-link {
     color: $nav-pills-link-active-color;
     background-color: $nav-pills-link-active-bg;
   }
@@ -112,6 +112,7 @@
   .tab-pane {
     display: none;
   }
+
   .tab-pane.active {
     display: block;
   }

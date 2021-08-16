@@ -4,15 +4,15 @@ p {
 	font-size: $paragraph-font-size;
 	font-weight: $paragraph-font-weight;
 	line-height: $paragraph-line-height;
-} 
+}
 
 .lead {
 	font-size: $lead-font-size;
-  	font-weight: $lead-font-weight;
+	font-weight: $lead-font-weight;
 	line-height: $paragraph-line-height;
 	margin-top: 1.5rem;
 
-	+ .btn-wrapper {
+	+.btn-wrapper {
 		margin-top: 3rem;
 	}
 }
@@ -74,12 +74,14 @@ p {
 // Articles
 
 article {
+
 	h4:not(:first-child),
 	h5:not(:first-child) {
 		margin-top: 3rem;
 	}
 
-	h4, h5 {
+	h4,
+	h5 {
 		margin-bottom: 1.5rem;
 	}
 
@@ -87,7 +89,7 @@ article {
 		margin: 3rem 0;
 	}
 
-	h5 + figure {
+	h5+figure {
 		margin-top: 0;
 	}
 }

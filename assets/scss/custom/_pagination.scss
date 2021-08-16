@@ -12,13 +12,14 @@
         margin: 0 3px;
         border-radius: 50% !important;
         width: 36px;
-		height: 36px;
-		font-size: $font-size-sm;
+        height: 36px;
+        font-size: $font-size-sm;
     }
 }
 
 .pagination-lg {
     .page-item {
+
         .page-link,
         span {
             width: 46px;
@@ -30,6 +31,7 @@
 
 .pagination-sm {
     .page-item {
+
         .page-link,
         span {
             width: 30px;

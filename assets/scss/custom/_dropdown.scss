@@ -11,8 +11,9 @@
     .dropdown-item {
         padding: .5rem 1rem;
         font-size: $font-size-sm;
-        > i,
-        > svg {
+
+        >i,
+        >svg {
             margin-right: 1rem;
             font-size: 1rem;
             vertical-align: -17%;
@@ -27,7 +28,7 @@
     font-size: .625rem;
     text-transform: uppercase;
     font-weight: 700;
-} 
+}
 
 
 // Inverse dropdown menu
@@ -57,7 +58,7 @@
 .dropdown-menu {
     a.media {
 
-        > div {
+        >div {
             &:first-child {
                 line-height: 1;
             }
@@ -66,8 +67,11 @@
         p {
             color: $gray-600;
         }
+
         &:hover {
-            .heading, p {
+
+            .heading,
+            p {
                 color: theme-color("default") !important;
             }
         }

@@ -3,6 +3,7 @@
     #{$parent} {
         background-color: $color !important;
     }
+
     a#{$parent},
     button#{$parent} {
         @include hover-focus {

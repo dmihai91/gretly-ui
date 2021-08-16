@@ -317,9 +317,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
     box-shadow: none;
 }
 
-.noUi-handle {
-
-}
+.noUi-handle {}
 
 .noUi-horizontal .noUi-handle,
 .noUi-vertical .noUi-handle {
@@ -389,6 +387,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 .input-slider--pink.noUi-vertical .noUi-handle {
     background-color: $pink;
 }
+
 /* Disabled state */
 [disabled] .noUi-connect,
 [disabled].noUi-connect {

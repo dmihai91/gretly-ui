@@ -34,6 +34,9 @@ Vue.mixin({
   ...GlobalMixin,
 });
 
+// register global filters
+import '@/filters';
+
 // global directives
 import VueClickOutside from 'vue-click-outside';
 Vue.directive('click-outside', VueClickOutside);

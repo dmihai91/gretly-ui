@@ -1,5 +1,5 @@
 {
-  "app_name": "GretlyStudio",
+  "app_name": "Gretlystudio",
   "apps_builder": "Apps builder",
   "buy": "Buy",
   "free": "Free",
@@ -30,5 +30,8 @@
   "welcome": "Welcome to {appName}, {user}",
   "join_our_newsletter": "Join Our Newsletter",
   "products": "Products",
-  "explore": "Explore"
+  "explore": "Explore",
+  "courses": "Courses",
+  "code_playground": "Code Playground",
+  "server_error_message": "Oops...Something went wrong"
 }

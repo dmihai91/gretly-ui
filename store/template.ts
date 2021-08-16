@@ -4,7 +4,7 @@ import { getterTree, mutationTree, actionTree } from 'nuxt-typed-vuex';
 import { Template } from '~/interfaces/Template';
 
 export const state = () => ({
-	// the templates created by the user
+  // the templates created by the user
 });
 
 export const getters = getterTree(state, {});
