@@ -34,16 +34,16 @@ $grays: map-merge(('100': $gray-100,
 		'900': $gray-900),
 	$grays);
 
-$blue: #5e72e4 !default;
-$indigo: #5603ad !default;
-$purple: #8965e0 !default;
-$pink: #f3a4b5 !default;
-$red: #d12003 !default;
-$orange: #ea9604 !default;
+$blue: #395dec !default;
+$indigo: #6e39ec !default;
+$purple: #a27ff2 !default;
+$pink: #f37fd0 !default;
+$red: #dd153d !default;
+$orange: #dd5115 !default;
 $yellow: #ffd600 !default;
-$green: #47b803 !default;
-$teal: #03a2b8 !default;
-$cyan: #2bffc6 !default;
+$green: #13c648 !default;
+$teal: #39b7ec !default;
+$cyan: #39ecc8 !default;
 
 $colors: () !default;
 $colors: map-merge(('blue': $blue,
@@ -66,6 +66,7 @@ $colors: map-merge(('blue': $blue,
 $default: #172b4d !default;
 $primary: #5115dd !default;
 $secondary: #f4f5f7 !default;
+$accent: #15dd51 !default;
 $success: $green !default;
 $info: $teal !default;
 $warning: $orange !default;

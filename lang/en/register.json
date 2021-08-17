@@ -8,12 +8,13 @@
 	"email": "Email",
 	"password": "Password",
 	"confirm_password": "Confirm Password",
-	"name": "Name",
+	"full_name": "Full name",
 	"register": "Register",
 	"already_registered": "Already a member?",
+	"user_from_social_already_exists": "User already exists, please sign in with it or register using another user",
 	"messages": {
 		"please_enter_username": "Please enter your username",
-		"invalid_username": "Username may only contain letters and numbers underscore and dash characters",
+		"invalid_username": "Username may only contain lowercase letters, numbers, underscore and dash characters",
 		"username_minlength_error": "Username must have a minimum of {minLength} characters",
 		"please_enter_email": "Please enter your email",
 		"invalid_email": "Invalid email address",
@@ -23,6 +24,8 @@
 		"confirm_password_not_match": "The password confirmation should match the password",
 		"please_enter_name": "Please enter your name",
 		"invalid_name": "Invalid name (only letters and space are allowed)",
-		"name_minlength_error": "Name must have a minimum of {minLength} characters"
+		"name_minlength_error": "Name must have a minimum of {minLength} characters",
+		"username_already_exists": "The username is already used please enter another one",
+		"email_already_exists": "The email is already used please use another one"
 	}
 }

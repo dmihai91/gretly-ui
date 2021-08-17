@@ -45,6 +45,6 @@ export interface IApiService {
   /** Set authorization token for all the requests */
   setToken(accessToken: string): void;
 
-  /** Revoke the authorization token for all the requests */
-  revokeToken(): void;
+  /** Removes the authorization token for all the requests */
+  removeToken(): void;
 }

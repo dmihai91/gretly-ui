@@ -146,4 +146,5 @@ export default {
   toast: {
     iconPack: 'fontawesome',
   },
+  watch: ['~/lang'],
 };

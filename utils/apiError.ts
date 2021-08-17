@@ -1,4 +1,4 @@
-import { AxiosError } from 'axios';
+import { AxiosResponse } from 'axios';
 
 interface Error {
   reason: string;
@@ -21,8 +21,7 @@ export class ApiError extends Error {
    * @param {string | Object} message
    * @memberof ApiError
    */
-  constructor(error: AxiosError) {
-    const response = error.response;
+  constructor(response: AxiosResponse) {
     const message = response.statusText;
 
     super(message);

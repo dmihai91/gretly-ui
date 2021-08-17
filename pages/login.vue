@@ -9,7 +9,7 @@
         <div class="text-muted text-center mb-3">
           <h6>{{ $t('sign_in_with') }}</h6>
         </div>
-        <SocialLogin />
+        <SocialLogin action="sign_in" />
       </div>
 
       <div class="card-body px-lg-5 py-lg-4">
@@ -72,7 +72,7 @@
           </div>
 
           <!-- the error from server will be displayed here !-->
-          <BaseFormInputError v-if="error" />
+          <BaseFormInputError v-if="error">{{ error }}</BaseFormInputError>
 
           <div class="form-group d-flex justify-content-between">
             <div class="custom-control custom-control-alternative custom-checkbox">
@@ -86,7 +86,7 @@
             </div>
           </div>
           <div class="text-center">
-            <button type="submit" class="btn btn-primary px-5 mt-3">
+            <button type="submit" class="btn btn-primary px-5 mt-3" :disabled="isBusy">
               {{ $t('sign_in') }}
             </button>
           </div>
@@ -116,9 +116,12 @@ import { usernameValidator } from '~/utils/validators';
 import AuthForm from '~/components/AuthForm.vue';
 import SocialLogin from '~/components/SocialLogin.vue';
 import { ApiError } from '~/utils/apiError';
-import { PASSWORD_VISIBLE_TIMEOUT } from '~/utils/const';
+import { PASSWORD_VISIBLE_TIMEOUT } from '~/const/const';
 import { LayoutType } from '~/enum/LayoutType';
 import { AxiosResponse } from 'axios';
+import { eventBus } from '~/utils/eventBus';
+import { Events } from '~/const/events';
+import { ErrorReasons } from '~/enum/ErrorReasons';
 
 const formData: LoginInfo = {
   username: '',
@@ -183,27 +186,28 @@ export default class Login extends Vue {
   }
 
   async submitForm(_evt: Event) {
-    try {
-      this.$v.$touch();
-      this.isBusy = true;
-      if (!this.$v.$invalid) {
-        this.$auth
-          .login(this.form)
-          .then(() => {
-            this.isBusy = false;
-            this.$router.push('/');
-          })
-          .catch((err) => {
-            throw new Error(err);
-          });
-      }
-    } catch (err) {
+    this.error = '';
+    this.$v.$touch();
+    this.isBusy = true;
+    if (!this.$v.$invalid) {
+      this.$auth
+        .login(this.form)
+        .then(() => {
+          this.isBusy = false;
+          this.$router.push('/');
+          setTimeout(
+            () => eventBus.$emit(Events.GLOBAL_SHOW_SUCCESS, this.$t('welcome', { appName: this.$t('app_name') })),
+            200
+          );
+        })
+        .catch((err: ApiError) => {
+          if (err.errorCode === 400 && err.details.reason === ErrorReasons.INVALID_CREDENTIALS) {
+            this.error = this.$t('messages.invalid_credentials').toString();
+          }
+          this.isBusy = false;
+        });
+    } else {
       this.isBusy = false;
-      // handle error
-      const { response }: { response: AxiosResponse } = err;
-      // set error message on bad request
-      if (response.status === 400) {
-      }
     }
   }
 

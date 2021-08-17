@@ -14,6 +14,7 @@
 	"messages": {
 		"please_enter_username_or_email": "Please enter your username or email address",
 		"invalid_username_or_email": "Invalid username or password",
-		"please_enter_password": "Please enter your password"
+		"please_enter_password": "Please enter your password",
+		"invalid_credentials": "The username and password combination was not found in the system"
 	}
 }

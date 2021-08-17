@@ -1,8 +1,10 @@
-import { AxiosStatic as Axios, AxiosResponse, AxiosRequestConfig } from 'axios';
+import { AxiosStatic as Axios, AxiosResponse, AxiosRequestConfig, AxiosError } from 'axios';
 import { IApiService, LongPollingRequestOptions } from './ApiServiceInterface';
 import RequestHandler from 'axios-request-handler';
-import { ApiError } from '@/utils/apiError';
-import { eventBus } from '@/utils/eventBus';
+import { ApiError } from '~/utils/apiError';
+import { Events } from '~/const/events';
+import { eventBus } from '~/utils/eventBus';
+import { ErrorReasons } from '~/enum/ErrorReasons';
 
 let _axios: Axios = null;
 
@@ -33,27 +35,41 @@ const makeRequest = async <T = any>(
     }
     return response.data;
   } catch (err) {
-    const { response }: { response: AxiosResponse } = err;
+    errorsHandler(err);
+  }
+};
 
-    // server error
-    if (/5[0-9][0-9]/.test('' + response.status)) {
-      eventBus.$emit('global:show-error-toast');
-      throw new Error(err);
+const errorsHandler = (err: any) => {
+  const { response }: { response: AxiosResponse } = err;
+
+  // handle server error
+  if (/5[0-9][0-9]/.test('' + response.status)) {
+    eventBus.$emit(Events.GLOBAL_SHOW_ERROR);
+  }
+
+  // handle bad request
+  if (response.status === 400) {
+    throw new ApiError(response);
+  }
+
+  // handle unauthorized error
+  if (response.status === 401) {
+    const { config } = response;
+    const error = new ApiError(response);
+    if (error.details.reason !== ErrorReasons.NO_REFRESH_TOKEN) {
+      // try to refresh the token and redo the request
+      eventBus.$emit(Events.GLOBAL_REFRESH_TOKEN);
+      makeRequest(config.url, config.method, config.data);
+      return;
     }
   }
+
+  throw err;
 };
 
 export const ApiService: IApiService = {
   init($axios) {
     _axios = $axios;
-    // Add a response interceptor
-    /*_axios.interceptors.response.use(function (response) {
-			// Do something with response data
-			return response;
-		}, function (error) {
-			// Do something with response error
-			return Promise.reject(error);
-  		});*/
   },
   async get<T = any>(url: string, options?: AxiosRequestConfig) {
     return makeRequest<T>(url, 'GET', null, options);
@@ -78,7 +94,7 @@ export const ApiService: IApiService = {
   setToken(accessToken) {
     _axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
   },
-  revokeToken() {
+  removeToken() {
     delete _axios.defaults.headers.common['Authorization'];
   },
 };

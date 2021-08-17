@@ -7,48 +7,27 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { eventBus } from '~/utils/eventBus';
+import { UnsubscribeToastsHandler, useToast } from '~/utils/useToast';
+
 export default Vue.extend({
+  data() {
+    return {
+      unsubscribeToastsHandler: null as UnsubscribeToastsHandler,
+    };
+  },
   computed: {
     isLoading() {
       return this.$accessor.isLoading;
     },
   },
   mounted() {
-    eventBus.$on('global:show-error-toast', () =>
-      this.$toasted.error(this.$t('server_error_message').toString(), {
-        className: 'error-toast',
-        action: {
-          text: '',
-          icon: 'fa-close',
-          onClick: (e, toastObject) => {
-            toastObject.goAway(0);
-          },
-        },
-      })
-    );
+    this.unsubscribeToastsHandler = useToast(this);
+  },
+  beforeDestroy() {
+    // unsubscribe all toast handler events
+    this.unsubscribeToastsHandler.unsubscribeAll();
   },
 });
 </script>
 
-<style lang="scss">
-.toasted-container {
-  @include media-breakpoint-up(md) {
-    top: 0 !important;
-    right: 10px !important;
-  }
-}
-
-.error-toast {
-  background: $danger !important;
-  @include media-breakpoint-up(md) {
-    min-width: 18vw !important;
-  }
-  a.action {
-    i {
-      color: #fff;
-      font-size: 1.2rem;
-    }
-  }
-}
-</style>
+<style lang="scss"></style>

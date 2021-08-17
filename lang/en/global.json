@@ -27,11 +27,10 @@
   "templates": "Templates",
   "tutorials": "Tutorials",
   "year": "Year",
-  "welcome": "Welcome to {appName}, {user}",
+  "welcome": "Welcome to {appName}",
   "join_our_newsletter": "Join Our Newsletter",
   "products": "Products",
-  "explore": "Explore",
-  "courses": "Courses",
-  "code_playground": "Code Playground",
-  "server_error_message": "Oops...Something went wrong"
+  "server_error_message": "Oops...Something went wrong. Please try again!",
+  "disable_adblocker": "Please disable adblocker for this application",
+  "verify_email_address": "It seems that you didn't activate your account. Please check the email we sent you and activate your account from there."
 }

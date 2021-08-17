@@ -1,4 +1,4 @@
-import { SESSION_KEY } from '~/utils/const';
+import { SESSION_KEY } from '~/const/const';
 
 /**
  * Provide methods for managing user session

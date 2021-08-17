@@ -1,1 +1,1 @@
-export const usernameValidator = (value: string) => /^[a-zA-Z0-9-_]+$/.test(value);
+export const usernameValidator = (value: string) => /^[a-z0-9_-]+$/.test(value);

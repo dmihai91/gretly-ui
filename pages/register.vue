@@ -9,7 +9,7 @@
         <div class="text-muted text-center mb-3">
           <h6>{{ $t('register_with', { appName: $t('app_name') }) }}</h6>
         </div>
-        <SocialLogin />
+        <SocialLogin action="sign_up" />
       </div>
 
       <div class="card-body px-lg-5 py-lg-4">
@@ -126,9 +126,9 @@
             </div>
           </div>
 
-          <!-- name field -->
+          <!-- full name field -->
           <div class="form-group mb-3">
-            <label for="inputName">{{ $t('name') }}</label>
+            <label for="inputName">{{ $t('full_name') }}</label>
             <input
               v-model="form.name"
               name="inputName"
@@ -151,8 +151,15 @@
             </div>
           </div>
 
+          <!-- the error from server will be displayed here !-->
+          <BaseFormInputError v-if="errors.length > 0">
+            <div v-for="(error, idx) in errors" :key="idx">
+              {{ error }}
+            </div>
+          </BaseFormInputError>
+
           <div class="text-center">
-            <button type="submit" class="btn btn-primary px-5 mt-1">
+            <button type="submit" class="btn btn-primary px-5 mt-1" :disabled="isBusy">
               {{ $t('register') }}
             </button>
           </div>
@@ -182,10 +189,10 @@ import { AuthService } from '~/services/AuthService';
 
 import AuthForm from '~/components/AuthForm.vue';
 import SocialLogin from '~/components/SocialLogin.vue';
-import { PASSWORD_VISIBLE_TIMEOUT } from '~/utils/const';
+import { PASSWORD_VISIBLE_TIMEOUT } from '~/const/const';
 import { ApiError } from '~/utils/apiError';
 import { LayoutType } from '~/enum/LayoutType';
-import { AxiosResponse } from 'axios';
+import { ErrorReasons } from '~/enum/ErrorReasons';
 
 const usernameMinLength = 5,
   passwordMinLength = 8,
@@ -218,7 +225,7 @@ export default class Register extends Vue {
   usernameMinLength = usernameMinLength;
   passwordMinLength = passwordMinLength;
   nameMinLength = nameMinLength;
-  error: string = null;
+  errors: string[] = [];
 
   // validations
   @Validations({
@@ -311,31 +318,35 @@ export default class Register extends Vue {
   }
 
   async submitForm(_evt: Event) {
-    this.$v.$touch();
+    this.errors = [];
     this.isBusy = true;
-    try {
-      if (!this.$v.$invalid) {
-        AuthService.register(this.form)
-          .then(() => {
-            this.$router.push('/');
-            this.isBusy = false;
-          })
-          .catch((err) => {
-            throw new Error(err);
-          });
-      }
-    } catch (err) {
+    this.$v.$touch();
+    if (!this.$v.$invalid) {
+      AuthService.register(this.form)
+        .then(() => {
+          this.$router.push('/');
+          this.isBusy = false;
+        })
+        .catch((err: ApiError) => {
+          if (err.errorCode === 400) {
+            switch (err.details.reason) {
+              case ErrorReasons.USER_ALREADY_EXISTS:
+                this.errors.push(this.$t('messages.username_already_exists').toString());
+                break;
+              case ErrorReasons.EMAIL_ALREADY_EXISTS:
+                this.errors.push(this.$t('messages.email_already_exists').toString());
+                break;
+            }
+          }
+          this.isBusy = false;
+        });
+    } else {
       this.isBusy = false;
-      // handle error
-      const { response }: { response: AxiosResponse } = err;
-      // set error message on bad request
-      if (response.status === 400) {
-      }
     }
   }
 
   resetForm() {
-    this.error = '';
+    this.errors = [];
     this.form = {
       ...formData,
     };

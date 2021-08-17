@@ -56,13 +56,27 @@ export const actions = actionTree(
         });
         dispatch(ActionsTypes.FETCH_USER_DATA);
       } catch (err) {
-        throw new Error(err);
+        throw err;
       }
     },
-    async [ActionsTypes.AUTH_WITH_FB]({ dispatch }, token: string) {
+    async [ActionsTypes.AUTH_WITH_FB]({ dispatch }, { token, action }: { token: string; action: string }) {
       try {
         const fbProfile = await AuthService.getFBUserData(token);
-        const response = await AuthService.authWithFacebook(token, fbProfile);
+        const response = await AuthService.authWithFacebook(token, fbProfile, action);
+        dispatch(ActionsTypes.SET_AUTH_USER, {
+          accessToken: response.accessToken,
+          expiresIn: response.expiresIn,
+          sessionId: response.sessionId,
+        });
+        dispatch(ActionsTypes.FETCH_USER_DATA);
+      } catch (err) {
+        throw err;
+      }
+    },
+    async [ActionsTypes.AUTH_WITH_GOOGLE]({ dispatch }, token: string) {
+      try {
+        const googleProfile = await AuthService.getGoogleUserData(token);
+        const response = await AuthService.authWithGoogle(token, googleProfile);
         dispatch(ActionsTypes.SET_AUTH_USER, {
           accessToken: response.accessToken,
           expiresIn: response.expiresIn,
@@ -71,26 +85,19 @@ export const actions = actionTree(
         });
         dispatch(ActionsTypes.FETCH_USER_DATA);
       } catch (err) {
-        throw new Error(err);
+        throw err;
       }
-    },
-    async [ActionsTypes.AUTH_WITH_GOOGLE]({ dispatch }, token: string) {
-      const googleProfile = await AuthService.getGoogleUserData(token);
-      const response = await AuthService.authWithGoogle(token, googleProfile);
-      dispatch(ActionsTypes.SET_AUTH_USER, {
-        accessToken: response.accessToken,
-        expiresIn: response.expiresIn,
-        sessionId: response.sessionId,
-        isPermanent: true,
-      });
-      dispatch(ActionsTypes.FETCH_USER_DATA);
     },
     async [ActionsTypes.FETCH_USER_DATA]({ commit, state }) {
       if (!state.loggedIn) {
         throw new Error("Can't fetch data for a non auth user");
       }
-      const user = await AuthService.getLoggedUser();
-      commit(MutationsTypes.SET_USER, user);
+      try {
+        const user = await AuthService.getLoggedUser();
+        commit(MutationsTypes.SET_USER, user);
+      } catch (err) {
+        throw err;
+      }
     },
     [ActionsTypes.SET_USER_SESSION]({ commit }, data: UserSession) {
       commit(MutationsTypes.SET_TOKEN, {
@@ -109,28 +116,34 @@ export const actions = actionTree(
         accessToken: data.accessToken,
         expiresIn: data.expiresIn,
         sessionId: data.sessionId,
-        isPermanent: true,
       });
     },
     async [ActionsTypes.REFRESH_TOKEN]({ dispatch }) {
-      const authResponse = await AuthService.refreshToken();
-      dispatch(ActionsTypes.SET_AUTH_USER, {
-        accessToken: authResponse.accessToken,
-        expiresIn: authResponse.expiresIn,
-        sessionId: authResponse.sessionId,
-        isPermanent: SessionService.isPermanent,
-      });
+      try {
+        const authResponse = await AuthService.refreshToken();
+        dispatch(ActionsTypes.SET_AUTH_USER, {
+          accessToken: authResponse.accessToken,
+          expiresIn: authResponse.expiresIn,
+          sessionId: authResponse.sessionId,
+          isPermanent: SessionService.isPermanent,
+        });
+      } catch (err) {
+        throw err;
+      }
     },
-    [ActionsTypes.LOGOUT]({ commit }) {
-      AuthService.logout();
-      commit(MutationsTypes.SET_LOGGED_IN, false);
-      commit(MutationsTypes.SET_USER, null);
-      commit(MutationsTypes.SET_TOKEN, {
-        accessToken: null,
-        expiresIn: 0,
-      });
-      AuthService.revokeToken();
-      SessionService.resetSession();
+    async [ActionsTypes.LOGOUT]({ commit }) {
+      try {
+        await AuthService.revokeToken();
+        commit(MutationsTypes.SET_LOGGED_IN, false);
+        commit(MutationsTypes.SET_USER, null);
+        commit(MutationsTypes.SET_TOKEN, {
+          accessToken: null,
+          expiresIn: 0,
+        });
+        SessionService.resetSession();
+      } catch (err) {
+        throw err;
+      }
     },
   }
 );

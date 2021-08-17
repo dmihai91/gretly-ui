@@ -20,15 +20,23 @@ export const AuthService = {
     return await ApiService.post<AuthResponse>(SERVICE_URL + '/register', registerInfo);
   },
 
-  async authWithFacebook(accessToken: string, fbProfile: FBProfile) {
-    return await ApiService.post<AuthResponse>(SERVICE_URL + '/authWithFacebook', {
-      accessToken: accessToken,
-      ...fbProfile,
-    });
+  async authWithFacebook(accessToken: string, fbProfile: FBProfile, action: string) {
+    return await ApiService.post<AuthResponse>(
+      SERVICE_URL + '/auth-with-facebook',
+      {
+        accessToken: accessToken,
+        ...fbProfile,
+      },
+      {
+        params: {
+          action,
+        },
+      }
+    );
   },
 
   async authWithGoogle(accessToken: string, googleProfile: GoogleProfile) {
-    return await ApiService.post<AuthResponse>(SERVICE_URL + '/authWithGoogle', {
+    return await ApiService.post<AuthResponse>(SERVICE_URL + '/auth-with-google', {
       accessToken: accessToken,
       ...googleProfile,
     });
@@ -46,19 +54,16 @@ export const AuthService = {
     ApiService.setToken(accessToken);
   },
 
-  revokeToken() {
-    ApiService.revokeToken();
-  },
-
   async getLoggedUser() {
-    return await ApiService.get<User>(SERVICE_URL + '/getLoggedUser');
+    return await ApiService.get<User>(SERVICE_URL + '/get-auth-user');
   },
 
   async refreshToken() {
-    return await ApiService.post<AuthResponse>(SERVICE_URL + '/refreshToken');
+    return await ApiService.post<AuthResponse>(SERVICE_URL + '/refresh-token');
   },
 
-  async logout() {
-    return await ApiService.post(SERVICE_URL + '/logout');
+  async revokeToken() {
+    await ApiService.post(SERVICE_URL + '/revoke-token');
+    ApiService.removeToken();
   },
 };

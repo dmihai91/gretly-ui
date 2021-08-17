@@ -14,7 +14,7 @@
 import Vue from 'vue';
 
 export default Vue.extend({
-  name: 'page-title',
+  name: 'PageTitle',
   props: {
     headerTitle: {
       type: String,

@@ -1,6 +1,6 @@
 // plugins/after-each.js:
 import { Context } from '@nuxt/types';
-import { LS_ROUTE_KEY } from '../utils/const';
+import { LS_ROUTE_KEY } from '../const/const';
 
 export default async ({ app }: Context) => {
   app.router.afterEach((to) => {

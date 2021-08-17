@@ -92,7 +92,7 @@ import Vue from 'vue';
 import Subscribe from '~/components/Subscribe.vue';
 
 export default Vue.extend({
-  name: 'app-footer',
+  name: 'Footer',
   components: {
     Subscribe,
   },

@@ -1,0 +1,38 @@
+.toasted-container {
+    @include media-breakpoint-up(md) {
+        top: 0 !important;
+        right: 10px !important;
+    }
+
+    .error-toast,
+    .warning-toast,
+    .success-toast {
+        display: flex;
+        align-items: center;
+
+        @include media-breakpoint-up(md) {
+            min-width: 10vw;
+            max-width: 20vw !important;
+            line-height: 2rem !important;
+        }
+
+        a.action {
+            i {
+                color: #fff;
+                font-size: 1.2rem;
+            }
+        }
+    }
+
+    .error-toast {
+        background: $danger !important;
+    }
+
+    .warning-toast {
+        background: $warning !important;
+    }
+
+    .success-toast {
+        background: $success !important;
+    }
+}

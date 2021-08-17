@@ -28,7 +28,7 @@
         <BaseDropdown tag="li" class="nav-item" menu-classes="dropdown-menu-xl">
           <a slot="title" href="#" class="nav-link" data-toggle="dropdown" role="button">
             <i class="ni ni-collection d-lg-none"></i>
-            <span class="nav-link-inner--text">Resources</span>
+            <span class="nav-link-inner--text">{{ $t('resources') }}</span>
           </a>
           <div class="dropdown-menu-inner">
             <a
@@ -59,8 +59,32 @@
                 </p>
               </div>
             </a>
+            <a
+              href="https://demos.creative-tim.com/vue-argon-design-system/documentation/"
+              class="media d-flex align-items-center"
+            >
+              <div class="icon icon-shape bg-gradient-primary rounded-circle text-white">
+                <i class="ni ni-spaceship"></i>
+              </div>
+              <div class="media-body ml-3">
+                <h6 class="heading text-primary mb-md-1">{{ $t('books') }}</h6>
+                <p class="description d-none d-md-inline-block mb-0">
+                  Get started with Bootstrap, the world's most popular framework for building responsive sites.
+                </p>
+              </div>
+            </a>
           </div>
         </BaseDropdown>
+
+        <li class="nav-item">
+          <NuxtLink to="/contact" class="nav-link d-lg-none">{{ $t('contact_us') }}</NuxtLink>
+          <NuxtLink to="/contact" class="d-none nav-link d-lg-block">{{ $t('contact_us') }}</NuxtLink>
+        </li>
+
+        <li class="nav-item">
+          <NuxtLink to="/about" class="nav-link d-lg-none">{{ $t('about_us') }}</NuxtLink>
+          <NuxtLink to="/about" class="d-none nav-link d-lg-block">{{ $t('about_us') }}</NuxtLink>
+        </li>
       </ul>
       <ul class="navbar-nav align-items-lg-center ml-lg-auto" v-if="!loggedIn">
         <li class="nav-item">
@@ -84,6 +108,7 @@
 import Vue from 'vue';
 
 export default Vue.extend({
+  name: 'Header',
   computed: {
     loggedIn() {
       return this.$auth ? this.$auth.loggedIn : false;
