@@ -6,6 +6,7 @@ export enum MutationsTypes {
   MARK_MESSAGE_AS_READ = 'markMessageAsRead',
   REMOVE_NOTIFICATION = 'removeNotification',
   SET_LAST_PATH = 'setLastPath',
+  UPDATE_HEADER_BACKGROUND = 'updateHeaderBackground',
 }
 
 export enum ActionsTypes {
@@ -15,4 +16,5 @@ export enum ActionsTypes {
   SEND_MESSAGE = 'sendMessage',
   DISMISS_NOTIFICATION = 'dismissNotification',
   DISMISS_MESSAGE = 'dismissMessage',
+  SET_HEADER_BACKGROUND = 'setHeaderBackground',
 }

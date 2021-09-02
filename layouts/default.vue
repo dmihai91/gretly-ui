@@ -1,7 +1,7 @@
 <template>
   <div>
     <Loader :active.sync="isLoading" :is-full-page="true" color="#5c00fa" />
-    <div v-show="!isLoading">
+    <div v-if="!isLoading">
       <AppHeader />
       <Nuxt />
       <AppFooter />
@@ -13,10 +13,9 @@
 import Vue from 'vue';
 import Header from '~/components/header/Header.vue';
 import Footer from '~/components/Footer.vue';
-import { UnsubscribeToastsHandler, useToast } from '~/utils/useToast';
+import { UnsubscribeToastsHandler, useToast } from '~/utils/hooks/useToast';
 import { SessionService } from '~/services/SessionService';
-import { eventBus } from '~/utils/eventBus';
-import { Events } from '~/const/events';
+import { handleUserAuth } from '~/utils/hooks/handleUserAuth';
 
 export default Vue.extend({
   data() {
@@ -35,23 +34,7 @@ export default Vue.extend({
   },
   async mounted() {
     this.unsubscribeToastsHandler = useToast(this);
-
-    eventBus.$on(Events.GLOBAL_REFRESH_TOKEN, () => {
-      this.$auth.refreshToken();
-      console.log('inside refresh token');
-    });
-
-    // refresh the token if user already logged in from old session
-    try {
-      if (!this.$auth.accessToken) {
-        await this.$auth.refreshToken();
-        await this.$auth.fetchUserData();
-        if (!this.$auth.user.verified) {
-          eventBus.$emit(Events.GLOBAL_SHOW_WARNING, this.$t('verify_email_address'));
-        }
-      }
-    } catch (err) {}
-
+    await handleUserAuth(this);
     this.isLoading = false;
   },
   beforeDestroy() {

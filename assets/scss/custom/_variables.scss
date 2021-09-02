@@ -20,7 +20,7 @@ $gray-600: #8898aa !default; // Line footer color
 $gray-700: #525f7f !default; // Line p color
 $gray-800: #32325d !default; // Line heading color
 $gray-900: #212529 !default;
-$black: #000 !default;
+$black: #292929 !default;
 
 $grays: () !default;
 $grays: map-merge(('100': $gray-100,
@@ -39,8 +39,8 @@ $indigo: #6e39ec !default;
 $purple: #a27ff2 !default;
 $pink: #f37fd0 !default;
 $red: #dd153d !default;
-$orange: #dd5115 !default;
-$yellow: #ffd600 !default;
+$orange: #e25d24 !default;
+$yellow: #e2bc24 !default;
 $green: #13c648 !default;
 $teal: #39b7ec !default;
 $cyan: #39ecc8 !default;

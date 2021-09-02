@@ -37,8 +37,12 @@ export const mutations = mutationTree(state, {
     state.accessToken = accessToken;
     state.expiresIn = expiresIn;
   },
-  [MutationsTypes.SET_SESSION](_state, { sessionId, isPermanent }: { sessionId: string; isPermanent: boolean }) {
-    SessionService.setSession(sessionId, isPermanent);
+  [MutationsTypes.SET_SESSION](_state, { sessionId, isPermanent }: { sessionId: string; isPermanent?: boolean }) {
+    if (typeof isPermanent === 'undefined') {
+      SessionService.setSession(sessionId, SessionService.isPermanent);
+    } else {
+      SessionService.setSession(sessionId, isPermanent);
+    }
   },
 });
 
@@ -54,7 +58,7 @@ export const actions = actionTree(
           sessionId: response.sessionId,
           isPermanent: loginInfo.rememberMe,
         });
-        dispatch(ActionsTypes.FETCH_USER_DATA);
+        await dispatch(ActionsTypes.FETCH_USER_DATA);
       } catch (err) {
         throw err;
       }
@@ -67,35 +71,40 @@ export const actions = actionTree(
           accessToken: response.accessToken,
           expiresIn: response.expiresIn,
           sessionId: response.sessionId,
+          isPermanent: true,
         });
-        dispatch(ActionsTypes.FETCH_USER_DATA);
+        await dispatch(ActionsTypes.FETCH_USER_DATA);
       } catch (err) {
         throw err;
       }
     },
-    async [ActionsTypes.AUTH_WITH_GOOGLE]({ dispatch }, token: string) {
+    async [ActionsTypes.AUTH_WITH_GOOGLE]({ dispatch }, { token, action }: { token: string; action: string }) {
       try {
         const googleProfile = await AuthService.getGoogleUserData(token);
-        const response = await AuthService.authWithGoogle(token, googleProfile);
+        const response = await AuthService.authWithGoogle(token, googleProfile, action);
         dispatch(ActionsTypes.SET_AUTH_USER, {
           accessToken: response.accessToken,
           expiresIn: response.expiresIn,
           sessionId: response.sessionId,
           isPermanent: true,
         });
-        dispatch(ActionsTypes.FETCH_USER_DATA);
+        await dispatch(ActionsTypes.FETCH_USER_DATA);
       } catch (err) {
         throw err;
       }
     },
-    async [ActionsTypes.FETCH_USER_DATA]({ commit, state }) {
+    async [ActionsTypes.FETCH_USER_DATA]({ commit, state, rootState }) {
       if (!state.loggedIn) {
         throw new Error("Can't fetch data for a non auth user");
       }
+      const accessor = this.app.$accessor;
       try {
-        const user = await AuthService.getLoggedUser();
+        accessor.setIsLoading(true);
+        const user = await AuthService.getUserData();
         commit(MutationsTypes.SET_USER, user);
+        accessor.setIsLoading(false);
       } catch (err) {
+        accessor.setIsLoading(false);
         throw err;
       }
     },
@@ -109,7 +118,7 @@ export const actions = actionTree(
         isPermanent: data.isPermanent,
       });
     },
-    [ActionsTypes.SET_AUTH_USER]({ commit, dispatch }, data: UserSession) {
+    [ActionsTypes.SET_AUTH_USER]({ commit, dispatch, state }, data: UserSession) {
       commit(MutationsTypes.SET_LOGGED_IN, true);
       AuthService.setToken(data.accessToken);
       dispatch(ActionsTypes.SET_USER_SESSION, {
@@ -117,10 +126,11 @@ export const actions = actionTree(
         expiresIn: data.expiresIn,
         sessionId: data.sessionId,
       });
+      console.log(state);
     },
     async [ActionsTypes.REFRESH_TOKEN]({ dispatch }) {
       try {
-        const authResponse = await AuthService.refreshToken();
+        const authResponse = await AuthService.refreshToken(SessionService.isPermanent);
         dispatch(ActionsTypes.SET_AUTH_USER, {
           accessToken: authResponse.accessToken,
           expiresIn: authResponse.expiresIn,
@@ -131,9 +141,9 @@ export const actions = actionTree(
         throw err;
       }
     },
-    async [ActionsTypes.LOGOUT]({ commit }) {
+    [ActionsTypes.LOGOUT]({ commit }) {
       try {
-        await AuthService.revokeToken();
+        AuthService.logout();
         commit(MutationsTypes.SET_LOGGED_IN, false);
         commit(MutationsTypes.SET_USER, null);
         commit(MutationsTypes.SET_TOKEN, {
@@ -144,6 +154,15 @@ export const actions = actionTree(
       } catch (err) {
         throw err;
       }
+    },
+    async [ActionsTypes.SILENT_LOGOUT]({ commit }) {
+      commit(MutationsTypes.SET_LOGGED_IN, false);
+      commit(MutationsTypes.SET_USER, null);
+      commit(MutationsTypes.SET_TOKEN, {
+        accessToken: null,
+        expiresIn: 0,
+      });
+      SessionService.resetSession();
     },
   }
 );

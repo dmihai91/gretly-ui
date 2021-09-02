@@ -1,9 +1,7 @@
 <template>
   <header class="header-global">
-    <BaseNav class="navbar-main" transparent type="" effect="light" expand>
-      <NuxtLink slot="brand" class="navbar-brand mr-lg-5" to="/">
-        <img src="img/brand/white.png" alt="logo" />
-      </NuxtLink>
+    <BaseNav class="navbar-main" transparent type="" :effect="headerBackground" expand>
+      <Logo path="img/brand/white.png" />
       <div class="row" slot="content-header" slot-scope="{ closeMenu }">
         <div class="col-6 collapse-brand">
           <a href="https://demos.creative-tim.com/vue-argon-design-system/documentation/">
@@ -88,16 +86,61 @@
       </ul>
       <ul class="navbar-nav align-items-lg-center ml-lg-auto" v-if="!loggedIn">
         <li class="nav-item">
-          <NuxtLink to="/login" class="nav-link d-lg-none font-weight-bold">{{ $t('sign_in') }}</NuxtLink>
-          <NuxtLink to="/login" class="d-none btn btn-secondary text-dark nav-link d-lg-block font-weight-bold">{{
-            $t('sign_in')
-          }}</NuxtLink>
+          <NuxtLink
+            :to="`/login?redirectPath=${redirectPath}`"
+            class="nav-link d-lg-none font-weight-bold text-uppercase"
+            >{{ $t('sign_in') }}</NuxtLink
+          >
+          <NuxtLink
+            :to="`/login?redirectPath=${redirectPath}`"
+            class="d-none btn btn-secondary text-dark nav-link d-lg-block font-weight-bold"
+            >{{ $t('sign_in') }}</NuxtLink
+          >
         </li>
         <li class="nav-item">
-          <NuxtLink to="/register" class="nav-link d-lg-none font-weight-bold">{{ $t('get_started') }}</NuxtLink>
+          <NuxtLink to="/register" class="nav-link d-lg-none font-weight-bold text-uppercase">{{
+            $t('get_started')
+          }}</NuxtLink>
           <NuxtLink to="/register" class="d-none btn btn-primary nav-link d-lg-block font-weight-bold">{{
             $t('get_started')
           }}</NuxtLink>
+        </li>
+      </ul>
+      <ul class="navbar-nav align-items-center ml-lg-auto cursor-pointer" v-else>
+        <li class="nav-item dropdown">
+          <BaseDropdown class="nav-link pr-0">
+            <template v-slot:title>
+              <div class="media align-items-center" style="margin-bottom: 0">
+                <span class="avatar avatar-sm rounded-circle">
+                  <img alt="Image placeholder" :src="user && user.profilePicture" />
+                </span>
+                <div class="media-body ml-2 d-none d-lg-block">
+                  <span class="mb-0 text-sm font-weight-bold">{{ user && user.name }}</span>
+                </div>
+              </div>
+            </template>
+            <NuxtLink to="/profile" class="dropdown-item">
+              <i class="ni ni-single-02"></i>
+              <span>My profile</span>
+            </NuxtLink>
+            <NuxtLink to="/profile" class="dropdown-item">
+              <i class="ni ni-settings-gear-65"></i>
+              <span>Settings</span>
+            </NuxtLink>
+            <NuxtLink to="/profile" class="dropdown-item">
+              <i class="ni ni-calendar-grid-58"></i>
+              <span>Activity</span>
+            </NuxtLink>
+            <NuxtLink to="/profile" class="dropdown-item">
+              <i class="ni ni-support-16"></i>
+              <span>Support</span>
+            </NuxtLink>
+            <div class="dropdown-divider"></div>
+            <BaseButton tag="a" type="link" @click="logout" class="dropdown-item text-capitalize">
+              <i class="ni ni-user-run"></i>
+              <span>Logout</span>
+            </BaseButton>
+          </BaseDropdown>
         </li>
       </ul>
     </BaseNav>
@@ -112,6 +155,20 @@ export default Vue.extend({
   computed: {
     loggedIn() {
       return this.$auth ? this.$auth.loggedIn : false;
+    },
+    user() {
+      return this.$auth ? this.$auth.user : null;
+    },
+    redirectPath() {
+      return this.$route.path;
+    },
+    headerBackground() {
+      return this.$accessor.headerBackground;
+    },
+  },
+  methods: {
+    logout() {
+      this.$auth.logout();
     },
   },
 });

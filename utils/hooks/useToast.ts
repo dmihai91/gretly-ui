@@ -1,6 +1,8 @@
-/// <reference path="../nuxt-shims.d.ts"/>
-import { Events } from '../const/events';
-import { eventBus } from './eventBus';
+/// <reference path="../../nuxt-shims.d.ts"/>
+import { Events } from '../../const/events';
+import { eventBus } from '../eventBus';
+
+const AUTO_HIDE_TIMEOUT = 20 * 1000; // 20s
 
 export interface UnsubscribeToastsHandler {
   unsubscribeAll: Function;
@@ -10,7 +12,7 @@ export const useToast = (vm: Vue) => {
   const closeToastAction = {
     text: '',
     icon: 'fa-close',
-    onClick: (_e, toastObject) => {
+    onClick: (_e: any, toastObject: { goAway: (arg0: number) => void }) => {
       toastObject.goAway(0);
     },
   };
@@ -22,6 +24,7 @@ export const useToast = (vm: Vue) => {
       action: {
         ...closeToastAction,
       },
+      duration: AUTO_HIDE_TIMEOUT,
     });
   });
 
@@ -31,6 +34,7 @@ export const useToast = (vm: Vue) => {
       action: {
         ...closeToastAction,
       },
+      duration: AUTO_HIDE_TIMEOUT,
     });
   });
 
@@ -40,6 +44,7 @@ export const useToast = (vm: Vue) => {
       action: {
         ...closeToastAction,
       },
+      duration: AUTO_HIDE_TIMEOUT,
     });
   });
 

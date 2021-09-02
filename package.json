@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"private": true,
 	"scripts": {
-		"dev": "nuxt-ts",
+		"dev": "nodemon --exec \"nuxt-ts\"",
 		"start": "nuxt-ts start",
 		"build": "nuxt-ts generate",
 		"test": "jest"
@@ -13,6 +13,7 @@
 		"@fortawesome/fontawesome-svg-core": "^1.2.35",
 		"@nuxtjs/axios": "^5.13.6",
 		"@nuxtjs/proxy": "^2.1.0",
+		"@nuxtjs/toast": "^3.3.1",
 		"axios-request-handler": "^1.0.4",
 		"bootstrap": "^4.6.0",
 		"bootstrap-vue": "^2.21.2",

@@ -1,10 +1,10 @@
-import { AxiosStatic as Axios, AxiosResponse, AxiosRequestConfig, AxiosError } from 'axios';
+import { AxiosStatic as Axios, AxiosResponse, AxiosRequestConfig } from 'axios';
 import { IApiService, LongPollingRequestOptions } from './ApiServiceInterface';
 import RequestHandler from 'axios-request-handler';
 import { ApiError } from '~/utils/apiError';
 import { Events } from '~/const/events';
 import { eventBus } from '~/utils/eventBus';
-import { ErrorReasons } from '~/enum/ErrorReasons';
+import { ErrorReasons } from '~/enums/ErrorReasons';
 
 let _axios: Axios = null;
 
@@ -64,7 +64,7 @@ const errorsHandler = (err: any) => {
     }
   }
 
-  throw err;
+  throw response;
 };
 
 export const ApiService: IApiService = {

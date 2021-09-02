@@ -1,6 +1,6 @@
 <template>
-  <component :is="tag" :type="tag === 'button' ? nativeType : ''" @click="handleClick" class="btn" :class="classes">
-    <span class="btn-inner--icon" v-if="$slots.icon || (icon && $slots.default)">
+  <component :is="tag" :type="tag === 'button' ? nativeType : ''" @click="handleClick" :class="classes">
+    <span class="btn-inner--icon" v-if="!iconAfterText && ($slots.icon || (icon && $slots.default))">
       <slot name="icon">
         <i :class="icon"></i>
       </slot>
@@ -9,6 +9,11 @@
     <span class="btn-inner--text" v-if="$slots.icon || (icon && $slots.default)">
       <slot>
         {{ text }}
+      </slot>
+    </span>
+    <span class="btn-inner--icon" v-if="iconAfterText && ($slots.icon || (icon && $slots.default))">
+      <slot name="icon">
+        <i :class="icon"></i>
       </slot>
     </span>
     <slot v-if="!$slots.icon && !icon"></slot>
@@ -25,26 +30,31 @@ export default Vue.extend({
       type: String,
       default: 'button',
       description: 'Button tag (default -> button)',
+      validator: (val) => ['button', 'a', 'input'].includes(val),
     },
     type: {
       type: String,
       default: 'default',
       description: 'Button type (e,g primary, danger etc)',
+      validator: (val) => ['default', 'primary', 'secondary', 'success', 'warning', 'danger', 'link'].includes(val),
     },
     size: {
       type: String,
       default: '',
       description: 'Button size lg|sm',
+      validator: (val) => ['', 'lg', 'md', 'sm'].includes(val),
     },
     textColor: {
       type: String,
       default: '',
       description: 'Button text color (e.g primary, danger etc)',
+      validator: (val) => ['', 'primary', 'default', 'secondary', 'success', 'warning', 'danger'].includes(val),
     },
     nativeType: {
       type: String,
       default: 'button',
       description: 'Button native type (e.g submit,button etc)',
+      validator: (val) => ['button', 'submit'].includes(val),
     },
     icon: {
       type: String,
@@ -76,6 +86,11 @@ export default Vue.extend({
       default: false,
       description: 'Whether button is of block type',
     },
+    iconAfterText: {
+      type: Boolean,
+      default: false,
+      description: 'Whether the icon should be positioned after the text',
+    },
   },
   computed: {
     classes(): Object {
@@ -90,6 +105,9 @@ export default Vue.extend({
       ];
       if (this.size) {
         btnClasses.push(`btn-${this.size}`);
+      }
+      if (this.type !== 'link') {
+        btnClasses.push('btn');
       }
       return btnClasses;
     },

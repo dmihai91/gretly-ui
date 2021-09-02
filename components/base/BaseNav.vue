@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="navbar"
+    class="navbar transition"
     :class="[
       { 'navbar-transparent': transparent },
       { 'navbar-expand-lg': expand },
@@ -34,13 +34,13 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { FadeTransition } from 'vue2-transitions';
 import NavbarToggleButton from './NavbarToggleButton.vue';
+
+const TRANSITION_TIMEOUT = 100;
 
 export default Vue.extend({
   name: 'BaseNav',
   components: {
-    FadeTransition,
     NavbarToggleButton,
   },
   props: {
@@ -88,10 +88,10 @@ export default Vue.extend({
   },
   mounted() {
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 400) {
-        setTimeout(() => (this.semiTransparent = true), 100);
+      if (window.scrollY > 250) {
+        setTimeout(() => (this.semiTransparent = true), TRANSITION_TIMEOUT);
       } else {
-        setTimeout(() => (this.semiTransparent = false), 100);
+        setTimeout(() => (this.semiTransparent = false), TRANSITION_TIMEOUT);
       }
     });
   },

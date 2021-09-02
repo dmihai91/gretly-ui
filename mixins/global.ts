@@ -5,6 +5,7 @@ type Accesor = typeof accessorType;
 export interface IGlobalMixin {
   toUpper(s: string): string;
   ucFirst(s: string): string;
+  setHeaderBackground(val: 'light' | 'dark'): void;
   $auth: Accesor['auth'];
 }
 
@@ -15,6 +16,9 @@ export default {
     },
     toUpper(s: string) {
       return s.toUpperCase();
+    },
+    setHeaderBackground(val: string) {
+      this['$accessor'].setHeaderBackground(val);
     },
   },
   computed: {

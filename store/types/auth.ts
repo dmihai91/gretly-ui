@@ -13,6 +13,7 @@ export enum ActionsTypes {
   AUTH_WITH_GOOGLE = 'authWithGoogle',
   REFRESH_TOKEN = 'refreshToken',
   LOGOUT = 'logout',
+  SILENT_LOGOUT = 'silentLogout',
   FETCH_USER_DATA = 'fetchUserData',
   SET_USER_SESSION = 'setUserSession',
   SET_AUTH_USER = 'setAuthUser',

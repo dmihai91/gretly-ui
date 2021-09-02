@@ -1,5 +1,5 @@
 {
-  "app_name": "Gretlystudio",
+  "app_name": "GretlyStudio",
   "apps_builder": "Apps builder",
   "buy": "Buy",
   "free": "Free",
@@ -27,10 +27,12 @@
   "templates": "Templates",
   "tutorials": "Tutorials",
   "year": "Year",
-  "welcome": "Welcome to {appName}",
+  "welcome": "Welcome to {appName}!",
   "join_our_newsletter": "Join Our Newsletter",
   "products": "Products",
   "server_error_message": "Oops...Something went wrong. Please try again!",
-  "disable_adblocker": "Please disable adblocker for this application",
-  "verify_email_address": "It seems that you didn't activate your account. Please check the email we sent you and activate your account from there."
+  "disable_adblocker": "Please disable the adblocker for this application or run it in the incognito mode",
+  "verify_email_address": "It seems that you didn't activate your account. Please check the email we sent you and activate your account from there.",
+  "user_logged_out": "You've been logout because your session expired or was invalid. Please login again.",
+  "global_title": "Learn how to build Stunning Web and Mobile Apps"
 }

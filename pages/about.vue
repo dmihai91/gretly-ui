@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <div class="container page-container">Courses here</div>
-  </div>
+  <div class="container page-container">About us</div>
 </template>
 
 <script lang="ts">
@@ -12,5 +10,3 @@ export default Vue.extend({
   },
 });
 </script>
-
-<style lang="scss" scoped></style>

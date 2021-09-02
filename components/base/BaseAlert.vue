@@ -1,5 +1,5 @@
 <template>
-  <fade-transition>
+  <FadeTransition>
     <div class="alert" :class="[`alert-${type}`, { 'alert-dismissible': dismissible }]" role="alert" v-if="visible">
       <slot v-if="!dismissible">
         <span v-if="icon" class="alert-inner--icon">
@@ -25,7 +25,7 @@
         </slot>
       </template>
     </div>
-  </fade-transition>
+  </FadeTransition>
 </template>
 
 <script lang="ts">

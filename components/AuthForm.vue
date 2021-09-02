@@ -3,9 +3,7 @@
     <div class="d-none d-lg-block d-xl-block col-lg-4 col-xl-3 side-banner">
       <div class="header">
         <div class="logo my-4">
-          <router-link slot="brand" class="navbar-brand mr-lg-5" to="/">
-            <img src="img/brand/white.png" alt="logo" />
-          </router-link>
+          <Logo path="img/brand/white.png" />
         </div>
         <div class="d-flex">
           <h3 class="slogan" v-html="slogan"></h3>
@@ -57,7 +55,7 @@ export default Vue.extend({
   .form-container {
     height: auto;
     max-width: $max-form-width;
-    margin: 1.5rem auto;
+    margin: auto;
     align-items: center;
 
     @include media-breakpoint-down(md) {
@@ -86,7 +84,7 @@ export default Vue.extend({
     padding: 3rem;
 
     @include media-breakpoint-up(lg) {
-      padding: 5rem;
+      padding: 4rem;
     }
 
     .header {

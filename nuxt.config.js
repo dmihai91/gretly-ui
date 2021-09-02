@@ -7,7 +7,7 @@ export default {
    ** See https://nuxtjs.org/api/configuration-head
    */
   head: {
-    title: 'Gretlystudio - Learn how to build Great Web and Mobile Apps',
+    title: 'GretlyStudio',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -133,7 +133,7 @@ export default {
     },
   },
   pwa: {
-    icon: false,
+    icon: true,
   },
   loader: {
     color: '#5c00fa',
@@ -145,6 +145,7 @@ export default {
   },
   toast: {
     iconPack: 'fontawesome',
+    position: 'bottom-left',
   },
   watch: ['~/lang'],
 };

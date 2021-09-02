@@ -68,12 +68,8 @@ export class SessionService {
    * @memberof SessionService
    */
   static resetSession() {
-    if (this._isPermanent) {
-      window.localStorage.removeItem(SESSION_KEY);
-    } else {
-      window.sessionStorage.removeItem(SESSION_KEY);
-    }
-    this.storage.clear();
+    window.localStorage.clear();
+    window.sessionStorage.clear();
     this.storage = window.sessionStorage;
   }
 }

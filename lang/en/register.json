@@ -25,7 +25,7 @@
 		"please_enter_name": "Please enter your name",
 		"invalid_name": "Invalid name (only letters and space are allowed)",
 		"name_minlength_error": "Name must have a minimum of {minLength} characters",
-		"username_already_exists": "The username is already used please enter another one",
-		"email_already_exists": "The email is already used please use another one"
+		"username_already_exists": "The username is already used, please enter another one",
+		"email_already_exists": "The email is already used, please use another one"
 	}
 }

@@ -28,6 +28,7 @@
     <slot v-bind="slotData">
       <input
         :value="value"
+        :type="type"
         v-on="listeners"
         v-bind="$attrs"
         class="form-control"
@@ -98,6 +99,12 @@ export default Vue.extend({
     addonLeftIcon: {
       type: String,
       description: 'Addont left icon',
+    },
+    type: {
+      type: String,
+      description: 'The input of the input(default="text")',
+      default: 'Text',
+      validator: (type) => ['text', 'email', 'date', 'number', 'time', 'search', 'file'].includes(type),
     },
   },
   data() {

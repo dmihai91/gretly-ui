@@ -35,11 +35,19 @@ export const AuthService = {
     );
   },
 
-  async authWithGoogle(accessToken: string, googleProfile: GoogleProfile) {
-    return await ApiService.post<AuthResponse>(SERVICE_URL + '/auth-with-google', {
-      accessToken: accessToken,
-      ...googleProfile,
-    });
+  async authWithGoogle(accessToken: string, googleProfile: GoogleProfile, action: String) {
+    return await ApiService.post<AuthResponse>(
+      SERVICE_URL + '/auth-with-google',
+      {
+        accessToken: accessToken,
+        ...googleProfile,
+      },
+      {
+        params: {
+          action,
+        },
+      }
+    );
   },
 
   async getFBUserData(accessToken: string) {
@@ -54,16 +62,20 @@ export const AuthService = {
     ApiService.setToken(accessToken);
   },
 
-  async getLoggedUser() {
+  async getUserData() {
     return await ApiService.get<User>(SERVICE_URL + '/get-auth-user');
   },
 
-  async refreshToken() {
-    return await ApiService.post<AuthResponse>(SERVICE_URL + '/refresh-token');
+  async refreshToken(permanentSession: boolean) {
+    return await ApiService.post<AuthResponse>(SERVICE_URL + '/refresh-token', {
+      params: {
+        permanentSession,
+      },
+    });
   },
 
-  async revokeToken() {
-    await ApiService.post(SERVICE_URL + '/revoke-token');
+  async logout() {
+    await ApiService.post(SERVICE_URL + '/logout');
     ApiService.removeToken();
   },
 };

@@ -9,7 +9,7 @@
         <div class="text-muted text-center mb-3">
           <h6>{{ $t('sign_in_with') }}</h6>
         </div>
-        <SocialLogin action="sign_in" />
+        <SocialLogin action="sign_in" @auth:action="resetForm" />
       </div>
 
       <div class="card-body px-lg-5 py-lg-4">
@@ -61,7 +61,7 @@
             <i
               class="fa password-eye"
               :class="!passwordViewIsToggled ? 'fa-eye' : 'fa-eye-slash'"
-              v-show="form.password.length > 0"
+              v-show="form.password.length > 0 && !isIeOrEdge"
               @click="togglePassword"
             ></i>
             <div v-if="passwordValidationField.$invalid" class="error">
@@ -76,7 +76,7 @@
 
           <div class="form-group d-flex justify-content-between">
             <div class="custom-control custom-control-alternative custom-checkbox">
-              <input id="remember-me" type="checkbox" class="custom-control-input" />
+              <input id="remember-me" type="checkbox" class="custom-control-input" v-model="form.rememberMe" />
               <label for="remember-me" class="custom-control-label">
                 <span>{{ $t('remember_me') }}</span>
               </label>
@@ -109,7 +109,7 @@ import { IValidator } from 'vuelidate';
 import { required, or, email } from 'vuelidate/lib/validators';
 
 import { LoginInfo } from '~/interfaces/LoginInfo';
-import { delayTouch } from '~/utils/helpers';
+import { delayTouch, getBrowserAgent } from '~/utils/helpers';
 import { Validations } from '~/utils/validations';
 import { usernameValidator } from '~/utils/validators';
 
@@ -117,11 +117,11 @@ import AuthForm from '~/components/AuthForm.vue';
 import SocialLogin from '~/components/SocialLogin.vue';
 import { ApiError } from '~/utils/apiError';
 import { PASSWORD_VISIBLE_TIMEOUT } from '~/const/const';
-import { LayoutType } from '~/enum/LayoutType';
-import { AxiosResponse } from 'axios';
+import { LayoutType } from '~/enums/LayoutType';
 import { eventBus } from '~/utils/eventBus';
 import { Events } from '~/const/events';
-import { ErrorReasons } from '~/enum/ErrorReasons';
+import { ErrorReasons } from '~/enums/ErrorReasons';
+import { loginRedirect } from '~/utils/loginRedirect';
 
 const formData: LoginInfo = {
   username: '',
@@ -135,6 +135,11 @@ const formData: LoginInfo = {
     AuthForm,
   },
   layout: LayoutType.SIMPLE,
+  head() {
+    return {
+      titleTemplate: `${this.$t('sign_in')} | ${this.$t('app_name')}`,
+    };
+  },
 })
 export default class Login extends Vue {
   // data
@@ -180,21 +185,27 @@ export default class Login extends Vue {
     return this.$t('login_slogan') as string;
   }
 
+  get isIeOrEdge() {
+    const agent = getBrowserAgent();
+    return agent === 'edge' || agent === 'chromium based edge (dev or canary)' || agent === 'ie';
+  }
+
   // methods
   delayTouch($v: IValidator) {
     return delayTouch($v);
   }
 
   async submitForm(_evt: Event) {
-    this.error = '';
     this.$v.$touch();
+    this.error = '';
     this.isBusy = true;
     if (!this.$v.$invalid) {
       this.$auth
         .login(this.form)
         .then(() => {
           this.isBusy = false;
-          this.$router.push('/');
+         
+          loginRedirect(this);
           setTimeout(
             () => eventBus.$emit(Events.GLOBAL_SHOW_SUCCESS, this.$t('welcome', { appName: this.$t('app_name') })),
             200
@@ -250,3 +261,5 @@ export default class Login extends Vue {
   }
 }
 </style>
+
+function detectBrowserAgent() { throw new Error('Function not implemented.'); }

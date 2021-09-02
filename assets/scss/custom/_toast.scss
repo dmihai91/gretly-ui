@@ -1,7 +1,17 @@
 .toasted-container {
-    @include media-breakpoint-up(md) {
-        top: 0 !important;
-        right: 10px !important;
+    height: fit-content;
+    overflow: hidden;
+
+    &.bottom-left {
+        position: fixed;
+        bottom: 1% !important;
+        left: auto !important;
+        margin-left: 1rem !important;
+
+        @include media-breakpoint-down(md) {
+            bottom: 0 !important;
+            margin-left: 0 !important;
+        }
     }
 
     .error-toast,
@@ -11,8 +21,7 @@
         align-items: center;
 
         @include media-breakpoint-up(md) {
-            min-width: 10vw;
-            max-width: 20vw !important;
+            width: 20vw;
             line-height: 2rem !important;
         }
 

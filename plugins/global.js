@@ -27,6 +27,15 @@ Vue.component('VueSlickCarousel', VueSlickCarousel);
 import { initFacebookSdk } from '../utils/fbSdk';
 initFacebookSdk();
 
+// init google sdk
+import GoogleAuth from '../utils/googleOAuth';
+const gauthOption = {
+  clientId: process.env.GOOGLE_CLIENT_ID,
+  scope: 'profile email',
+  prompt: 'select_account',
+};
+Vue.use(GoogleAuth, gauthOption);
+
 // global mixins
 import GlobalMixin from '@/mixins/global';
 

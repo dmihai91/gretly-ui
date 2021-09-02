@@ -9,7 +9,7 @@
         <div class="text-muted text-center mb-3">
           <h6>{{ $t('register_with', { appName: $t('app_name') }) }}</h6>
         </div>
-        <SocialLogin action="sign_up" />
+        <SocialLogin action="sign_up" @auth:action="resetForm" />
       </div>
 
       <div class="card-body px-lg-5 py-lg-4">
@@ -94,38 +94,6 @@
             </div>
           </div>
 
-          <!-- confirm password field -->
-          <div class="form-group position-relative">
-            <label for="inputConfirmPassword">{{ $t('confirm_password') }}</label>
-            <input
-              v-model="form.confirmPassword"
-              name="inputConfirmPassword"
-              :type="confirmPasswordViewIsToggled ? 'text' : 'password'"
-              class="form-control"
-              :class="{
-                'is-valid': isValidConfirmPassword,
-                'is-invalid': confirmPasswordValidationField.$dirty && !isValidConfirmPassword,
-              }"
-              @input="delayTouch(confirmPasswordValidationField)"
-            />
-            <i
-              class="fa password-eye"
-              :class="!confirmPasswordViewIsToggled ? 'fa-eye' : 'fa-eye-slash'"
-              v-show="form.confirmPassword.length > 0"
-              @click="toggleConfirmPassword"
-            ></i>
-            <div v-if="confirmPasswordValidationField.$invalid" class="error">
-              <span v-if="confirmPasswordValidationField.$dirty && !confirmPasswordValidationField.required">
-                <BaseFormInputError>{{ $t('messages.confirm_password_not_match') }}</BaseFormInputError>
-              </span>
-              <span v-else-if="confirmPasswordValidationField.$dirty && !confirmPasswordValidationField.goodPassword">
-                <BaseFormInputError>{{
-                  $t('messages.confirm_password_not_match', { minLength: passwordMinLength })
-                }}</BaseFormInputError>
-              </span>
-            </div>
-          </div>
-
           <!-- full name field -->
           <div class="form-group mb-3">
             <label for="inputName">{{ $t('full_name') }}</label>
@@ -179,10 +147,10 @@
 <script lang="ts">
 import { Vue, Component, Watch } from 'nuxt-property-decorator';
 import { IValidator } from 'vuelidate';
-import { required, email, minLength, sameAs } from 'vuelidate/lib/validators';
+import { required, email, minLength } from 'vuelidate/lib/validators';
 
 import { RegisterInfo } from '~/interfaces/RegisterInfo';
-import { delayTouch } from '~/utils/helpers';
+import { delayTouch, getBrowserAgent } from '~/utils/helpers';
 import { Validations } from '~/utils/validations';
 import { usernameValidator } from '~/utils/validators';
 import { AuthService } from '~/services/AuthService';
@@ -191,8 +159,8 @@ import AuthForm from '~/components/AuthForm.vue';
 import SocialLogin from '~/components/SocialLogin.vue';
 import { PASSWORD_VISIBLE_TIMEOUT } from '~/const/const';
 import { ApiError } from '~/utils/apiError';
-import { LayoutType } from '~/enum/LayoutType';
-import { ErrorReasons } from '~/enum/ErrorReasons';
+import { LayoutType } from '~/enums/LayoutType';
+import { ErrorReasons } from '~/enums/ErrorReasons';
 
 const usernameMinLength = 5,
   passwordMinLength = 8,
@@ -202,7 +170,6 @@ const formData: RegisterInfo = {
   username: '',
   email: '',
   password: '',
-  confirmPassword: '',
   name: '',
 };
 
@@ -212,6 +179,11 @@ const formData: RegisterInfo = {
     SocialLogin,
   },
   layout: LayoutType.SIMPLE,
+  head() {
+    return {
+      titleTemplate: `${this.$t('register')} | ${this.$t('app_name')}`,
+    };
+  },
 })
 export default class Register extends Vue {
   // data
@@ -221,7 +193,6 @@ export default class Register extends Vue {
 
   isBusy = false;
   passwordViewIsToggled = false;
-  confirmPasswordViewIsToggled = false;
   usernameMinLength = usernameMinLength;
   passwordMinLength = passwordMinLength;
   nameMinLength = nameMinLength;
@@ -251,10 +222,6 @@ export default class Register extends Vue {
           );
         },
       },
-      confirmPassword: {
-        required,
-        sameAs: sameAs((vm: RegisterInfo) => vm.password),
-      },
       name: {
         required,
         minLength: minLength(nameMinLength),
@@ -280,10 +247,6 @@ export default class Register extends Vue {
     return this.$v.form.password;
   }
 
-  get confirmPasswordValidationField() {
-    return this.$v.form.confirmPassword;
-  }
-
   get nameValidationField() {
     return this.$v.form.name;
   }
@@ -300,16 +263,17 @@ export default class Register extends Vue {
     return this.$v.form.password.$dirty && !this.$v.form.password.$invalid;
   }
 
-  get isValidConfirmPassword() {
-    return this.$v.form.confirmPassword.$dirty && !this.$v.form.confirmPassword.$invalid;
-  }
-
   get isValidName() {
     return this.$v.form.name.$dirty && !this.$v.form.name.$invalid;
   }
 
   get sloganMessage(): string {
     return this.$t('register_slogan') as string;
+  }
+
+  get isIeOrEdge() {
+    const agent = getBrowserAgent();
+    return agent === 'edge' || agent === 'chromium based edge (dev or canary)' || agent === 'ie';
   }
 
   // methods
@@ -324,7 +288,7 @@ export default class Register extends Vue {
     if (!this.$v.$invalid) {
       AuthService.register(this.form)
         .then(() => {
-          this.$router.push('/');
+          this.$router.push('/login');
           this.isBusy = false;
         })
         .catch((err: ApiError) => {
@@ -361,26 +325,12 @@ export default class Register extends Vue {
     this.passwordViewIsToggled = !this.passwordViewIsToggled;
   }
 
-  toggleConfirmPassword() {
-    this.confirmPasswordViewIsToggled = !this.confirmPasswordViewIsToggled;
-  }
-
   @Watch('passwordViewIsToggled')
   onPasswordViewIsToggled(val: boolean) {
     // make the password visible for 3s only
     if (val) {
       setTimeout(() => {
         this.passwordViewIsToggled = false;
-      }, PASSWORD_VISIBLE_TIMEOUT);
-    }
-  }
-
-  @Watch('confirmPasswordViewIsToggled')
-  onConfirmPasswordViewIsToggled(val: boolean) {
-    // make the password visible for 3s only
-    if (val) {
-      setTimeout(() => {
-        this.confirmPasswordViewIsToggled = false;
       }, PASSWORD_VISIBLE_TIMEOUT);
     }
   }

@@ -37,7 +37,6 @@
   "files": [
     "nuxt-shims.d.ts",
     "types/vuelidate.d.ts",
-    "vue-toasted/types/index.d.ts"
   ],
   "exclude": [
     "node_modules",

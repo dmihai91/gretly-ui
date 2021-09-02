@@ -14,7 +14,7 @@
 import Vue from 'vue';
 import { Events } from '~/const/events';
 import { ApiError } from '~/utils/apiError';
-import { ErrorReasons } from '~/enum/ErrorReasons';
+import { ErrorReasons } from '~/enums/ErrorReasons';
 import { eventBus } from '~/utils/eventBus';
 import { loginRedirect } from '~/utils/loginRedirect';
 
@@ -27,32 +27,41 @@ export default Vue.extend({
     },
   },
   methods: {
-    async authWithFacebook() {
-      this.$accessor.setIsLoading(true);
-
-      const authCb = async (accessToken: string) => {
-        try {
-          await this.$auth.authWithFb({ token: accessToken, action: this.action });
-          loginRedirect(this);
-          setTimeout(
-            () => eventBus.$emit(Events.GLOBAL_SHOW_SUCCESS, this.$t('welcome', { appName: this.$t('app_name') })),
-            200
-          );
-        } catch (_err) {
-          const err: ApiError = _err;
-          const details = err.details;
-          if (details.reason === ErrorReasons.USER_ALREADY_EXISTS) {
-            eventBus.$emit(Events.GLOBAL_SHOW_ERROR, this.$t('user_from_social_already_exists'));
-          }
-          console.error(err);
-          this.$accessor.setIsLoading(false);
-        }
-      };
-
+    showWelcomeMessage() {
+      setTimeout(
+        () => eventBus.$emit(Events.GLOBAL_SHOW_SUCCESS, this.$t('welcome', { appName: this.$t('app_name') })),
+        100
+      );
+    },
+    successCallback() {
+      loginRedirect(this);
+      this.$nextTick(() => {
+        this.showWelcomeMessage();
+      });
+    },
+    errorCallback(err: ApiError) {
+      const details = err.details;
+      if (details.reason === ErrorReasons.USER_ALREADY_EXISTS) {
+        eventBus.$emit(Events.GLOBAL_SHOW_ERROR, this.$t('user_from_social_already_exists'));
+      }
+      console.error(err);
+      this.$accessor.setIsLoading(false);
+    },
+    async authWithFacebook(evt: Event) {
       if (typeof FB === 'undefined') {
         eventBus.$emit(Events.GLOBAL_SHOW_WARNING, this.$t('disable_adblocker'));
         return;
       }
+      this.$emit(Events.AUTH_ACTION, evt);
+      const authCb = async (accessToken: string) => {
+        try {
+          this.$accessor.setIsLoading(true);
+          await this.$auth.authWithFb({ token: accessToken, action: this.action });
+          this.successCallback();
+        } catch (_err) {
+          this.errorCallback(_err);
+        }
+      };
 
       return FB.getLoginStatus(async (response) => {
         try {
@@ -69,7 +78,17 @@ export default Vue.extend({
         }
       });
     },
-    async authWithGoogle(evt: Event) {},
+    async authWithGoogle(evt: Event) {
+      this.$emit(Events.AUTH_ACTION, evt);
+      try {
+        const user = await this.$gAuth.signIn();
+        this.$accessor.setIsLoading(true);
+        await this.$auth.authWithGoogle({ token: user.getAuthResponse().access_token, action: this.action });
+        this.successCallback();
+      } catch (_err) {
+        this.errorCallback(_err);
+      }
+    },
   },
 });
 </script>

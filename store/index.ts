@@ -20,6 +20,7 @@ export const state = () => ({
   messages: [] as Message[],
   readMessages: [] as Message[],
   lastPath: null,
+  headerBackground: 'light',
 });
 
 export type RootState = ReturnType<typeof state>;
@@ -47,6 +48,12 @@ export const mutations = mutationTree(state, {
   [MutationsTypes.SET_LAST_PATH](state, lastPath: string) {
     state.lastPath = lastPath;
   },
+  [MutationsTypes.UPDATE_HEADER_BACKGROUND](state, headerBackground: string) {
+    if (!['light', 'dark'].includes(headerBackground)) {
+      throw new Error('Header background should be either light or dark');
+    }
+    state.headerBackground = headerBackground;
+  },
 });
 
 // global actions
@@ -58,6 +65,9 @@ export const actions = actionTree(
     },
     [ActionsTypes.NOTIFICATION_RECEIVED]({ commit }, notification: Notification) {
       commit(MutationsTypes.ADD_NEW_NOTIFICATION, notification);
+    },
+    [ActionsTypes.SET_HEADER_BACKGROUND]({ commit }, headerBackground: string) {
+      commit(MutationsTypes.UPDATE_HEADER_BACKGROUND, headerBackground);
     },
   }
 );

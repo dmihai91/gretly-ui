@@ -1,8 +1,18 @@
 <template>
-  <div class="newsletter-subscribe my-md">
-    <h5 class="mb-3">Join our newsletter</h5>
-    <input type="email" placeholder="Enter your email" v-model="email" />
-    <a class="btn btn-primary mx-3" @click="joinNewsletter">Join</a>
+  <div class="newsletter-subscribe my-md d-flex justify-content-center">
+    <BaseCard class="col-sm-6">
+      <form id="newsletter-form" @submit.prevent="joinNewsletter">
+        <h5 class="mb-3">Join our newsletter</h5>
+        <div class="row">
+          <div class="col-sm-8">
+            <BaseInput type="email" placeholder="Enter your email" v-model="email" :required="true" />
+          </div>
+          <div class="col-sm-4">
+            <BaseButton nativeType="submit" type="primary" class="mx-3">Join</BaseButton>
+          </div>
+        </div>
+      </form>
+    </BaseCard>
   </div>
 </template>
 
@@ -16,14 +26,18 @@ export default Vue.extend({
     };
   },
   methods: {
-    joinNewsletter() {},
+    joinNewsletter(evt) {
+      console.log(evt);
+    },
   },
 });
 </script>
 
 <style lang="scss" scoped>
 .newsletter-subscribe {
-  margin: 20px 0;
+  position: relative;
+  top: 4.5rem;
+  padding: 30px 0;
 
   input {
     padding: 9px;
