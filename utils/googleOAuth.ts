@@ -48,7 +48,7 @@ interface BasicUserInfo {
   getEmail: () => string;
 }
 
-interface GoogleUser {
+export interface GoogleUser {
   getId(): () => string;
   getBasicProfile: () => BasicUserInfo;
   getAuthResponse: () => AuthResponse;

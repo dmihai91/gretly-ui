@@ -2,14 +2,16 @@
   <!-- Sign In Form -->
   <AuthForm :slogan="sloganMessage">
     <div class="text-center mb-3">
-      <h2>{{ $t('sign_in_label', { appName: $t('app_name') }) }}</h2>
+      <h2>
+        <strong>{{ $t('sign_in_label', { appName: $t('app_name') }) }}</strong>
+      </h2>
     </div>
     <div class="card bg-secondary shadow border-0">
       <div class="card-header bg-white pb-4">
         <div class="text-muted text-center mb-3">
           <h6>{{ $t('sign_in_with') }}</h6>
         </div>
-        <SocialLogin action="sign_in" @auth:action="resetForm" />
+        <SocialAuth :action="'sign_up'" @auth:action="resetForm" />
       </div>
 
       <div class="card-body px-lg-5 py-lg-4">
@@ -82,7 +84,9 @@
               </label>
             </div>
             <div class="forgot-password">
-              <a class="font-bold text-sm align-right" href="#">{{ $t('forgot_password') }}</a>
+              <BaseButton tag="a" type="link" class="font-bold text-sm align-right" href="/reset-password">{{
+                $t('forgot_password')
+              }}</BaseButton>
             </div>
           </div>
           <div class="text-center">
@@ -91,7 +95,7 @@
             </button>
           </div>
           <hr class="mt-6" />
-          <div class="flex justify-center">
+          <div class="flex justify-center pt-0">
             <span>
               {{ $t('not_registered_yet') }}
               <a class="link" @click="showRegister">{{ $t('join_us') }}</a>
@@ -114,7 +118,7 @@ import { Validations } from '~/utils/validations';
 import { usernameValidator } from '~/utils/validators';
 
 import AuthForm from '~/components/AuthForm.vue';
-import SocialLogin from '~/components/SocialLogin.vue';
+import SocialAuth from '~/components/SocialAuth.vue';
 import { ApiError } from '~/utils/apiError';
 import { PASSWORD_VISIBLE_TIMEOUT } from '~/const/const';
 import { LayoutType } from '~/enums/LayoutType';
@@ -131,8 +135,8 @@ const formData: LoginInfo = {
 
 @Component({
   components: {
-    SocialLogin,
     AuthForm,
+    SocialAuth,
   },
   layout: LayoutType.SIMPLE,
   head() {
@@ -146,7 +150,6 @@ export default class Login extends Vue {
   form = {
     ...formData,
   };
-
   isBusy = false;
   passwordViewIsToggled = false;
   error: string = null;
@@ -181,7 +184,7 @@ export default class Login extends Vue {
     return this.$v.form.password.$dirty && !this.$v.form.password.$invalid;
   }
 
-  get sloganMessage(): string {
+  get sloganMessage() {
     return this.$t('login_slogan') as string;
   }
 
@@ -204,7 +207,7 @@ export default class Login extends Vue {
         .login(this.form)
         .then(() => {
           this.isBusy = false;
-         
+
           loginRedirect(this);
           setTimeout(
             () => eventBus.$emit(Events.GLOBAL_SHOW_SUCCESS, this.$t('welcome', { appName: this.$t('app_name') })),
@@ -261,5 +264,3 @@ export default class Login extends Vue {
   }
 }
 </style>
-
-function detectBrowserAgent() { throw new Error('Function not implemented.'); }

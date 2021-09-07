@@ -3,10 +3,10 @@
     <a @click="authWithFacebook" class="btn social-btn btn-icon mr-3 fb-text"
       ><span class="btn-inner--icon"><i class="fa fa-facebook mr-2"></i></span
       ><span class="btn-inner--text text-uppercase">{{ $t('facebook') }}</span></a
-    ><a @click="authWithGoogle" class="btn social-btn btn-icon google-text"
+    ><GoogleLogin :params="params" :onSuccess="authWithGoogle" class="btn social-btn btn-icon google-text"
       ><span class="btn-inner--icon mr-2"><i class="fa fa-google"></i></span
-      ><span class="btn-inner--text text-uppercase">{{ $t('google') }}</span></a
-    >
+      ><span class="btn-inner--text text-uppercase">{{ $t('google') }}</span>
+    </GoogleLogin>
   </div>
 </template>
 
@@ -17,6 +17,8 @@ import { ApiError } from '~/utils/apiError';
 import { ErrorReasons } from '~/enums/ErrorReasons';
 import { eventBus } from '~/utils/eventBus';
 import { loginRedirect } from '~/utils/loginRedirect';
+import GoogleLogin from 'vue-google-login';
+import { GoogleUser } from '~/utils/googleOAuth';
 
 export default Vue.extend({
   name: 'SocialLogin',
@@ -25,6 +27,21 @@ export default Vue.extend({
       type: String,
       validator: (val: string) => ['sign_in', 'sign_up'].includes(val),
     },
+  },
+  components: {
+    GoogleLogin,
+  },
+  data() {
+    return {
+      params: {
+        clientId: process.env.GOOGLE_CLIENT_ID,
+      },
+      renderParams: {
+        width: 250,
+        height: 50,
+        longtitle: true,
+      },
+    };
   },
   methods: {
     showWelcomeMessage() {
@@ -41,7 +58,7 @@ export default Vue.extend({
     },
     errorCallback(err: ApiError) {
       const details = err.details;
-      if (details.reason === ErrorReasons.USER_ALREADY_EXISTS) {
+      if (details && details.reason === ErrorReasons.USER_ALREADY_EXISTS) {
         eventBus.$emit(Events.GLOBAL_SHOW_ERROR, this.$t('user_from_social_already_exists'));
       }
       console.error(err);
@@ -62,7 +79,6 @@ export default Vue.extend({
           this.errorCallback(_err);
         }
       };
-
       return FB.getLoginStatus(async (response) => {
         try {
           if (!response.authResponse) this.$accessor.toggleIsLoading();
@@ -78,10 +94,9 @@ export default Vue.extend({
         }
       });
     },
-    async authWithGoogle(evt: Event) {
-      this.$emit(Events.AUTH_ACTION, evt);
+    async authWithGoogle(user: GoogleUser) {
+      this.$emit(Events.AUTH_ACTION);
       try {
-        const user = await this.$gAuth.signIn();
         this.$accessor.setIsLoading(true);
         await this.$auth.authWithGoogle({ token: user.getAuthResponse().access_token, action: this.action });
         this.successCallback();

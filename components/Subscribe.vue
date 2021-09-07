@@ -1,13 +1,14 @@
 <template>
-  <div class="newsletter-subscribe my-md d-flex justify-content-center">
-    <BaseCard class="col-sm-6">
+  <div class="newsletter-subscribe my-4 d-flex justify-content-center">
+    <BaseCard class="col-md-8 col-lg-5">
       <form id="newsletter-form" @submit.prevent="joinNewsletter">
-        <h5 class="mb-3">Join our newsletter</h5>
+        <h4 class="mb-3">Join our newsletter</h4>
+        <p>Get news about the latest courses we upload</p>
         <div class="row">
-          <div class="col-sm-8">
+          <div class="col-8">
             <BaseInput type="email" placeholder="Enter your email" v-model="email" :required="true" />
           </div>
-          <div class="col-sm-4">
+          <div class="col-4">
             <BaseButton nativeType="submit" type="primary" class="mx-3">Join</BaseButton>
           </div>
         </div>
@@ -35,9 +36,7 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .newsletter-subscribe {
-  position: relative;
-  top: 4.5rem;
-  padding: 30px 0;
+  padding: 5px 0;
 
   input {
     padding: 9px;

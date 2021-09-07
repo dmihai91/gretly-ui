@@ -1,4 +1,20 @@
+$navbar-background: rgb(246, 244, 255);
+$navbar-dark-background: rgb(10, 0, 31);
+
 .navbar {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 100;
+	background-color: $navbar-background;
+	border: 0;
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+	backdrop-filter: blur(30px);
+
+	.navbar-toggler-icon {
+		background-image: $navbar-dark-toggler-icon-bg;
+	}
+
 	&.transition {
 		transition: all 0.2s linear;
 	}
@@ -39,8 +55,7 @@
 		color: $white;
 	}
 
-	background-color: rgba(0, 0, 0, 0.85) !important;
-
+	background-color: $navbar-dark-background !important;
 }
 
 .navbar-light {
@@ -189,11 +204,15 @@
 	.navbar-toggler-icon {
 		background-image: $navbar-dark-toggler-icon-bg;
 	}
+}
 
-	&.navbar-semi-transparent {
-		background-color: rgba(0, 0, 0, 0.6);
-		backdrop-filter: blur(30px);
-	}
+.nav-link:hover {
+	color: inherit;
+	opacity: 0.75;
+}
+
+.navbar-semi-transparent {
+	background-color: rgba(249, 247, 255, 0.6);
 }
 
 @include media-breakpoint-up(md) {

@@ -6,7 +6,7 @@
         position: fixed;
         bottom: 1% !important;
         left: auto !important;
-        margin-left: 1rem !important;
+        margin-left: 2.5rem !important;
 
         @include media-breakpoint-down(md) {
             bottom: 0 !important;
@@ -21,7 +21,7 @@
         align-items: center;
 
         @include media-breakpoint-up(md) {
-            width: 20vw;
+            width: 19vw;
             line-height: 2rem !important;
         }
 

@@ -9,6 +9,15 @@
 }
 
 .page-container {
-    margin-top: 150px;
-    min-height: 305px;
+    margin-top: 5rem;
+    min-height: 50vh;
+
+    @media screen and (min-width: 992px) {
+        margin-top: 8rem;
+        margin-bottom: 8rem;
+    }
+}
+
+.app-name {
+    font-size: 1.5rem;
 }

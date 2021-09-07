@@ -62,6 +62,7 @@ export default Vue.extend({
     required: {
       type: Boolean,
       description: 'Whether input is required (adds an asterix *)',
+      default: false,
     },
     valid: {
       type: Boolean,
@@ -71,6 +72,7 @@ export default Vue.extend({
     alternative: {
       type: Boolean,
       description: 'Whether input is of alternative layout',
+      default: false,
     },
     label: {
       type: String,
@@ -79,26 +81,32 @@ export default Vue.extend({
     error: {
       type: String,
       description: 'Input error (below input)',
+      default: '',
     },
     labelClasses: {
       type: String,
       description: 'Input label css classes',
+      default: '',
     },
     inputClasses: {
       type: String,
       description: 'Input css classes',
+      default: '',
     },
     value: {
       type: [String, Number],
       description: 'Input value',
+      default: '',
     },
     addonRightIcon: {
       type: String,
       description: 'Addon right icon',
+      default: '',
     },
     addonLeftIcon: {
       type: String,
       description: 'Addont left icon',
+      default: '',
     },
     type: {
       type: String,

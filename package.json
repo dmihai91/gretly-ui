@@ -37,6 +37,7 @@
 		"vue-click-outside": "^1.1.0",
 		"vue-email-editor": "^0.7.2",
 		"vue-flatpickr-component": "^8.1.7",
+		"vue-google-login": "^2.0.5",
 		"vue-lazyload": "^1.2.6",
 		"vue-loading-overlay": "^3.4.2",
 		"vue-server-renderer": "^2.6.14",

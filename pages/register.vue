@@ -2,14 +2,16 @@
   <!-- Register Layout -->
   <AuthForm :slogan="sloganMessage" class="register-form-container">
     <div class="text-center mb-3">
-      <h2>{{ $t('register_label', { appName: $t('app_name') }) }}</h2>
+      <h2>
+        <strong>{{ $t('register_label', { appName: $t('app_name') }) }}</strong>
+      </h2>
     </div>
     <div class="card bg-secondary shadow border-0">
       <div class="card-header bg-white pb-4">
         <div class="text-muted text-center mb-3">
           <h6>{{ $t('register_with', { appName: $t('app_name') }) }}</h6>
         </div>
-        <SocialLogin action="sign_up" @auth:action="resetForm" />
+        <SocialAuth :action="'sign_up'" @auth:action="resetForm" />
       </div>
 
       <div class="card-body px-lg-5 py-lg-4">
@@ -117,6 +119,9 @@
                 <BaseFormInputError>{{ $t('messages.invalid_name') }}</BaseFormInputError>
               </span>
             </div>
+            <h6 class="my-4">
+              {{ $t('agree_to') }} <NuxtLink to="/term-of-service">{{ $t('term_of_service') }}</NuxtLink>
+            </h6>
           </div>
 
           <!-- the error from server will be displayed here !-->
@@ -132,7 +137,7 @@
             </button>
           </div>
           <hr class="mt-6" />
-          <div class="flex justify-center pt-2">
+          <div class="flex justify-center pt-0">
             <span>
               {{ $t('already_registered') }}
               <a class="link" @click="showLogin">{{ $t('sign_in') }}</a>
@@ -156,7 +161,7 @@ import { usernameValidator } from '~/utils/validators';
 import { AuthService } from '~/services/AuthService';
 
 import AuthForm from '~/components/AuthForm.vue';
-import SocialLogin from '~/components/SocialLogin.vue';
+import SocialAuth from '~/components/SocialAuth.vue';
 import { PASSWORD_VISIBLE_TIMEOUT } from '~/const/const';
 import { ApiError } from '~/utils/apiError';
 import { LayoutType } from '~/enums/LayoutType';
@@ -176,7 +181,7 @@ const formData: RegisterInfo = {
 @Component({
   components: {
     AuthForm,
-    SocialLogin,
+    SocialAuth,
   },
   layout: LayoutType.SIMPLE,
   head() {

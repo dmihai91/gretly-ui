@@ -1,13 +1,34 @@
 <template>
   <footer class="footer has-cards">
     <div class="container">
-      <Subscribe class="newsletter" />
-      <div class="row row-grid align-items-center my-md">
-        <div class="col-lg-6">
+      <div class="row row-grid align-items-center my-4">
+        <div class="col-lg-8">
           <Logo path="img/brand/blue.png" />
-          <h4 class="mt-2 mb-0 font-weight-light">{{ $t('app_name') }} lorem ipsum</h4>
+          <h4 class="mt-2 mb-0 font-weight-light xl-mw-50 lh-2">
+            {{ $t('footer_upper_text') }}
+          </h4>
         </div>
-        <div class="col-lg-6 text-lg-center btn-wrapper">
+        <div class="col-lg-4 text-lg-center btn-wrapper">
+          <a
+            target="_blank"
+            rel="noopener"
+            href="https://www.facebook.com/creativetim"
+            class="btn btn-neutral btn-icon-only btn-facebook btn-round btn-lg"
+            data-toggle="tooltip"
+            data-original-title="Like us"
+          >
+            <i class="fa fa-facebook-square"></i>
+          </a>
+          <a
+            target="_blank"
+            rel="noopener"
+            href="https://www.facebook.com/creativetim"
+            class="btn btn-neutral btn-icon-only btn-instagram btn-round btn-lg"
+            data-toggle="tooltip"
+            data-original-title="Like us"
+          >
+            <i class="fa fa-instagram"></i>
+          </a>
           <a
             target="_blank"
             rel="noopener"
@@ -22,63 +43,45 @@
             target="_blank"
             rel="noopener"
             href="https://www.facebook.com/creativetim"
-            class="btn btn-neutral btn-icon-only btn-facebook btn-round btn-lg"
+            class="btn btn-neutral btn-icon-only btn-pinterest btn-round btn-lg"
             data-toggle="tooltip"
             data-original-title="Like us"
           >
-            <i class="fa fa-facebook-square"></i>
-          </a>
-          <a
-            target="_blank"
-            rel="noopener"
-            href="https://dribbble.com/creativetim"
-            class="btn btn-neutral btn-icon-only btn-dribbble btn-lg btn-round"
-            data-toggle="tooltip"
-            data-original-title="Follow us"
-          >
-            <i class="fa fa-dribbble"></i>
-          </a>
-          <a
-            target="_blank"
-            rel="noopener"
-            href="https://github.com/creativetimofficial"
-            class="btn btn-neutral btn-icon-only btn-github btn-round btn-lg"
-            data-toggle="tooltip"
-            data-original-title="Star on Github"
-          >
-            <i class="fa fa-github"></i>
+            <i class="fa fa-pinterest"></i>
           </a>
         </div>
       </div>
+      <Subscribe />
       <hr />
       <div class="row align-items-center justify-content-md-between">
         <div class="col-md-6">
           <div class="copyright">
-            &copy; {{ year }} <a href="https://www.creative-tim.com" target="_blank" rel="noopener">Creative Tim</a> &
-            <a href="https://www.binarcode.com" target="_blank" rel="noopener">Binar Code</a>
+            <span v-html="$t('footer_bottom_text')"></span>
+            <NuxtLink to="/" target="_blank" rel="noopener">{{ $t('app_name') }}</NuxtLink
+            ><br />
+            <div style="height: 5px"></div>
+            {{ $t('all_rights_reserved') }} &copy; {{ year }}
           </div>
         </div>
         <div class="col-md-6">
           <ul class="nav nav-footer justify-content-end">
             <li class="nav-item">
-              <a href="https://www.creative-tim.com" class="nav-link" target="_blank" rel="noopener">Creative Tim</a>
+              <NuxtLink to="/contact" class="nav-link">{{ $t('home') }}</NuxtLink>
             </li>
             <li class="nav-item">
-              <a href="https://www.creative-tim.com/presentation" class="nav-link" target="_blank" rel="noopener"
-                >About Us</a
-              >
+              <NuxtLink to="/editor" class="nav-link">{{ $t('code_playground') }}</NuxtLink>
             </li>
             <li class="nav-item">
-              <a href="http://blog.creative-tim.com" class="nav-link" target="_blank" rel="noopener">Blog</a>
+              <NuxtLink to="/blog" class="nav-link">{{ $t('blog') }}</NuxtLink>
             </li>
             <li class="nav-item">
-              <a
-                href="https://github.com/creativetimofficial/argon-design-system/blob/master/LICENSE.md"
-                class="nav-link"
-                target="_blank"
-                rel="noopener"
-                >MIT License</a
-              >
+              <NuxtLink to="/contact" class="nav-link">{{ $t('contact') }}</NuxtLink>
+            </li>
+            <li class="nav-item">
+              <NuxtLink to="/about" class="nav-link">{{ $t('about_us') }}</NuxtLink>
+            </li>
+            <li class="nav-item">
+              <NuxtLink to="/privacy-policy" class="nav-link">{{ $t('privacy_policy') }}</NuxtLink>
             </li>
           </ul>
         </div>

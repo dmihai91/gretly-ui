@@ -19,13 +19,5 @@ export default Vue.extend({
       return this.$auth ? this.$auth.loggedIn : false;
     },
   },
-  watch: {
-    loggedIn(val: boolean) {
-      this.setHeaderBackground(!val ? 'light' : 'dark');
-    },
-  },
-  mounted() {
-    this.setHeaderBackground(!this.loggedIn ? 'light' : 'dark');
-  },
 });
 </script>

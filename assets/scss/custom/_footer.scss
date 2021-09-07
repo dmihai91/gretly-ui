@@ -47,8 +47,8 @@
 
 .footer.has-cards {
     overflow: hidden;
-    padding-top: 510px;
-    margin-top: -510px;
+    padding-top: 600px;
+    margin-top: -600px;
     position: relative;
     background: transparent;
     pointer-events: none;
@@ -61,7 +61,6 @@
         top: 600px;
         height: 2000px;
         background: theme-color("secondary");
-        transform: skew(0, -8deg);
     }
 
     .container {

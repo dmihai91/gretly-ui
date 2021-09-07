@@ -36,7 +36,7 @@
 import Vue from 'vue';
 import NavbarToggleButton from './NavbarToggleButton.vue';
 
-const TRANSITION_TIMEOUT = 100;
+const TRANSITION_TIMEOUT = 50;
 
 export default Vue.extend({
   name: 'BaseNav',
@@ -88,7 +88,7 @@ export default Vue.extend({
   },
   mounted() {
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 250) {
+      if (window.scrollY > 300) {
         setTimeout(() => (this.semiTransparent = true), TRANSITION_TIMEOUT);
       } else {
         setTimeout(() => (this.semiTransparent = false), TRANSITION_TIMEOUT);
@@ -106,4 +106,12 @@ export default Vue.extend({
 });
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.navbar-collapse {
+  max-height: 350px;
+}
+
+.nav-link {
+  color: $white;
+}
+</style>
