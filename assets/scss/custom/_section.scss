@@ -2,6 +2,13 @@
 	position: relative;
 	padding-top: $spacer * 4;
 	padding-bottom: $spacer * 4;
+
+	@include media-breakpoint-up(lg) {
+		& .container {
+			padding-left: 6rem;
+			padding-right: 6rem;
+		}
+	}
 }
 
 .section-xl {

@@ -1,5 +1,5 @@
 {
-	"register_slogan": "<b>CREATE</b> beautiful <b>WEBSITES</b>, <b>WEB APPS</b> and <b>MOBILE apps</b> with the skills learned from here",
+	"register_slogan": "<b>CREATE</b> <b>STUNNING AND RESPONSIVE</b> web and mobile apps <b>FAST</b> using the latest technologies",
 	"register_label": "Register to {appName}",
 	"register_with": "Register with",
 	"fill_up_details": "Fill up the following details",
@@ -14,7 +14,6 @@
 	"user_from_social_already_exists": "User already exists, please sign in with it or register using another user",
 	"sign_up": "Sign up",
 	"agree_to": "By signing up you agree to our",
-	"term_of_service": "Terms of Service",
 	"messages": {
 		"please_enter_username": "Please enter your username",
 		"invalid_username": "Username may only contain lowercase letters, numbers, underscore and dash characters",

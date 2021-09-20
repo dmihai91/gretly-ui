@@ -13,12 +13,9 @@
     <div class="container">
       <slot name="container-pre"></slot>
       <slot name="brand">
-        <a class="navbar-brand" href="#" @click.prevent="onTitleClick">
-          {{ title }}
-        </a>
+        <Logo class="d-lg-none" path="img/brand/blue.png" />
       </slot>
-      <navbar-toggle-button :toggled="toggled" :target="contentId" @click.native.stop="toggled = !toggled">
-      </navbar-toggle-button>
+      <navbar-toggle-button :toggled="toggled" :target="contentId" @click.native.stop="toggled = !toggled" />
 
       <slot name="container-after"></slot>
 
@@ -34,9 +31,9 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { Events } from '~/const/events';
+import { eventBus } from '~/utils/eventBus';
 import NavbarToggleButton from './NavbarToggleButton.vue';
-
-const TRANSITION_TIMEOUT = 50;
 
 export default Vue.extend({
   name: 'BaseNav',
@@ -88,12 +85,13 @@ export default Vue.extend({
   },
   mounted() {
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 300) {
-        setTimeout(() => (this.semiTransparent = true), TRANSITION_TIMEOUT);
+      if (window.scrollY > 200) {
+        this.$nextTick(() => (this.semiTransparent = true));
       } else {
-        setTimeout(() => (this.semiTransparent = false), TRANSITION_TIMEOUT);
+        this.$nextTick(() => (this.semiTransparent = false));
       }
     });
+    eventBus.$on(Events.GLOBAL_CLOSE_MENU, () => this.closeMenu());
   },
   methods: {
     onTitleClick(evt: Event) {
@@ -108,7 +106,7 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .navbar-collapse {
-  max-height: 350px;
+  max-height: 90vh;
 }
 
 .nav-link {

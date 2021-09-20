@@ -51,9 +51,7 @@ import VueClickOutside from 'vue-click-outside';
 Vue.directive('click-outside', VueClickOutside);
 
 // global components
-import PageTitle from '~/components/global/PageTitle.vue';
 import FormInputError from '~/components/base/FormInputError.vue';
-Vue.component(PageTitle.name, PageTitle);
 Vue.component(FormInputError.name, FormInputError);
 
 // argon kit

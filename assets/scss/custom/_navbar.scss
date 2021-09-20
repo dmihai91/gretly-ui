@@ -1,19 +1,16 @@
-$navbar-background: rgb(246, 244, 255);
-$navbar-dark-background: rgb(10, 0, 31);
+$navbar-light-background: rgb(248, 248, 248);
+$navbar-dark-background: rgb(13, 1, 39);
 
 .navbar {
 	position: fixed;
 	top: 0;
 	width: 100%;
 	z-index: 100;
-	background-color: $navbar-background;
+	min-height: 70px;
+
 	border: 0;
 	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-	backdrop-filter: blur(30px);
-
-	.navbar-toggler-icon {
-		background-image: $navbar-dark-toggler-icon-bg;
-	}
+	backdrop-filter: blur(15px);
 
 	&.transition {
 		transition: all 0.2s linear;
@@ -36,6 +33,11 @@ $navbar-dark-background: rgb(10, 0, 31);
 			margin-left: 0.25rem;
 		}
 	}
+
+	.nav-link:hover {
+		color: inherit;
+		opacity: .75;
+	}
 }
 
 .navbar-brand {
@@ -50,18 +52,25 @@ $navbar-dark-background: rgb(10, 0, 31);
 	}
 }
 
+.navbar-light {
+	background-color: $navbar-light-background;
+
+	& .navbar-brand {
+		color: $gray-800;
+	}
+
+	& .navbar-toggler-icon {
+		background-image: $navbar-light-toggler-icon-bg !important;
+	}
+}
+
+
 .navbar-dark {
 	.navbar-brand {
 		color: $white;
 	}
 
-	background-color: $navbar-dark-background !important;
-}
-
-.navbar-light {
-	.navbar-brand {
-		color: $gray-800;
-	}
+	background-color: $navbar-dark-background;
 }
 
 .navbar-nav {
@@ -200,19 +209,23 @@ $navbar-dark-background: rgb(10, 0, 31);
 	.navbar-toggler {
 		color: rgba(255, 255, 255, 1);
 	}
+}
 
-	.navbar-toggler-icon {
-		background-image: $navbar-dark-toggler-icon-bg;
+.nav-link {
+	&:hover {
+		color: inherit;
+		opacity: .5;
 	}
 }
 
-.nav-link:hover {
-	color: inherit;
-	opacity: 0.75;
-}
-
 .navbar-semi-transparent {
-	background-color: rgba(249, 247, 255, 0.6);
+	&.navbar-light {
+		background-color: rgba($navbar-light-background, 0.6);
+	}
+
+	&.navbar-dark {
+		background-color: rgba($navbar-dark-background, 0.8);
+	}
 }
 
 @include media-breakpoint-up(md) {

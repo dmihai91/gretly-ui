@@ -1,28 +1,28 @@
 <template>
   <div class="full-form-wrapper">
-    <div class="d-none d-lg-block d-xl-block col-lg-4 col-xl-3 side-banner">
+    <div class="d-none d-lg-block col-lg-4 side-banner">
       <div class="header">
-        <div class="logo my-4">
-          <Logo path="img/brand/white.png" />
+        <div class="logo my-3">
+          <Logo path="img/brand/blue.png" />
         </div>
         <div class="d-flex">
-          <h3 class="slogan" v-html="slogan"></h3>
+          <p class="slogan text-primary lead font-weight-normal" v-html="slogan"></p>
         </div>
       </div>
       <div
-        class="artwork"
+        class="illustration"
         :style="{
           backgroundImage: `url(${ilustrationPath})`,
           backgroundPosition: 'center center',
           backgroundSize: 'cover',
         }"
-        aria-label="login-illustration"
+        aria-label="auth-form-illustration"
       ></div>
     </div>
 
     <div class="form-content">
       <div class="container form-container">
-        <div class="mx-auto my-md-3">
+        <div class="mx-auto my-4">
           <slot />
         </div>
       </div>
@@ -38,7 +38,7 @@ export default Vue.extend({
     slogan: String,
     ilustrationPath: {
       type: String,
-      default: '',
+      default: 'img/signin-illu.svg',
     },
   },
 });
@@ -67,24 +67,32 @@ export default Vue.extend({
     }
   }
 
-  .artwork {
+  .illustration {
     position: relative;
     bottom: 0;
     left: 0;
     width: 100%;
     height: 100%;
     margin: 0 auto;
+    max-height: 350px;
+    margin-top: 1rem;
   }
 
   // login and register forms
   .side-banner {
     flex: 1;
     box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
-    background: #a27ef3;
-    padding: 3rem;
+    background: rgb(242, 219, 255);
+    background: linear-gradient(
+      153deg,
+      rgba(242, 219, 255, 1) 0%,
+      rgba(239, 208, 255, 1) 55%,
+      rgba(187, 138, 255, 1) 100%
+    );
+    padding: 2.5rem;
 
-    @include media-breakpoint-up(lg) {
-      padding: 4rem;
+    @include media-breakpoint-up(xl) {
+      padding: 3.5rem;
     }
 
     .header {
@@ -95,7 +103,7 @@ export default Vue.extend({
 
   .slogan {
     color: $white;
-    line-height: 3.5rem;
+    line-height: 2.8rem;
   }
 
   .form-content {

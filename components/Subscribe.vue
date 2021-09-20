@@ -1,6 +1,6 @@
 <template>
-  <div class="newsletter-subscribe my-4 d-flex justify-content-center">
-    <BaseCard class="col-md-8 col-lg-5">
+  <div class="newsletter-subscribe d-flex">
+    <BaseCard class="col-12" gradient="secondary">
       <form id="newsletter-form" @submit.prevent="joinNewsletter">
         <h4 class="mb-3">Join our newsletter</h4>
         <p>Get news about the latest courses we upload</p>
@@ -45,6 +45,10 @@ export default Vue.extend({
   a.btn {
     padding: 12px 20px;
     color: #fff;
+  }
+
+  .card {
+    box-shadow: 2px 4px 13px -4px #bfbfbf;
   }
 }
 </style>

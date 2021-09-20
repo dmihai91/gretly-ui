@@ -36,7 +36,8 @@ export default Vue.extend({
       type: String,
       default: 'default',
       description: 'Button type (e,g primary, danger etc)',
-      validator: (val) => ['default', 'primary', 'secondary', 'success', 'warning', 'danger', 'link'].includes(val),
+      validator: (val) =>
+        ['default', 'primary', 'secondary', 'success', 'warning', 'danger', 'link', 'info'].includes(val),
     },
     size: {
       type: String,

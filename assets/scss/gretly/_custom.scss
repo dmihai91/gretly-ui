@@ -8,6 +8,10 @@
 .link {
 	color: $link-color !important;
 	cursor: pointer;
+
+	&:hover {
+		opacity: 0.75;
+	}
 }
 
 .nuxt-loading div {

@@ -1,5 +1,8 @@
 export enum AccountType {
   FREE = 1,
-  PAID_STUDENT = 2,
-  PAID_PRO = 3,
+  STUDENT = 2,
+  DEV = 3,
+  DEV_PRO = 4,
+  BUSSINESS = 5,
+  BUSSINESS_PRO = 6,
 }

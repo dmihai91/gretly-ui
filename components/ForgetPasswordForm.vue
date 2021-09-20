@@ -1,16 +1,16 @@
 <template>
   <AuthForm :slogan="sloganMessage">
-    <a class="btn btn-link" @click="$router.go(-1)"><i class="fa fa-arrow-left mr-2"></i>{{ $t('back') }}</a>
+    <a class="btn btn-link mb-3" @click="$router.go(-1)"><i class="fa fa-arrow-left mr-2"></i>{{ $t('back') }}</a>
     <div class="text-center mb-4">
-      <h2>
-        <b>{{ $t('forget_password') }}</b>
-      </h2>
-      <h6 class="my-3">{{ $t('enter_your_email_address') }}</h6>
+      <Title heading="h2">{{ $t('reset_password_forgot_password') }}</Title>
     </div>
     <div class="card bg-secondary shadow border-0">
       <div class="card-body px-lg-5 py-lg-4">
-        <form id="reset-password-form" role="form" class="mt-4 px-4" @submit.prevent="submitForm">
-          <img src="img/forgot-password-illu.svg" class="mw-100" />
+        <form id="reset-password-form" role="form" class="mt-2 px-4" @submit.prevent="submitForm">
+          <div class="mw-100 d-flex justify-content-center mb-2">
+            <img src="img/forgot-password-illu.svg" class="mw-100" />
+          </div>
+          <h6 class="my-4 lh-2">{{ $t('enter_your_email_address') }}</h6>
           <div class="form-group mb-3">
             <label for="inputEmail">{{ $t('email_address') }}</label>
             <input

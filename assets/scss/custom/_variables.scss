@@ -38,12 +38,12 @@ $blue: #395dec !default;
 $indigo: #6e39ec !default;
 $purple: #a27ff2 !default;
 $pink: #f37fd0 !default;
-$red: #dd153d !default;
-$orange: #e25d24 !default;
-$yellow: #e2bc24 !default;
-$green: #13c648 !default;
-$teal: #39b7ec !default;
-$cyan: #39ecc8 !default;
+$red: #e4293c !default;
+$orange: #e47429 !default;
+$yellow: #e7d63f !default;
+$green: #18c231 !default;
+$teal: #128195 !default;
+$cyan: #18a9c2 !default;
 
 $colors: () !default;
 $colors: map-merge(('blue': $blue,
@@ -63,10 +63,9 @@ $colors: map-merge(('blue': $blue,
 		'gray-dark': $gray-800),
 	$colors);
 
-$default: #172b4d !default;
-$primary: #5115dd !default;
+$default: #0d2d67 !default;
+$primary: #3118c2 !default;
 $secondary: #f4f5f7 !default;
-$accent: #15dd51 !default;
 $success: $green !default;
 $info: $teal !default;
 $warning: $orange !default;
@@ -210,7 +209,7 @@ $grid-breakpoints: (xs: 0,
 	sm: 576px,
 	md: 768px,
 	lg: 992px,
-	xl: 1500px);
+	xl: 1200px);
 
 @include _assert-ascending($grid-breakpoints, '$grid-breakpoints');
 @include _assert-starts-at-zero($grid-breakpoints);
@@ -643,7 +642,7 @@ $navbar-dark-toggler-border-color: transparent !default;
 $navbar-light-bg: transparent !default;
 $navbar-light-hover-bg: rgba(0, 0, 0, 0.1);
 $navbar-light-active-bg: rgba(0, 0, 0, 0.1);
-$navbar-light-color: rgba($black, 0.5);
+$navbar-light-color: rgba($black, 0.75);
 $navbar-light-hover-color: rgba($black, 0.7);
 $navbar-light-active-color: rgba($black, 0.9);
 $navbar-light-disabled-color: rgba($black, 0.3);

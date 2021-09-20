@@ -9,7 +9,7 @@ export default Vue.extend({
   layout: LayoutType.SIMPLE,
   head() {
     return {
-      titleTemplate: `${this.$t('reset_password')} | ${this.$t('app_name')}`,
+      titleTemplate: `${this.$t('app_name')} - ${this.$t('reset_password')}`,
     };
   },
 });

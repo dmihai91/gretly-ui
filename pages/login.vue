@@ -2,9 +2,9 @@
   <!-- Sign In Form -->
   <AuthForm :slogan="sloganMessage">
     <div class="text-center mb-3">
-      <h2>
-        <strong>{{ $t('sign_in_label', { appName: $t('app_name') }) }}</strong>
-      </h2>
+      <Title heading="h2">
+        {{ $t('sign_in_label', { appName: $t('app_name') }) }}
+      </Title>
     </div>
     <div class="card bg-secondary shadow border-0">
       <div class="card-header bg-white pb-4">
@@ -141,7 +141,7 @@ const formData: LoginInfo = {
   layout: LayoutType.SIMPLE,
   head() {
     return {
-      titleTemplate: `${this.$t('sign_in')} | ${this.$t('app_name')}`,
+      titleTemplate: `${this.$t('app_name')} - ${this.$t('sign_in')}`,
     };
   },
 })
@@ -255,12 +255,4 @@ export default class Login extends Vue {
 
 <style lang="scss">
 @import '@/assets/scss/style.scss';
-
-.login-form {
-  @media only screen and (min-width: 960px) {
-    position: relative;
-    top: -1.5rem;
-    min-width: 550px;
-  }
-}
 </style>

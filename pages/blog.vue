@@ -1,6 +1,8 @@
 <template>
-  <div class="container page-container">
-    <h2 class="title">Blog</h2>
-    <hr />
-  </div>
+  <PageContent :headerTitle="$t('blog')" />
 </template>
+
+<script lang="ts">
+import Vue from 'vue';
+export default Vue.extend({});
+</script>

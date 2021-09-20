@@ -1,3 +1,3 @@
 <template>
-  <div class="container page-container"></div>
+  <PageContent :title="$t('privacy_policy')" />
 </template>

@@ -1,3 +1,11 @@
+.app-name {
+    font-size: 1.5rem;
+}
+
+.page-container {
+    padding: 8rem;
+}
+
 .password-eye {
     position: absolute;
     right: 40px;
@@ -8,16 +16,44 @@
     cursor: pointer;
 }
 
-.page-container {
-    margin-top: 5rem;
-    min-height: 50vh;
+.landing-page,
+.apps-builder {
+    .hero-section-container {
+        transform: skewY(-5deg);
+    }
 
-    @media screen and (min-width: 992px) {
-        margin-top: 8rem;
-        margin-bottom: 8rem;
+    .hero-section-content {
+        transform: skewY(5deg);
     }
 }
 
-.app-name {
-    font-size: 1.5rem;
+.landing-page {
+    .hero-section-container {
+        background: linear-gradient(150deg, #5a4cd6 15%, #826bc7 70%, #a382d9 94%);
+    }
+}
+
+.apps-builder {
+    .hero-section-container {
+        background: linear-gradient(150deg, #e7583f 15%, #ec8966 70%, #f69b79 94%);
+    }
+}
+
+.hero-section {
+    display: flex;
+    justify-content: center;
+    padding: 100px 10px;
+
+    @include media-breakpoint-up(lg) {
+        margin-top: -30px;
+        padding: 130px;
+    }
+
+    .hero-section-content {
+        padding: 2rem;
+
+        @include media-breakpoint-up(lg) {
+            padding: 6rem 0 3rem;
+        }
+    }
 }

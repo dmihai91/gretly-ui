@@ -7,7 +7,8 @@ import '@types/facebook-js-sdk';
 
 import firebase from 'firebase/app';
 
-import { IGlobalMixin } from './mixins/global';
+import { GlobalMixin } from './mixins/global';
+import { UtilsMixin } from './mixins/utils';
 import { accessorType } from './store';
 import { GAuth } from './utils/googleOAuth';
 
@@ -17,7 +18,7 @@ declare module '*.vue' {
 }
 
 declare module 'vue/types/vue' {
-  interface Vue extends IGlobalMixin {
+  interface Vue extends GlobalMixin, UtilsMixin {
     /**
      * Method like the setState in React
      * it alters the state by updating the properties with the new values specified using the props object

@@ -2,9 +2,9 @@
   <!-- Register Layout -->
   <AuthForm :slogan="sloganMessage" class="register-form-container">
     <div class="text-center mb-3">
-      <h2>
-        <strong>{{ $t('register_label', { appName: $t('app_name') }) }}</strong>
-      </h2>
+      <Title heading="h2">
+        {{ $t('register_label', { appName: $t('app_name') }) }}
+      </Title>
     </div>
     <div class="card bg-secondary shadow border-0">
       <div class="card-header bg-white pb-4">
@@ -119,9 +119,9 @@
                 <BaseFormInputError>{{ $t('messages.invalid_name') }}</BaseFormInputError>
               </span>
             </div>
-            <h6 class="my-4">
-              {{ $t('agree_to') }} <NuxtLink to="/term-of-service">{{ $t('term_of_service') }}</NuxtLink>
-            </h6>
+            <p class="py-3 font-weight-normal" style="font-size: 0.93rem">
+              {{ $t('agree_to') }} <NuxtLink to="/terms-and-conditions">{{ $t('terms_and_conditions') }}</NuxtLink>
+            </p>
           </div>
 
           <!-- the error from server will be displayed here !-->
@@ -186,7 +186,7 @@ const formData: RegisterInfo = {
   layout: LayoutType.SIMPLE,
   head() {
     return {
-      titleTemplate: `${this.$t('register')} | ${this.$t('app_name')}`,
+      titleTemplate: `${this.$t('app_name')} - ${this.$t('register')}`,
     };
   },
 })
@@ -344,12 +344,4 @@ export default class Register extends Vue {
 
 <style lang="scss">
 @import '@/assets/scss/style.scss';
-
-.register-form {
-  @media only screen and (min-width: 960px) {
-    position: relative;
-    top: -1.5rem;
-    min-width: 550px;
-  }
-}
 </style>
