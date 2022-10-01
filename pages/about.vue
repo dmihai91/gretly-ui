@@ -4,6 +4,7 @@
     headerTitle="About Gretly"
     headerBanner="Our mission is to help developers and people passionate about technology to learn and build beautiful web and mobile apps fast using
         the latest web technologies and easily share their work to the world."
+    gradient="third"
   >
     <section class="section">
       <div class="container">

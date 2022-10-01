@@ -1,4 +1,4 @@
-import { accessorType } from '~/store';
+import { accessorType } from '@/store';
 
 type Accesor = typeof accessorType;
 
@@ -27,6 +27,7 @@ export interface GlobalMixin {
    * The name of the application
    */
   appName: string;
+  isClient: boolean;
 }
 
 export default {
@@ -45,11 +46,14 @@ export default {
     $auth(): Accesor['auth'] {
       return this['$accessor'].auth;
     },
-    appName() {
+    appName(): string {
       return this['$t']('app_name');
     },
-    loggedIn() {
+    loggedIn() : boolean {
       return this.$auth ? this.$auth['loggedIn'] : false;
+    },
+    isClient() {
+      return process.client;
     },
   },
 };

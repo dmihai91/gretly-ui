@@ -13,9 +13,9 @@
 <script lang="ts">
 import Vue from 'vue';
 
-import { Tab } from '~/interfaces/Tab';
+import { Tab } from '@/interfaces/Tab';
 import { ProvidedProps } from './Tabs.vue';
-import { injectProps } from '~/utils/injectProps';
+import { injectProps } from '@/utils/injectProps';
 
 const propsToBeInjected = ['addTab', 'removeTab'];
 

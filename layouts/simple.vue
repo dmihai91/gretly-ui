@@ -7,7 +7,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { UnsubscribeToastsHandler, useToast } from '~/utils/hooks/useToast';
+import { UnsubscribeToastsHandler, useToast } from '@/hooks/useToast';
 
 export default Vue.extend({
   data() {

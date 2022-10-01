@@ -31,8 +31,8 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { Events } from '~/const/events';
-import { eventBus } from '~/utils/eventBus';
+import { Events } from '@/const/events';
+import { eventBus } from '@/utils/eventBus';
 import NavbarToggleButton from './NavbarToggleButton.vue';
 
 export default Vue.extend({

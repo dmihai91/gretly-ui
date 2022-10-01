@@ -1,11 +1,9 @@
 <template>
   <div class="page">
-    <div class="page-header d-flex text-center my-auto">
-      <div class="container">
-        <div class="my-4 text-center px-5">
-          <h1 class="title font-weight-bold px-3 text-uppercase">{{ headerTitle }}</h1>
-          <h5 class="mt-4 lh-2 page-header-banner">{{ headerBanner }}</h5>
-        </div>
+    <div class="page-header d-flex text-center my-auto" :class="`${[gradient]}-gradient`">
+      <div class="my-4 text-center px-5">
+        <h1 class="title font-weight-bold px-3 text-uppercase">{{ headerTitle }}</h1>
+        <h5 class="mt-4 lh-2 page-header-banner">{{ headerBanner }}</h5>
       </div>
     </div>
     <div class="container page-content">
@@ -25,12 +23,21 @@ export default Vue.extend({
     },
     title: {
       type: String,
-      default: function () {
+      default() {
         return this.headerTitle;
       },
     },
     headerBanner: {
       type: String,
+    },
+    gradient: {
+      type: String,
+      validator(val: string) {
+        return ['default', 'second', 'third'].includes(val);
+      },
+      default() {
+        return 'default';
+      },
     },
   },
   head() {
@@ -43,12 +50,45 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .page-header {
-  background: rgb(240, 231, 255);
+  display: flex;
   padding: 130px 0 50px 0;
+  height: 450px;
+  justify-content: center;
+  align-items: center;
+
+  &.default-gradient {
+    background: rgb(220, 218, 255);
+    background: linear-gradient(
+      90deg,
+      rgba(220, 218, 255, 1) 0%,
+      rgba(229, 193, 255, 1) 31%,
+      rgba(192, 228, 255, 1) 100%
+    );
+  }
+
+  &.second-gradient {
+    background: rgb(193, 219, 255);
+    background: linear-gradient(
+      90deg,
+      rgba(193, 219, 255, 1) 0%,
+      rgba(192, 228, 255, 1) 31%,
+      rgba(218, 254, 255, 1) 100%
+    );
+  }
+
+  &.third-gradient {
+    background: rgb(235, 255, 218);
+    background: linear-gradient(
+      90deg,
+      rgba(235, 255, 218, 1) 0%,
+      rgba(193, 255, 198, 1) 31%,
+      rgba(255, 251, 192, 1) 100%
+    );
+  }
 }
 
 .page-content {
-  padding: 3rem;
+  padding: 2rem;
 }
 
 .page-header-banner {

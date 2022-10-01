@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { randomString } from '~/utils/stringUtils';
+import { randomString } from '@/utils/stringUtils';
 
 interface Model extends Vue {
   checked: boolean;

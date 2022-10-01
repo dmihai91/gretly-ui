@@ -11,13 +11,11 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import Header from '~/components/header/Header.vue';
-import Footer from '~/components/Footer.vue';
-import { UnsubscribeToastsHandler, useToast } from '~/utils/hooks/useToast';
-import { SessionService } from '~/services/SessionService';
-import { handleUserAuth } from '~/utils/hooks/handleUserAuth';
-import { eventBus } from '~/utils/eventBus';
-import { Events } from '~/const/events';
+import Header from '@/components/header/Header.vue';
+import Footer from '@/components/footer/Footer.vue';
+import { UnsubscribeToastsHandler, useToast } from '@/hooks/useToast';
+import { eventBus } from '@/utils/eventBus';
+import { Events } from '@/const/events';
 
 export default Vue.extend({
   data() {
@@ -32,7 +30,6 @@ export default Vue.extend({
   },
   created() {
     this.isLoading = true;
-    SessionService.loadSession();
   },
   watch: {
     $route(to, from) {
@@ -42,7 +39,6 @@ export default Vue.extend({
   },
   async mounted() {
     this.unsubscribeToastsHandler = useToast(this);
-    await handleUserAuth(this);
     this.isLoading = false;
   },
   beforeDestroy() {

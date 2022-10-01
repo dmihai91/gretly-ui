@@ -8,7 +8,7 @@
         left: auto !important;
 
         @include media-breakpoint-up(xl) {
-            margin-left: 3rem !important;
+            margin-left: 3.5rem !important;
         }
 
         @include media-breakpoint-down(md) {

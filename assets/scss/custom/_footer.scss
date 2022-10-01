@@ -1,120 +1,122 @@
+$footer-offset: 600;
+
 .footer {
-    background: $footer-bg;
-    padding: 3rem 0;
-    //color: $footer-color;
+  background: $footer-bg;
+  padding: 2rem 0;
+  //color: $footer-color;
 
-    @include media-breakpoint-up(lg) {
-        .container {
-            padding-left: 4rem;
-            padding-right: 4rem;
-        }
+  @include media-breakpoint-up(lg) {
+    .container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+
+  .col-footer {
+    .heading {
+      color: $footer-heading-color;
+      letter-spacing: 0;
+      font-size: $footer-heading-font-size;
+      text-transform: uppercase;
+      font-weight: $font-weight-bold;
+      margin-bottom: 1rem;
+    }
+  }
+
+  .nav .nav-item .nav-link,
+  .footer-link {
+    color: $footer-link-color !important;
+
+    &:hover {
+      color: $footer-link-hover-color !important;
+    }
+  }
+
+  .list-unstyled li a {
+    display: inline-block;
+    padding: 0.125rem 0;
+    color: $footer-link-color;
+    font-size: $footer-link-font-size;
+
+    &:hover {
+      color: $footer-link-hover-color;
+    }
+  }
+
+  .copyright {
+    font-size: $font-size-sm;
+  }
+
+  & .column ul:not(.social-buttons) {
+    margin-bottom: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      color: $gray-600;
+      padding: 5px 0;
     }
 
-    .col-footer {
-        .heading {
-            color: $footer-heading-color;
-            letter-spacing: 0;
-            font-size: $footer-heading-font-size;
-            text-transform: uppercase;
-            font-weight: $font-weight-bold;
-            margin-bottom: 1rem;
-        }
+    h4 {
+      font-size: 16px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.025em;
+      margin: 0 0 20px;
+      color: $gray-600;
     }
 
-    .nav .nav-item .nav-link,
-    .footer-link {
-        color: $footer-link-color !important;
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.1s;
+      font-weight: 500;
 
-        &:hover {
-            color: $footer-link-hover-color !important;
-        }
+      &:hover {
+        opacity: 0.75;
+      }
     }
-
-    .list-unstyled li a {
-        display: inline-block;
-        padding: .125rem 0;
-        color: $footer-link-color;
-        font-size: $footer-link-font-size;
-
-        &:hover {
-            color: $footer-link-hover-color;
-        }
-    }
-
-    .copyright {
-        font-size: $font-size-sm;
-    }
-
-    & .column ul:not(.social-buttons) {
-        margin-bottom: 0;
-        padding: 0;
-        list-style: none;
-
-        li {
-            color: $gray-600;
-            padding: 5px 0;
-        }
-
-        h4 {
-            font-size: 16px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: .025em;
-            margin: 0 0 20px;
-            color: $gray-600;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-            transition: color .1s;
-            font-weight: 500;
-
-            &:hover {
-                opacity: .75;
-            }
-        }
-    }
+  }
 }
 
 .footer-dark {
-    .col-footer .heading {
-        color: $white;
-    }
+  .col-footer .heading {
+    color: $white;
+  }
 }
 
 .footer.has-cards {
-    overflow: hidden;
-    padding-top: 600px;
-    margin-top: -600px;
+  overflow: hidden;
+  padding-top: #{$footer-offset}px;
+  margin-top: #{-$footer-offset}px;
+  position: relative;
+  background: transparent;
+  pointer-events: none;
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 600px;
+    height: 2000px;
+    background: theme-color('secondary');
+  }
+
+  .container {
+    pointer-events: auto;
     position: relative;
-    background: transparent;
-    pointer-events: none;
-
-    &:before {
-        content: "";
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 600px;
-        height: 2000px;
-        background: theme-color("secondary");
-    }
-
-    .container {
-        pointer-events: auto;
-        position: relative;
-    }
+  }
 }
 
 .nav-footer {
-    .nav-link {
-        font-size: $font-size-sm;
-    }
+  .nav-link {
+    font-size: $font-size-sm;
+  }
 
-    .nav-item:last-child {
-        .nav-link {
-            padding-right: 0;
-        }
+  .nav-item:last-child {
+    .nav-link {
+      padding-right: 0;
     }
+  }
 }

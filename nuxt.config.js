@@ -1,5 +1,5 @@
-import en from './lang/en';
 import fs from 'fs';
+import en from './locales/en.json';
 
 export default {
   target: 'static',
@@ -39,7 +39,7 @@ export default {
    */
   plugins: [
     {
-      src: '~/plugins/global.js',
+      src: '~/plugins/global.ts',
       ssr: false,
     },
     '~/plugins/lastRouterPath',
@@ -53,7 +53,7 @@ export default {
   /*
    ** Nuxt.js dev-modules
    */
-  buildModules: ['@nuxt/typescript-build', '@nuxtjs/dotenv', 'nuxt-typed-vuex'],
+  buildModules: ['@nuxt/typescript-build', '@nuxtjs/dotenv', 'nuxt-typed-vuex', '@nuxtjs/composition-api/module'],
   /*
    ** Nuxt.js modules
    */
@@ -92,11 +92,7 @@ export default {
     locales: ['en'],
     defaultLocale: 'en',
     vueI18n: {
-      messages: {
-        en: {
-          ...en,
-        },
-      },
+      en,
     },
   },
   // extend routes

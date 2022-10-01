@@ -1,9 +1,9 @@
 <template>
   <div class="newsletter-subscribe d-flex">
-    <BaseCard class="col-12" gradient="secondary">
+    <BaseCard class="col-12">
       <form id="newsletter-form" @submit.prevent="joinNewsletter">
         <h4 class="mb-3">Join our newsletter</h4>
-        <p>Get news about the latest courses we upload</p>
+        <p>You'll send you updates, special offers and planned changes..</p>
         <div class="row">
           <div class="col-8">
             <BaseInput type="email" placeholder="Enter your email" v-model="email" :required="true" />

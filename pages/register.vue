@@ -22,31 +22,6 @@
         </div>
 
         <form id="register-form" role="form" class="mt-4 px-4" @submit.prevent="submitForm">
-          <!-- username field -->
-          <div class="form-group mb-3">
-            <label for="inputusername">{{ $t('username') }}</label>
-            <input
-              v-model="form.username"
-              name="inputusername"
-              class="form-control"
-              :class="{ 'is-valid': isValidUsername, 'is-invalid': usernameValidationField.$dirty && !isValidUsername }"
-              @input="delayTouch(usernameValidationField)"
-            />
-            <div v-if="usernameValidationField.$invalid" class="error">
-              <span v-if="usernameValidationField.$dirty && !usernameValidationField.required">
-                <BaseFormInputError>{{ $t('messages.please_enter_username') }}</BaseFormInputError>
-              </span>
-              <span v-else-if="usernameValidationField.$dirty && !usernameValidationField.minLength">
-                <BaseFormInputError>{{
-                  $t('messages.username_minlength_error', { minLength: usernameMinLength })
-                }}</BaseFormInputError>
-              </span>
-              <span v-else-if="usernameValidationField.$dirty && !usernameValidationField.valid">
-                <BaseFormInputError>{{ $t('messages.invalid_username') }}</BaseFormInputError>
-              </span>
-            </div>
-          </div>
-
           <!-- email field -->
           <div class="form-group mb-3">
             <label for="inputEmail">{{ $t('email') }}</label>
@@ -54,10 +29,13 @@
               v-model="form.email"
               name="inputEmail"
               class="form-control"
-              :class="{ 'is-valid': isValidEmail, 'is-invalid': emailValidationField.$dirty && !isValidEmail }"
+              :class="{
+                'is-valid': isValidEmail,
+                'is-invalid': emailValidationField?.$dirty && !isValidEmail,
+              }"
               @input="delayTouch(emailValidationField)"
             />
-            <div v-if="emailValidationField.$invalid" class="error">
+            <div v-if="emailValidationField?.$invalid" class="error">
               <span v-if="emailValidationField.$dirty && !emailValidationField.required">
                 <BaseFormInputError>{{ $t('messages.please_enter_email') }}</BaseFormInputError>
               </span>
@@ -75,7 +53,10 @@
               name="inputPassword"
               :type="passwordViewIsToggled ? 'text' : 'password'"
               class="form-control"
-              :class="{ 'is-valid': isValidPassword, 'is-invalid': passwordValidationField.$dirty && !isValidPassword }"
+              :class="{
+                'is-valid': isValidPassword,
+                'is-invalid': passwordValidationField?.$dirty && !isValidPassword,
+              }"
               @input="delayTouch(passwordValidationField)"
             />
             <i
@@ -84,7 +65,7 @@
               v-show="form.password.length > 0"
               @click="togglePassword"
             ></i>
-            <div v-if="passwordValidationField.$invalid" class="error">
+            <div v-if="passwordValidationField?.$invalid" class="error">
               <span v-if="passwordValidationField.$dirty && !passwordValidationField.required">
                 <BaseFormInputError>{{ $t('messages.please_enter_password') }}</BaseFormInputError>
               </span>
@@ -103,10 +84,10 @@
               v-model="form.name"
               name="inputName"
               class="form-control"
-              :class="{ 'is-valid': isValidName, 'is-invalid': nameValidationField.$dirty && !isValidName }"
+              :class="{ 'is-valid': isValidName, 'is-invalid': nameValidationField?.$dirty && !isValidName }"
               @input="delayTouch(nameValidationField)"
             />
-            <div v-if="nameValidationField.$invalid" class="error">
+            <div v-if="nameValidationField?.$invalid" class="error">
               <span v-if="nameValidationField.$dirty && !nameValidationField.required">
                 <BaseFormInputError>{{ $t('messages.please_enter_name') }}</BaseFormInputError>
               </span>
@@ -153,26 +134,22 @@
 import { Vue, Component, Watch } from 'nuxt-property-decorator';
 import { IValidator } from 'vuelidate';
 import { required, email, minLength } from 'vuelidate/lib/validators';
+import { ApiError } from '@supabase/supabase-js';
 
-import { RegisterInfo } from '~/interfaces/RegisterInfo';
-import { delayTouch, getBrowserAgent } from '~/utils/helpers';
-import { Validations } from '~/utils/validations';
-import { usernameValidator } from '~/utils/validators';
-import { AuthService } from '~/services/AuthService';
+import { RegisterInfo } from '@/store/auth/interfaces/RegisterInfo';
+import { delayTouch } from '@/utils/helpers';
+import { Validations } from '@/utils/validations';
+import { PASSWORD_VISIBLE_TIMEOUT } from '@/const/const';
+import { LayoutType } from '@/enums/LayoutType';
+import { ErrorReasons } from '@/enums/ErrorReasons';
 
-import AuthForm from '~/components/AuthForm.vue';
-import SocialAuth from '~/components/SocialAuth.vue';
-import { PASSWORD_VISIBLE_TIMEOUT } from '~/const/const';
-import { ApiError } from '~/utils/apiError';
-import { LayoutType } from '~/enums/LayoutType';
-import { ErrorReasons } from '~/enums/ErrorReasons';
+import AuthForm from '@/components/auth/AuthForm.vue';
+import SocialAuth from '@/components/auth/SocialAuth.vue';
 
-const usernameMinLength = 5,
-  passwordMinLength = 8,
+const passwordMinLength = 8,
   nameMinLength = 5;
 
 const formData: RegisterInfo = {
-  username: '',
   email: '',
   password: '',
   name: '',
@@ -198,7 +175,6 @@ export default class Register extends Vue {
 
   isBusy = false;
   passwordViewIsToggled = false;
-  usernameMinLength = usernameMinLength;
   passwordMinLength = passwordMinLength;
   nameMinLength = nameMinLength;
   errors: string[] = [];
@@ -206,11 +182,6 @@ export default class Register extends Vue {
   // validations
   @Validations({
     form: {
-      username: {
-        required,
-        minLength: minLength(usernameMinLength),
-        valid: usernameValidator,
-      },
       email: {
         required,
         valid: email,
@@ -238,51 +209,36 @@ export default class Register extends Vue {
       },
     },
   })
-
-  // computed props
-  get usernameValidationField() {
-    return this.$v.form.username;
-  }
-
   get emailValidationField() {
-    return this.$v.form.email;
+    return this.$v.form?.email;
   }
 
   get passwordValidationField() {
-    return this.$v.form.password;
+    return this.$v.form?.password;
   }
 
   get nameValidationField() {
-    return this.$v.form.name;
-  }
-
-  get isValidUsername() {
-    return this.$v.form.username.$dirty && !this.$v.form.username.$invalid;
+    return this.$v.form?.name;
   }
 
   get isValidEmail() {
-    return this.$v.form.email.$dirty && !this.$v.form.email.$invalid;
+    return this.$v.form?.email?.$dirty && !this.$v.form.email.$invalid;
   }
 
   get isValidPassword() {
-    return this.$v.form.password.$dirty && !this.$v.form.password.$invalid;
+    return this.$v.form?.password?.$dirty && !this.$v.form.password.$invalid;
   }
 
   get isValidName() {
-    return this.$v.form.name.$dirty && !this.$v.form.name.$invalid;
+    return this.$v.form?.name?.$dirty && !this.$v.form.name.$invalid;
   }
 
   get sloganMessage(): string {
     return this.$t('register_slogan') as string;
   }
 
-  get isIeOrEdge() {
-    const agent = getBrowserAgent();
-    return agent === 'edge' || agent === 'chromium based edge (dev or canary)' || agent === 'ie';
-  }
-
   // methods
-  delayTouch($v: IValidator): void {
+  delayTouch($v: IValidator | undefined): void {
     return delayTouch($v);
   }
 
@@ -290,20 +246,19 @@ export default class Register extends Vue {
     this.errors = [];
     this.isBusy = true;
     this.$v.$touch();
+
     if (!this.$v.$invalid) {
-      AuthService.register(this.form)
+      this.$auth
+        .signUp(this.form)
         .then(() => {
           this.$router.push('/login');
           this.isBusy = false;
         })
         .catch((err: ApiError) => {
-          if (err.errorCode === 400) {
-            switch (err.details.reason) {
-              case ErrorReasons.USER_ALREADY_EXISTS:
-                this.errors.push(this.$t('messages.username_already_exists').toString());
-                break;
-              case ErrorReasons.EMAIL_ALREADY_EXISTS:
-                this.errors.push(this.$t('messages.email_already_exists').toString());
+          if (err.status === 400) {
+            switch (err.message) {
+              case "User already registered":
+                this.errors.push(this.$t('user_already_registered').toString());
                 break;
             }
           }

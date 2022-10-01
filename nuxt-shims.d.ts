@@ -3,14 +3,10 @@ import 'vue';
 import 'nuxt-i18n';
 import 'vuelidate';
 import '@nuxt/types';
-import '@types/facebook-js-sdk';
-
-import firebase from 'firebase/app';
 
 import { GlobalMixin } from './mixins/global';
 import { UtilsMixin } from './mixins/utils';
 import { accessorType } from './store';
-import { GAuth } from './utils/googleOAuth';
 
 declare module '*.vue' {
   import Vue from 'vue';
@@ -29,11 +25,9 @@ declare module 'vue/types/vue' {
      * Check if an object is empty
      */
     isEmpty(obj: object): boolean;
-    $db: typeof firebase['database'];
     $persistance: string;
     // the store helper
     $accessor: typeof accessorType;
-    $gAuth: GAuth;
     popupItem: Element | undefined;
   }
 }

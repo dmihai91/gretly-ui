@@ -42,7 +42,7 @@ import Vue, { CreateElement } from 'vue';
 import PillsLayout from './PillsLayout.vue';
 import TabsLayout from './TabsLayout.vue';
 
-import { Tab } from '~/interfaces/Tab';
+import { Tab } from '@/interfaces/Tab';
 
 interface SlotData {
   activeTabIndex: number;

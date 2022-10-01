@@ -1,0 +1,17 @@
+{
+    "login_form": {
+        "forgot_password": "Forgot password",
+        "join_us": "Join us",
+        "not_registered_yet": "Not registered yet",
+        "sign_in_label": "Sign in label",
+        "sign_in_with": "Sign in with",
+        "sign_in": "Sign in",
+        "remember_me": "Remember me"
+    },
+    "email": "Email",
+    "please_enter_email": "Please enter your email",
+    "invalid_email": "Invalid email format",
+    "password": "Password",
+    "please_enter_password": "Please enter your password",
+    "or": "Or",
+}
