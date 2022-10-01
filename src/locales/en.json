@@ -1,0 +1,32 @@
+{
+    "login_form": {
+        "forgot_password": "Forgot password",
+        "join_us": "Join us",
+        "not_registered_yet": "Not registered yet",
+        "sign_in_label": "Sign in to {appName}",
+        "sign_in_with": "Sign in with",
+        "sign_in": "Sign in",
+        "remember_me": "Remember me"
+    },
+    "register_form": {
+        "register_label": "Register to {appName}",
+        "register_with": "Register with {appName}",
+        "register": "Register"
+    },
+    "messages": {
+        "please_enter_email": "Please enter your email",
+        "invalid_email": "Invalid email format",
+        "please_enter_password": "Please enter your password",
+        "not_good_password": "The password should contains at least {minLength} alphanumeric + special characters",
+        "please_enter_name": "Please enter your name",
+        "invalid_name": "Invalid name",
+        "invalid_credentials": "Invalid credentials"
+    },
+    "app_name": "Gretly",
+    "email": "Email",
+    "password": "Password",
+    "auth_slogan": "Auth slogan",
+    "or": "Or",
+    "back": "Back",
+    "terms_and_condition": "Terms and conditions"
+}

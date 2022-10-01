@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "target": "ES2018",
+    "target": "ESNext",
     "module": "ESNext",
-    "moduleResolution": "Node",
+    "moduleResolution": "node",
     "lib": ["ESNext", "ESNext.AsyncIterable", "DOM"],
     "esModuleInterop": true,
     "allowJs": true,
@@ -16,10 +16,10 @@
     "noImplicitThis": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["src/*"]
     },
-    "types": ["@types/node", "@nuxt/types", "nuxt-i18n", "@nuxtjs/axios"]
+    "types": ["@types/node", "@types/jest", "@types/webpack", "@nuxt/types", "@nuxtjs/axios", "vue-i18n"]
   },
-  "files": ["nuxt-shims.d.ts", "types/vuelidate.d.ts"],
+  "include": ["src/nuxt-shims.d.ts", "src/**/*.ts", "src/**/*.vue"],
   "exclude": ["node_modules", ".nuxt", "dist"]
 }

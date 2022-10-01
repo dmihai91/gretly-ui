@@ -1,5 +1,5 @@
 import fs from 'fs';
-import en from './locales/en.json';
+import en from './src/locales/en.json';
 
 export default {
   target: 'static',
@@ -11,11 +11,6 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      {
-        hid: 'description',
-        name: 'description',
-        content: process.env.npm_package_description || '',
-      },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -37,19 +32,13 @@ export default {
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: [
-    {
-      src: '~/plugins/global.ts',
-      ssr: false,
-    },
-    '~/plugins/lastRouterPath',
-    '~/plugins/initApiService',
-  ],
+  plugins: ['~/plugins/global.ts', '~/plugins/lastRouterPath'],
   /*
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components
    */
   components: true,
+  srcDir: 'src/',
   /*
    ** Nuxt.js dev-modules
    */
@@ -84,15 +73,14 @@ export default {
   },
   env: {
     baseUrl: process.env.BASE_URL || 'http://localhost:3000',
-    apiUrl: process.env.API_URL || 'http://localhost:5000',
-    fbClientId: process.env.FB_CLIENT_ID,
-    googleClientId: process.env.GOOGLE_CLIENT_ID,
   },
   i18n: {
     locales: ['en'],
     defaultLocale: 'en',
     vueI18n: {
-      en,
+      messages: {
+        en,
+      },
     },
   },
   // extend routes
@@ -115,19 +103,6 @@ export default {
       cert: fs.readFileSync('cert/server.crt'),
     },
   },
-  axios: {
-    proxy: true,
-  },
-  proxy: {
-    // Simple proxy
-    '/api/': {
-      target: process.env.API_URL,
-      pathRewrite: {
-        '^/api': '/',
-      },
-      secure: false,
-    },
-  },
   pwa: {
     icon: true,
   },
@@ -143,5 +118,5 @@ export default {
     iconPack: 'fontawesome',
     position: 'bottom-left',
   },
-  watch: ['~/lang'],
+  watch: ['~/locales'],
 };

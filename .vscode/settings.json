@@ -1,25 +1,11 @@
 {
   "editor.formatOnSave": true,
+  "vetur.validation.template": false,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
-  "eslint.probe": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "html",
-    "vue",
-    "markdown",
-    "react"
-  ],
-  "eslint.quiet": true,
-  "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "js/ts.implicitProjectConfig.experimentalDecorators": true,
-  "typescript.preferences.importModuleSpecifier": "relative",
-  "cSpell.words": ["supabase"],
-  "[typescript]": {
-    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
-  }
+  "cSpell.words": ["fontawesome", "Gretly", "nuxt", "supabase", "vuelidate", "vuex"],
+  "typescript.tsserver.enableTracing": true,
+  "vetur.validation.templateProps": true,
+  "vetur.experimental.templateInterpolationService": true
 }
