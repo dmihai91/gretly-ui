@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Landing v-show="!$auth.loggedIn" />
+    <Landing v-show="!$auth?.loggedIn" />
   </div>
 </template>
 

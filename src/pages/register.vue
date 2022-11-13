@@ -79,7 +79,7 @@
 
           <!-- full name field -->
           <div class="form-group mb-3">
-            <label for="inputName">{{ $t('full_name') }}</label>
+            <label for="inputName">{{ $t('register_form.full_name') }}</label>
             <input
               v-model="form.name"
               name="inputName"
@@ -101,7 +101,8 @@
               </span>
             </div>
             <p class="py-3 font-weight-normal" style="font-size: 0.93rem">
-              {{ $t('agree_to') }} <NuxtLink to="/terms-and-conditions">{{ $t('terms_and_conditions') }}</NuxtLink>
+              {{ $t('register_form.agree_to') }}
+              <NuxtLink to="/terms-and-conditions">{{ $t('terms_and_conditions') }}</NuxtLink>
             </p>
           </div>
 
@@ -120,8 +121,8 @@
           <hr class="mt-6" />
           <div class="flex justify-center pt-0">
             <span>
-              {{ $t('already_registered') }}
-              <a class="link" @click="showLogin">{{ $t('login_form.sign_in') }}</a>
+              {{ $t('register_form.already_registered') }}
+              <a class="link" @click="showLogin">{{ $t('sign_in') }}</a>
             </span>
           </div>
         </form>
@@ -162,7 +163,7 @@ const formData: RegisterInfo = {
   layout: LayoutType.SIMPLE,
   head() {
     return {
-      titleTemplate: `${this.$t('app_name')} - ${this.$t('register')}`,
+      titleTemplate: `${this.$t('app_name')} - ${this.$t('register_form.register')}`,
     };
   },
 })
@@ -233,7 +234,7 @@ export default class Register extends Vue {
   }
 
   get sloganMessage(): string {
-    return this.$t('register_slogan') as string;
+    return this.$t('register_form.slogan') as string;
   }
 
   // methods
@@ -262,6 +263,7 @@ export default class Register extends Vue {
             }
           }
           this.isBusy = false;
+          console.error(err);
         });
     } else {
       this.isBusy = false;

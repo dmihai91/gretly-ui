@@ -2,7 +2,7 @@ declare module 'vuelidate' {
   import _Vue from 'vue';
 
   /**
-   * @module augmentation to ComponentOptions defined by Vue
+   * @module augmentation to ComponentOptions defined by Vuejs
    */
   module 'vue/types/options' {
     interface ComponentOptions<V extends _Vue> {

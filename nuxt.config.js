@@ -8,10 +8,7 @@ export default {
    */
   head: {
     title: 'Gretly',
-    meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-    ],
+    meta: [{ charset: 'utf-8' }, { name: 'viewport', content: 'width=device-width, initial-scale=1' }],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
@@ -32,7 +29,16 @@ export default {
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: ['~/plugins/global.ts', '~/plugins/lastRouterPath'],
+  plugins: [
+    {
+      src: '~/plugins/global.ts',
+      ssr: false,
+    },
+    {
+      src: '~/plugins/lastRouterPath',
+      ssr: false,
+    },
+  ],
   /*
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components
@@ -42,35 +48,29 @@ export default {
   /*
    ** Nuxt.js dev-modules
    */
-  buildModules: ['@nuxt/typescript-build', '@nuxtjs/dotenv', 'nuxt-typed-vuex', '@nuxtjs/composition-api/module'],
+  buildModules: [
+    '@nuxt/typescript-build',
+    ['@nuxtjs/dotenv', { path: './' }],
+    'nuxt-typed-vuex',
+    '@nuxtjs/composition-api/module',
+  ],
+  build: {
+    loaders: {
+      scss: {
+        sassOptions: {
+          quietDeps: true,
+        },
+      },
+    },
+  },
   /*
    ** Nuxt.js modules
    */
-  modules: [
-    // Doc: https://bootstrap-vue.js.org
-    'bootstrap-vue/nuxt',
-    '@nuxtjs/pwa',
-    '@nuxtjs/axios',
-    '@nuxtjs/style-resources',
-    'nuxt-i18n',
-    '@nuxtjs/proxy',
-    '@nuxtjs/toast',
-  ],
+  modules: ['@nuxtjs/pwa', '@nuxtjs/axios', 'nuxt-i18n', '@nuxtjs/proxy', '@nuxtjs/toast', '@nuxtjs/style-resources'],
   /*
    ** Build configuration
    ** See https://nuxtjs.org/api/configuration-build/
    */
-  build: {
-    extend(config, { isClient }) {
-      if (isClient) {
-        config.optimization.splitChunks.maxSize = 499712; // 488 Kb
-        config.optimization.runtimeChunk = 'single';
-      }
-    },
-    babel: {
-      compact: true,
-    },
-  },
   env: {
     baseUrl: process.env.BASE_URL || 'http://localhost:3000',
   },
@@ -88,14 +88,11 @@ export default {
     extendRoutes(routes, resolve) {
       routes.push({
         path: '*',
-        component: resolve(__dirname, '~/pages/not-found.vue'),
+        component: resolve(__dirname, '@/pages/not-found.vue'),
       });
     },
 
     prefetchLinks: true,
-  },
-  styleResources: {
-    scss: ['~/assets/scss/style.scss'],
   },
   server: {
     https: {
@@ -118,5 +115,8 @@ export default {
     iconPack: 'fontawesome',
     position: 'bottom-left',
   },
-  watch: ['~/locales'],
+  watch: ['@/locales'],
+  styleResources: {
+    scss: ['@/assets/scss/*.scss'],
+  },
 };

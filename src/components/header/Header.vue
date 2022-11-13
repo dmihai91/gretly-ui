@@ -63,7 +63,7 @@
           <NuxtLink to="/about" class="nav-link">{{ $t('about_us') }}</NuxtLink>
         </li>
       </ul>
-      <ul class="navbar-nav align-items-lg-center ml-lg-auto" v-if="!$auth.loggedIn">
+      <ul class="navbar-nav align-items-lg-center ml-lg-auto" v-if="!$auth?.loggedIn">
         <li class="nav-item mb-3 mb-md-0">
           <NuxtLink
             :to="`/login?redirectPath=${redirectPath}`"

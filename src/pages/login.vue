@@ -3,7 +3,7 @@
   <AuthForm :slogan="sloganMessage">
     <div class="text-center mb-3">
       <Title heading="h2">
-        {{ $t('login_form.sign_in_label', { appName: $t('app_name') }) }}
+        {{ $t('sign_in_label', { appName: $t('app_name') }) }}
       </Title>
     </div>
     <div class="card bg-secondary shadow border-0">
@@ -11,7 +11,7 @@
         <div class="text-muted text-center mb-3">
           <h6>{{ $t('login_form.sign_in_with') }}</h6>
         </div>
-        <SocialAuth :action="'sign_up'" @auth:action="resetForm" />
+        <SocialAuth />
       </div>
 
       <div class="card-body px-lg-5 py-lg-4">
@@ -65,7 +65,7 @@
               :class="!passwordViewIsToggled ? 'fa-eye' : 'fa-eye-slash'"
               v-show="form.password.length > 0 && !isIeOrEdge"
               @click="togglePassword"
-            ></i>
+            ></i>=
             <div v-if="passwordValidationField?.$invalid" class="error">
               <span v-if="passwordValidationField.$dirty && !passwordValidationField.required">
                 <BaseFormInputError>{{ $t('messages.please_enter_password') }}</BaseFormInputError>
@@ -84,14 +84,14 @@
               </label>
             </div>
             <div class="forgot-password">
-              <BaseButton tag="a" type="link" class="font-bold text-sm align-right" href="/reset-password">{{
-                $t('login_form.forgot_password')
-              }}</BaseButton>
+              <NuxtLink to="/reset-password" class="font-bold text-sm align-right"
+                >{{ $t('login_form.forgot_password') }}
+              </NuxtLink>
             </div>
           </div>
           <div class="text-center">
             <button type="submit" class="btn btn-primary px-5 mt-3" :disabled="isBusy">
-              {{ $t('login_form.sign_in') }}
+              {{ $t('sign_in') }}
             </button>
           </div>
           <hr class="mt-6" />
@@ -112,7 +112,6 @@ import { Vue, Component, Watch } from 'nuxt-property-decorator';
 import { IValidator } from 'vuelidate';
 import { required, email } from 'vuelidate/lib/validators';
 import { ApiError } from '@supabase/supabase-js';
-
 import { LoginInfo } from '@/store/auth/interfaces/LoginInfo';
 import { delayTouch, getBrowserAgent } from '@/utils/helpers';
 import { Validations } from '@/utils/validations';
@@ -121,7 +120,6 @@ import { LayoutType } from '@/enums/LayoutType';
 import { eventBus } from '@/utils/eventBus';
 import { Events } from '@/const/events';
 import { loginRedirect } from '@/utils/loginRedirect';
-
 import AuthForm from '@/components/auth/AuthForm.vue';
 import SocialAuth from '@/components/auth/SocialAuth.vue';
 
@@ -150,7 +148,7 @@ export default class Login extends Vue {
 
   isBusy = false;
   passwordViewIsToggled = false;
-  error: string | null | undefined;
+  error = '';
 
   @Validations({
     form: {
@@ -180,7 +178,7 @@ export default class Login extends Vue {
   }
 
   get sloganMessage() {
-    return this.$t('auth_slogan') as string;
+    return this.$t('login_form.slogan') as string;
   }
 
   get isIeOrEdge() {

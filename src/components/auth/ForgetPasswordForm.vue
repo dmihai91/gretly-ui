@@ -1,8 +1,10 @@
 <template>
   <AuthForm :slogan="sloganMessage">
-    <a class="btn btn-link mb-3" @click="$router.go(-1)"><i class="fa fa-arrow-left mr-2"></i>{{ $t('back') }}</a>
-    <div class="text-center mb-4">
-      <BaseTitle heading="h2">{{ $t('reset_password_forgot_password') }}</BaseTitle>
+    <div class="d-flex">
+      <a class="btn btn-link" @click="$router.go(-1)"><i class="fa fa-arrow-left mr-2"></i>{{ $t('back') }}</a>
+      <div class="text-center mb-4">
+        <BaseTitle heading="h2">{{ $t('forget_password_form.reset_password') }}</BaseTitle>
+      </div>
     </div>
     <div class="card bg-secondary shadow border-0">
       <div class="card-body px-lg-5 py-lg-4">
@@ -10,9 +12,9 @@
           <div class="mw-100 d-flex justify-content-center mb-2">
             <img src="/img/forgot-password-illu.svg" class="mw-100" />
           </div>
-          <h6 class="my-4 lh-2">{{ $t('enter_your_email_address') }}</h6>
+          <h6 class="my-4 lh-2">{{ $t('forget_password_form.your_email_address') }}</h6>
           <div class="form-group mb-3">
-            <label for="inputEmail">{{ $t('email_address') }}</label>
+            <label for="inputEmail">{{ $t('email') }}</label>
             <input
               v-model="email"
               name="inputEmail"
@@ -63,6 +65,11 @@ export default Vue.extend({
       isBusy: false,
     };
   },
+  head() {
+    return {
+      titleTemplate: `${this.$t('app_name')} - ${this.$t('forget_password_form.forget_password')}`,
+    };
+  },
   validations: {
     email: {
       required,
@@ -71,7 +78,7 @@ export default Vue.extend({
   },
   computed: {
     sloganMessage() {
-      return this.$t('auth_slogan') as string;
+      return this.$t('forget_password_form.slogan') as string;
     },
     emailValidationField() {
       return this.$v ? this.$v.email : null;
@@ -86,6 +93,8 @@ export default Vue.extend({
     },
     submitForm() {
       this.$v.$touch();
+
+      if (this.$v.$invalid) return;
 
       this.$auth.sendResetPasswordEmail({ email }).catch((err: ApiError) => {
         eventBus.$emit(Events.GLOBAL_SHOW_ERROR, err.message);

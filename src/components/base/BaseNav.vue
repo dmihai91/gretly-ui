@@ -19,7 +19,12 @@
 
       <slot name="container-after"></slot>
 
-      <div class="collapse navbar-collapse" :class="{ show: toggled }" :id="contentId" v-click-outside="closeMenu">
+      <div
+        class="collapse navbar-collapse"
+        :class="{ show: toggled }"
+        :id="contentId.toString()"
+        v-click-outside="closeMenu"
+      >
         <div class="navbar-collapse-header">
           <slot name="content-header" :close-menu="closeMenu"></slot>
         </div>

@@ -12,6 +12,201 @@ export interface paths {
       };
     };
   };
+  "/videos": {
+    get: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.videos.id"];
+          created_at?: parameters["rowFilter.videos.created_at"];
+          categ_id?: parameters["rowFilter.videos.categ_id"];
+          video_url?: parameters["rowFilter.videos.video_url"];
+          name?: parameters["rowFilter.videos.name"];
+          description?: parameters["rowFilter.videos.description"];
+          user_id?: parameters["rowFilter.videos.user_id"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["videos"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** videos */
+          videos?: definitions["videos"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.videos.id"];
+          created_at?: parameters["rowFilter.videos.created_at"];
+          categ_id?: parameters["rowFilter.videos.categ_id"];
+          video_url?: parameters["rowFilter.videos.video_url"];
+          name?: parameters["rowFilter.videos.name"];
+          description?: parameters["rowFilter.videos.description"];
+          user_id?: parameters["rowFilter.videos.user_id"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.videos.id"];
+          created_at?: parameters["rowFilter.videos.created_at"];
+          categ_id?: parameters["rowFilter.videos.categ_id"];
+          video_url?: parameters["rowFilter.videos.video_url"];
+          name?: parameters["rowFilter.videos.name"];
+          description?: parameters["rowFilter.videos.description"];
+          user_id?: parameters["rowFilter.videos.user_id"];
+        };
+        body: {
+          /** videos */
+          videos?: definitions["videos"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
+  "/videos_categories": {
+    get: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.videos_categories.id"];
+          name?: parameters["rowFilter.videos_categories.name"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["videos_categories"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** videos_categories */
+          videos_categories?: definitions["videos_categories"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.videos_categories.id"];
+          name?: parameters["rowFilter.videos_categories.name"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.videos_categories.id"];
+          name?: parameters["rowFilter.videos_categories.name"];
+        };
+        body: {
+          /** videos_categories */
+          videos_categories?: definitions["videos_categories"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
   "/user_profiles": {
     get: {
       parameters: {
@@ -21,6 +216,8 @@ export interface paths {
           avatar_url?: parameters["rowFilter.user_profiles.avatar_url"];
           name?: parameters["rowFilter.user_profiles.name"];
           user_id?: parameters["rowFilter.user_profiles.user_id"];
+          prefered_categories?: parameters["rowFilter.user_profiles.prefered_categories"];
+          settings?: parameters["rowFilter.user_profiles.settings"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -76,6 +273,8 @@ export interface paths {
           avatar_url?: parameters["rowFilter.user_profiles.avatar_url"];
           name?: parameters["rowFilter.user_profiles.name"];
           user_id?: parameters["rowFilter.user_profiles.user_id"];
+          prefered_categories?: parameters["rowFilter.user_profiles.prefered_categories"];
+          settings?: parameters["rowFilter.user_profiles.settings"];
         };
         header: {
           /** Preference */
@@ -95,6 +294,8 @@ export interface paths {
           avatar_url?: parameters["rowFilter.user_profiles.avatar_url"];
           name?: parameters["rowFilter.user_profiles.name"];
           user_id?: parameters["rowFilter.user_profiles.user_id"];
+          prefered_categories?: parameters["rowFilter.user_profiles.prefered_categories"];
+          settings?: parameters["rowFilter.user_profiles.settings"];
         };
         body: {
           /** user_profiles */
@@ -114,6 +315,43 @@ export interface paths {
 }
 
 export interface definitions {
+  videos: {
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: number;
+    /**
+     * Format: timestamp with time zone
+     * @default now()
+     */
+    created_at?: string;
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Foreign Key to `videos_categories.id`.<fk table='videos_categories' column='id'/>
+     */
+    categ_id?: number;
+    /** Format: character varying */
+    video_url?: string;
+    /** Format: character varying */
+    name?: string;
+    /** Format: character varying */
+    description?: string;
+    /** Format: uuid */
+    user_id?: string;
+  };
+  videos_categories: {
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: number;
+    /** Format: character varying */
+    name?: string;
+  };
   user_profiles: {
     /**
      * Format: uuid
@@ -127,8 +365,12 @@ export interface definitions {
     avatar_url?: string;
     /** Format: character varying */
     name?: string;
-    /** Format: character varying */
+    /** Format: uuid */
     user_id?: string;
+    /** Format: json */
+    prefered_categories?: unknown;
+    /** Format: json */
+    settings?: unknown;
   };
 }
 
@@ -165,6 +407,28 @@ export interface parameters {
   offset: string;
   /** @description Limiting and Pagination */
   limit: string;
+  /** @description videos */
+  "body.videos": definitions["videos"];
+  /** Format: bigint */
+  "rowFilter.videos.id": string;
+  /** Format: timestamp with time zone */
+  "rowFilter.videos.created_at": string;
+  /** Format: bigint */
+  "rowFilter.videos.categ_id": string;
+  /** Format: character varying */
+  "rowFilter.videos.video_url": string;
+  /** Format: character varying */
+  "rowFilter.videos.name": string;
+  /** Format: character varying */
+  "rowFilter.videos.description": string;
+  /** Format: uuid */
+  "rowFilter.videos.user_id": string;
+  /** @description videos_categories */
+  "body.videos_categories": definitions["videos_categories"];
+  /** Format: bigint */
+  "rowFilter.videos_categories.id": string;
+  /** Format: character varying */
+  "rowFilter.videos_categories.name": string;
   /** @description user_profiles */
   "body.user_profiles": definitions["user_profiles"];
   /** Format: uuid */
@@ -175,8 +439,12 @@ export interface parameters {
   "rowFilter.user_profiles.avatar_url": string;
   /** Format: character varying */
   "rowFilter.user_profiles.name": string;
-  /** Format: character varying */
+  /** Format: uuid */
   "rowFilter.user_profiles.user_id": string;
+  /** Format: json */
+  "rowFilter.user_profiles.prefered_categories": string;
+  /** Format: json */
+  "rowFilter.user_profiles.settings": string;
 }
 
 export interface operations {}

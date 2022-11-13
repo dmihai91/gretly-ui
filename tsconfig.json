@@ -11,6 +11,7 @@
     "strictNullChecks": false,
     "noEmit": true,
     "experimentalDecorators": true,
+    "jsx": "preserve",
     "emitDecoratorMetadata": true,
     "resolveJsonModule": true,
     "noImplicitThis": true,
@@ -18,6 +19,7 @@
     "paths": {
       "@/*": ["src/*"]
     },
+    "skipLibCheck": true,
     "types": ["@types/node", "@types/jest", "@types/webpack", "@nuxt/types", "@nuxtjs/axios", "vue-i18n"]
   },
   "include": ["src/nuxt-shims.d.ts", "src/**/*.ts", "src/**/*.vue"],

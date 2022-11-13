@@ -10,7 +10,7 @@ import { RegisterInfo } from '@/store/auth/interfaces/RegisterInfo';
 type GretlyUser = User & {
   name?: string;
   profileImage?: string;
-}
+};
 
 export interface AuthState {
   user: GretlyUser;
@@ -19,7 +19,7 @@ export interface AuthState {
 
 export const state = (): AuthState => ({
   user: null,
-  session: null,
+  session: null
 });
 
 export const getters = getterTree(state, {
@@ -38,7 +38,7 @@ export const mutations = mutationTree(state, {
   [MutationsTypes.RESET_STATE](state) {
     state.user = null;
     state.session = null;
-  }
+  },
 });
 
 export const actions = actionTree(
@@ -51,10 +51,11 @@ export const actions = actionTree(
       if (error) throw error;
 
       const { data } = await supabase
-        .from<definitions['user_profiles']>('user_profiles').select('name, avatar_url')
-        .eq("user_id", user.id)
+        .from<definitions['user_profiles']>('user_profiles')
+        .select('name, avatar_url')
+        .eq('user_id', user.id)
         .single();
-        
+
       commit(MutationsTypes.SET_USER, { ...user, name: data.name, profileImage: data.avatar_url });
       commit(MutationsTypes.SET_SESSION, session);
 
@@ -64,7 +65,7 @@ export const actions = actionTree(
     async [ActionsTypes.SIGN_IN]({ dispatch }, { email, password }: LoginInfo): Promise<Session> {
       const { user, session, error } = await supabase.auth.signIn({ email, password }, { redirectTo: BASE_URL });
 
-      return dispatch(ActionsTypes.SET_SESSION, { user, session, error })
+      return dispatch(ActionsTypes.SET_SESSION, { user, session, error });
     },
 
     async [ActionsTypes.SIGN_IN_WITH_GOOGLE]({ dispatch }) {
@@ -98,15 +99,16 @@ export const actions = actionTree(
 
     async [ActionsTypes.SIGN_OUT]({ commit }): Promise<void> {
       const { error } = await supabase.auth.signOut();
+
       if (error) throw error;
 
       commit(MutationsTypes.RESET_STATE);
     },
-  
-    async [ActionsTypes.SEND_RESET_PASSWORD_EMAIL](_, { email } : { email: string }): Promise<void> {
+
+    async [ActionsTypes.SEND_RESET_PASSWORD_EMAIL](_, { email }: { email: string }): Promise<void> {
       const { error } = await supabase.auth.api.resetPasswordForEmail(email, { redirectTo: BASE_URL });
 
       if (error) throw error;
-    }
+    },
   }
 );

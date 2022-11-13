@@ -4,7 +4,7 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
-  "cSpell.words": ["fontawesome", "Gretly", "nuxt", "supabase", "vuelidate", "vuex"],
+  "cSpell.words": ["fontawesome", "Gretly", "nuxt", "nuxtjs", "Ruleset", "supabase", "vuelidate", "vuex"],
   "typescript.tsserver.enableTracing": true,
   "vetur.validation.templateProps": true,
   "vetur.experimental.templateInterpolationService": true
