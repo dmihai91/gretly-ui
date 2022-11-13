@@ -34,9 +34,10 @@ export default Vue.extend({
     signInWithGoogle() {
       this.$auth
         .signInWithGoogle()
-        .then(() => this.showWelcomeMessage())
+        // .then(() => this.showWelcomeMessage())
         .catch((err: ApiError) => {
-          eventBus.$emit(Events.GLOBAL_SHOW_ERROR, err.message);
+          console.error(err);
+          // eventBus.$emit(Events.GLOBAL_SHOW_ERROR, err.message);
         });
     },
   },

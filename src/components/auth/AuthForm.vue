@@ -9,15 +9,7 @@
           <p class="slogan text-primary lead font-weight-normal" v-html="slogan"></p>
         </div>
       </div>
-      <div
-        class="illustration"
-        :style="{
-          backgroundImage: `url(${ilustrationPath})`,
-          backgroundPosition: 'center center',
-          backgroundSize: 'cover',
-        }"
-        aria-label="auth-form-illustration"
-      ></div>
+      <div class="illustration" :style="illustrationStyle" aria-label="auth-form-illustration"></div>
     </div>
 
     <div class="form-content">
@@ -36,11 +28,20 @@ export default Vue.extend({
   name: 'AuthForm',
   props: {
     slogan: String,
-    ilustrationPath: {
+    illustrationPath: {
       type: String,
       default: '/img/signin-illu.svg',
     },
   },
+  data() {
+    return {
+      illustrationStyle: {
+        backgroundImage: `url(${this.illustrationPath})`,
+        backgroundPosition: 'center center',
+        backgroundSize: 'cover',
+      }
+    }
+  }
 });
 </script>
 
@@ -73,12 +74,10 @@ export default Vue.extend({
     max-width: 350px;
     box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
     background: rgb(242, 219, 255);
-    background: linear-gradient(
-      153deg,
-      rgba(242, 219, 255, 1) 0%,
-      rgba(239, 208, 255, 1) 55%,
-      rgba(187, 138, 255, 1) 100%
-    );
+    background: linear-gradient(153deg,
+        rgba(242, 219, 255, 1) 0%,
+        rgba(239, 208, 255, 1) 55%,
+        rgb(158, 93, 248) 100%);
     padding: 2.5rem;
 
     @include media-breakpoint-up(xl) {

@@ -19,7 +19,7 @@ export interface AuthState {
 
 export const state = (): AuthState => ({
   user: null,
-  session: null
+  session: null,
 });
 
 export const getters = getterTree(state, {
@@ -69,10 +69,7 @@ export const actions = actionTree(
     },
 
     async [ActionsTypes.SIGN_IN_WITH_GOOGLE]({ dispatch }) {
-      const { user, session, error } = await supabase.auth.signIn(
-        { provider: SignInProviders.GOOGLE },
-        { redirectTo: BASE_URL }
-      );
+      const { user, session, error } = await supabase.auth.signIn({ provider: SignInProviders.GOOGLE });
 
       return dispatch(ActionsTypes.SET_SESSION, { user, session, error });
     },

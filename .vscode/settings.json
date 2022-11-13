@@ -7,5 +7,7 @@
   "cSpell.words": ["fontawesome", "Gretly", "nuxt", "nuxtjs", "Ruleset", "supabase", "vuelidate", "vuex"],
   "typescript.tsserver.enableTracing": true,
   "vetur.validation.templateProps": true,
-  "vetur.experimental.templateInterpolationService": true
+  "vetur.experimental.templateInterpolationService": true,
+  "prettier.trailingComma": "es5",
+  "scssFormatter.trailingComma": "es5"
 }

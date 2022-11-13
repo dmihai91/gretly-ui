@@ -2,30 +2,22 @@
   <AuthForm :slogan="sloganMessage">
     <div class="d-flex">
       <a class="btn btn-link" @click="$router.go(-1)"><i class="fa fa-arrow-left mr-2"></i>{{ $t('back') }}</a>
-      <div class="text-center mb-4">
-        <BaseTitle heading="h2">{{ $t('forget_password_form.reset_password') }}</BaseTitle>
-      </div>
     </div>
     <div class="card bg-secondary shadow border-0">
       <div class="card-body px-lg-5 py-lg-4">
+        <div class="text-center mb-4">
+          <BaseTitle heading="h4">{{ $t('forget_password_form.reset_password') }}</BaseTitle>
+        </div>
         <form id="reset-password-form" role="form" class="mt-2 px-4" @submit.prevent="submitForm">
           <div class="mw-100 d-flex justify-content-center mb-2">
             <img src="/img/forgot-password-illu.svg" class="mw-100" />
           </div>
-          <h6 class="my-4 lh-2">{{ $t('forget_password_form.your_email_address') }}</h6>
           <div class="form-group mb-3">
             <label for="inputEmail">{{ $t('email') }}</label>
-            <input
-              v-model="email"
-              name="inputEmail"
-              type="text"
-              class="form-control"
-              :class="{
-                'is-valid': isValidEmail,
-                'is-invalid': emailValidationField && emailValidationField.$dirty && !isValidEmail,
-              }"
-              @input="delayTouch(emailValidationField)"
-            />
+            <input v-model="email" name="inputEmail" type="text" class="form-control" :class="{
+              'is-valid': isValidEmail,
+              'is-invalid': emailValidationField && emailValidationField.$dirty && !isValidEmail,
+            }" @input="delayTouch(emailValidationField)" />
             <div v-if="emailValidationField && emailValidationField.$invalid" class="error">
               <span v-if="emailValidationField && emailValidationField.$dirty && !emailValidationField.required">
                 <BaseFormInputError>{{ $t('messages.please_enter_email') }}</BaseFormInputError>

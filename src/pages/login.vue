@@ -65,7 +65,7 @@
               :class="!passwordViewIsToggled ? 'fa-eye' : 'fa-eye-slash'"
               v-show="form.password.length > 0 && !isIeOrEdge"
               @click="togglePassword"
-            ></i>=
+            ></i>
             <div v-if="passwordValidationField?.$invalid" class="error">
               <span v-if="passwordValidationField.$dirty && !passwordValidationField.required">
                 <BaseFormInputError>{{ $t('messages.please_enter_password') }}</BaseFormInputError>

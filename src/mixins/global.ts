@@ -40,7 +40,7 @@ export default {
   },
   computed: {
     $auth(): Accessor['auth'] {
-      const { auth } = this['$accessor'].auth;
+      const { auth } = this['$accessor'];
       return auth ?? auth;
     },
     appName(): string {

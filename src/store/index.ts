@@ -2,7 +2,7 @@ import { getAccessorType, mutationTree, actionTree } from 'nuxt-typed-vuex';
 import { ActionsTypes, MutationsTypes } from './types/global';
 
 // import modules
-import { auth } from './auth';
+import auth from './auth';
 
 // global state
 export const state = () => ({

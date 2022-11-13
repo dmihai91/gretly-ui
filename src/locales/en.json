@@ -1,45 +1,44 @@
 {
-    "sign_in": "Sign in",
-    "get_started": "Get started",
-    "login_form": {
-        "slogan": "Slogan message",
-        "forgot_password": "Forget your password?",
-        "join_us": "Join us",
-        "not_registered_yet": "Not registered yet?",
-        "sign_in_label": "Sign in to {appName}",
-        "sign_in_with": "Sign in with",
-        "remember_me": "Remember me"
-    },
-    "register_form": {
-        "slogan": "Slogan message",
-        "register_slogan": "Register slogan",
-        "register_label": "Register to {appName}",
-        "register_with": "Register with {appName}",
-        "register": "Register",
-        "agree_to": "Agree to",
-        "full_name": "Full name",
-        "already_registered": "Already registered?"
-    },
-    "messages": {
-        "please_enter_email": "Please enter your email",
-        "invalid_email": "Invalid email format",
-        "please_enter_password": "Please enter your password",
-        "not_good_password": "The password should contains at least {minLength} alphanumeric + special characters",
-        "please_enter_name": "Please enter your name",
-        "invalid_name": "Invalid name",
-        "invalid_credentials": "Invalid credentials"
-    },
-    "forget_password_form": {
-        "forget_password": "Forget password",
-        "reset_password": "Reset your password",
-        "slogan": "Slogan message",
-        "your_email_address": "Your email address"
-    },
-    "app_name": "Gretly",
-    "email": "Email",
-    "password": "Password",
-    "or": "Or",
-    "back": "Back",
-    "terms_and_conditions": "Terms and conditions",
-    "send": "Send"
+  "sign_in": "Sign in",
+  "get_started": "Get started",
+  "login_form": {
+    "slogan": "Slogan message",
+    "forgot_password": "Forget your password?",
+    "join_us": "Join us",
+    "not_registered_yet": "Not registered yet?",
+    "sign_in_label": "Sign in to {appName}",
+    "sign_in_with": "Sign in with",
+    "remember_me": "Remember me"
+  },
+  "register_form": {
+    "slogan": "Slogan message",
+    "register_slogan": "Register slogan",
+    "register_label": "Register to {appName}",
+    "register_with": "Register tp {appName} with",
+    "register": "Register",
+    "agree_to": "Agree to",
+    "full_name": "Full name",
+    "already_registered": "Already registered?"
+  },
+  "messages": {
+    "please_enter_email": "Please enter your email",
+    "invalid_email": "Invalid email format",
+    "please_enter_password": "Please enter your password",
+    "not_good_password": "The password should contains at least {minLength} alphanumeric + special characters",
+    "please_enter_name": "Please enter your name",
+    "invalid_name": "Invalid name",
+    "invalid_credentials": "Invalid credentials"
+  },
+  "forget_password_form": {
+    "forget_password": "Forget password",
+    "reset_password": "Reset your password",
+    "slogan": "Slogan message"
+  },
+  "app_name": "Gretly",
+  "email": "Email",
+  "password": "Password",
+  "or": "Or",
+  "back": "Back",
+  "terms_and_conditions": "Terms and conditions",
+  "send": "Send"
 }
