@@ -8,7 +8,6 @@
 import Vue from 'vue';
 
 export default Vue.extend({
-  middleware: ['setSession'],
   head() {
     return {
       titleTemplate: `${this.$t('app_name')} - ${this.$t('global_title')}`,
